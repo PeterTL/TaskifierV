@@ -15,13 +15,44 @@ Public Class TaskifierV
         'lbl.Text = str
         'str.ToUpper()
         'Me.TextBox1.Controls.Add(lbl)
-        Me.TextBox1.Controls.Add(lbl.CreateTagLabel("Doofi", 0))
-        Me.TextBox1.Controls.Add(lbl.CreateTagLabel("ist", 41))
-        Me.TextBox1.Controls.Add(lbl.CreateTagLabel("liiiiiieb", 66))
 
-        Dim tbTag As New TagTextBox
-        tbTag.Controls.Add(lbl.CreateTagLabel("Doofi", 0))
-        Me.Controls.Add(tbTag)
+        Dim tl As New TagLabel
+        Dim position As Integer = 0
+
+        tl = tl.CreateTagLabel("Doofi", position)
+        Me.TextBox1.Controls.Add(tl)
+        position += tl.Width + 1
+        tl = tl.CreateTagLabel("ist", position)
+        Me.TextBox1.Controls.Add(tl)
+        position += tl.Width + 1
+        tl = tl.CreateTagLabel("liiiiiieb", position)
+        Me.TextBox1.Controls.Add(tl)
+
+
+        'Me.TextBox1.Controls.Add(lbl.CreateTagLabel("Doofi", 0))
+        'Me.TextBox1.Controls.Add(lbl.CreateTagLabel("ist", 41))
+        'Me.TextBox1.Controls.Add(lbl.CreateTagLabel("liiiiiieb", 66))
+
+        'Dim tbTag As New TagTextBox
+        'tbTag.Controls.Add(lbl.CreateTagLabel("Doofi", 0))
+        'Me.Controls.Add(tbTag)
+
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        ''Create tags...
+        Dim lst As New List(Of String)
+        lst.Add("Doofi")
+        lst.Add("ist")
+        lst.Add("liiiiiieb")
+        lst.Add("oft")
+
+        Dim tc As New TagControl()
+        Dim ttb As TagTextBox = tc.CreateTagBox(lst)
+        Me.Controls.Add(ttb)
+
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        ''Put it into the grid...
+        DataGridView1.Columns.Add("Column1", "Column1")
+        DataGridView1.Rows.Add("Value1")
     End Sub
 
     Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles TabControl1.DrawItem
@@ -44,13 +75,14 @@ Public Class TaskifierV
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim lst As New List(Of String)
-        lst.Add("Zeile 1")
-        lst.Add("Zeile 2")
-        lst.Add("Zeile 3")
+        'Dim lst As New List(Of String)
+        'lst.Add("Doofi")
+        'lst.Add("ist")
+        'lst.Add("liiiiiieb")
 
-        Dim tag As New TagControl()
-        tag.DoIt(lst)
+        'Dim tc As New TagControl()
+        'Dim ttb As TagTextBox = tc.CreateTagBox(lst)
+        'Me.Parent.Controls.Add(ttb)
 
         'For Each item As String In lst
         '    Debug.Print(item)

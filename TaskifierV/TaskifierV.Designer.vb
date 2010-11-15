@@ -27,13 +27,15 @@ Partial Class TaskifierV
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabControl1.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TextBox1
         '
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Location = New System.Drawing.Point(12, 70)
+        Me.TextBox1.Location = New System.Drawing.Point(12, 204)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(260, 20)
@@ -46,7 +48,7 @@ Partial Class TaskifierV
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
         Me.TabControl1.ItemSize = New System.Drawing.Size(30, 80)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 107)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 241)
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -71,31 +73,41 @@ Partial Class TaskifierV
         Me.TabPage2.Location = New System.Drawing.Point(84, 4)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(172, 141)
+        Me.TabPage2.Size = New System.Drawing.Size(172, 87)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Worklog"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 219)
+        Me.Button1.Location = New System.Drawing.Point(12, 353)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(260, 23)
         Me.Button1.TabIndex = 2
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 12)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(260, 163)
+        Me.DataGridView1.TabIndex = 3
+        '
         'TaskifierV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 264)
+        Me.ClientSize = New System.Drawing.Size(284, 387)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.TextBox1)
         Me.Name = "TaskifierV"
         Me.Text = "Form1"
         Me.TabControl1.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -105,5 +117,6 @@ Partial Class TaskifierV
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
 
 End Class
