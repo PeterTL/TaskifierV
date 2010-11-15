@@ -1,0 +1,63 @@
+
+# compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
+
+# VS Upgrade stuff #
+####################
+UpgradeLog.XML
+_UpgradeReport_Files/
+
+# Directories #
+###############
+bin/
+obj/
+TestResults/
+
+# Resharper #
+#############
+/_ReSharper.*
+*.ReSharper.*
+
+# Logs and databases #
+######################
+*.log
+
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Mehr bringt mehr #
+####################
+*.obj
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+[Rr]elease*/
+
+# Fürs aktuelle Projekt #
+#########################
+SqlMetal.cmd
