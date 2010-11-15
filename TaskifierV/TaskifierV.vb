@@ -51,8 +51,10 @@ Public Class TaskifierV
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         ''Put it into the grid...
+        Dim txt As New TextBox
+        txt.Text = "Hallo"
         DataGridView1.Columns.Add("Column1", "Column1")
-        DataGridView1.Rows.Add("Value1")
+        DataGridView1.Rows.Add(txt)
     End Sub
 
     Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles TabControl1.DrawItem

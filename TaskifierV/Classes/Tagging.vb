@@ -9,9 +9,9 @@
         For Each strTag As String In loStrTags
             tl = tl.CreateTagLabel(strTag, position)
             tb.Controls.Add(tl)
-            position += tl.Width + 1
+            position += tl.Width + 4
         Next
-        tb.Width = position + 8
+        tb.Width = position + 4
         Return tb
     End Function
 End Class

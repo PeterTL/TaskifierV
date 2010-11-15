@@ -94,6 +94,7 @@ Partial Class TaskifierV
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(260, 163)
         Me.DataGridView1.TabIndex = 3
+        Me.DataGridView1.Visible = False
         '
         'TaskifierV
         '
