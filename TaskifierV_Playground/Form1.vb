@@ -63,6 +63,13 @@ Public Class TagLabel
         'lbl.Margin = New Padding(100, 0, 0, 0)
         'lbl.Location = New Point(strCaption.Length * 8 + 2, 0)
         lbl.Location = New Point(iPosX + 2, 2)
+
+        AddHandler lbl.MouseDoubleClick, AddressOf TagLabel_OnDoubleClick
+
         Return (lbl)
     End Function
+
+    Private Sub TagLabel_OnDoubleClick()
+        MsgBox("I was doubleclicked.")
+    End Sub
 End Class
