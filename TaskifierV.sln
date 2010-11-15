@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Basic Express 2010
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TaskifierV", "TaskifierV_Playground\TaskifierV.vbproj", "{E6AB3941-E1FA-409C-BEA9-F05E11E97EA3}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TaskifierV", "TaskifierV\TaskifierV.vbproj", "{E6AB3941-E1FA-409C-BEA9-F05E11E97EA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
