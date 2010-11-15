@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Die Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("TaskifierV_Playground")> 
+<Assembly: AssemblyTitle("TaskifierV")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("Microsoft")> 
-<Assembly: AssemblyProduct("TaskifierV_Playground")> 
+<Assembly: AssemblyProduct("TaskifierV")> 
 <Assembly: AssemblyCopyright("Copyright © Microsoft 2010")> 
 <Assembly: AssemblyTrademark("")> 
 
