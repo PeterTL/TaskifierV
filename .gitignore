@@ -18,6 +18,7 @@ _UpgradeReport_Files/
 ###############
 bin/
 obj/
+publish/
 TestResults/
 
 # Resharper #
@@ -57,6 +58,7 @@ Thumbs.db
 *.lib
 *.sbr
 [Rr]elease*/
+*.pfx
 
 # Fürs aktuelle Projekt #
 #########################
