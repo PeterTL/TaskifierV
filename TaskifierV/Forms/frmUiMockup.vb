@@ -25,7 +25,15 @@
         DataGridView1.Rows.Add("All")
         'Display all tags
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
-        Dim v = From k In DB.Tags Select k.Name
+        'Dim v = From k In DB.Tags Select k.Name
+        Dim v = From t In DB.Tags
+                       Join lett In DB.LogEntriesToTags
+                       On lett.TagId Equals t.Id
+                       Join le In DB.LogEntries
+                       On le.Id Equals lett.LogEntryId
+                       Where le.LogType = "Backlog"
+                       Where le.Active = True
+                       Select t.Name
         For Each element In v
             DataGridView1.Rows.Add(element.ToString)
             'MsgBox(element.ToString)
