@@ -1,0 +1,17 @@
+Taskifier...
+
+...is a simple tool for managing daily todos. The V in the name indicates
+that it is written in good old dirty Visual Basic.NET. A C# sharp version
+(TaskifierC) will be implemented after the V version. And finally there
+might be versions for Mac OS (TaskifierX) and iOS (Taskifier?!?).
+
+Right now Taskifier is in alpha status and not to be used in a production
+anvironment. A version X.Y with X <= 1 will indicate that it is kind of
+stable though. But this will take a few more hours/days/months/years.
+
+The Github repository is here: https://github.com/PeterTL/TaskifierV
+A public info and support website is not yet available.
+
+Copyright © Peter Langheinrich IT 2010
+
+TaskifierV is distributed under a GNU General Public License (GPL).
