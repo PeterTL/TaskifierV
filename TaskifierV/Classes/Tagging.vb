@@ -14,6 +14,26 @@
         tb.Width = position + 4
         Return tb
     End Function
+
+    Public Function GetTagsForLog(ByVal strLog As String) As List(Of String)
+        Dim lstTags As New List(Of String)
+        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim v = From t In DB.Tags
+                       Join lett In DB.LogEntriesToTags
+                       On lett.TagId Equals t.Id
+                       Join le In DB.LogEntries
+                       On le.Id Equals lett.LogEntryId
+                       Where le.LogType = strLog
+                       Where le.Active = True
+                       Order By t.Name
+                       Select t.Name
+        For Each element In v
+            lstTags.Add(element.ToString)
+        Next
+        DB = Nothing
+        Return lstTags
+    End Function
+
 End Class
 
 Public Class TagTextBox
