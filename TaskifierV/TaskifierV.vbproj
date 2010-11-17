@@ -95,21 +95,21 @@
     <Compile Include="Classes\Tagging.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Data\Taskifier.designer.vb">
+    <Compile Include="Data\dbTaskifier.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Taskifier.dbml</DependentUpon>
+      <DependentUpon>dbTaskifier.dbml</DependentUpon>
     </Compile>
-    <Compile Include="frmUiMockup.Designer.vb">
+    <Compile Include="Forms\frmUiMockup.Designer.vb">
       <DependentUpon>frmUiMockup.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmUiMockup.vb">
+    <Compile Include="Forms\frmUiMockup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TaskifierV.vb">
+    <Compile Include="Forms\TaskifierV.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TaskifierV.Designer.vb">
+    <Compile Include="Forms\TaskifierV.Designer.vb">
       <DependentUpon>TaskifierV.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -130,10 +130,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmUiMockup.resx">
+    <EmbeddedResource Include="Forms\frmUiMockup.resx">
       <DependentUpon>frmUiMockup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskifierV.resx">
+    <EmbeddedResource Include="Forms\TaskifierV.resx">
       <DependentUpon>TaskifierV.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -144,13 +144,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\Taskifier.dbml">
+    <None Include="Data\dbTaskifier.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Taskifier.designer.vb</LastGenOutput>
+      <LastGenOutput>dbTaskifier.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Data\Taskifier.dbml.layout">
-      <DependentUpon>Taskifier.dbml</DependentUpon>
+    <None Include="Data\dbTaskifier.dbml.layout">
+      <DependentUpon>dbTaskifier.dbml</DependentUpon>
     </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

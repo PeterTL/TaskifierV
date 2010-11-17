@@ -111,6 +111,10 @@ Partial Public Class LogEntries
 	
 	Private _Active As Boolean
 	
+	Private _InProgress As System.Nullable(Of Boolean)
+	
+	Private _Finished As System.Nullable(Of Boolean)
+	
     #Region "Definitionen der Erweiterungsmethoden"
     Partial Private Sub OnLoaded()
     End Sub
@@ -149,6 +153,14 @@ Partial Public Class LogEntries
     Partial Private Sub OnActiveChanging(value As Boolean)
     End Sub
     Partial Private Sub OnActiveChanged()
+    End Sub
+    Partial Private Sub OnInProgressChanging(value As System.Nullable(Of Boolean))
+    End Sub
+    Partial Private Sub OnInProgressChanged()
+    End Sub
+    Partial Private Sub OnFinishedChanging(value As System.Nullable(Of Boolean))
+    End Sub
+    Partial Private Sub OnFinishedChanged()
     End Sub
     #End Region
 	
@@ -283,6 +295,38 @@ Partial Public Class LogEntries
 				Me._Active = value
 				Me.SendPropertyChanged("Active")
 				Me.OnActiveChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_InProgress", DbType:="Bit")>  _
+	Public Property InProgress() As System.Nullable(Of Boolean)
+		Get
+			Return Me._InProgress
+		End Get
+		Set
+			If (Me._InProgress.Equals(value) = false) Then
+				Me.OnInProgressChanging(value)
+				Me.SendPropertyChanging
+				Me._InProgress = value
+				Me.SendPropertyChanged("InProgress")
+				Me.OnInProgressChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Finished", DbType:="Bit")>  _
+	Public Property Finished() As System.Nullable(Of Boolean)
+		Get
+			Return Me._Finished
+		End Get
+		Set
+			If (Me._Finished.Equals(value) = false) Then
+				Me.OnFinishedChanging(value)
+				Me.SendPropertyChanging
+				Me._Finished = value
+				Me.SendPropertyChanged("Finished")
+				Me.OnFinishedChanged
 			End If
 		End Set
 	End Property

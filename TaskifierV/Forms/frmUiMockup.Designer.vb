@@ -29,16 +29,19 @@ Partial Class frmUiMockup
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.sc2forTagsAndTasks = New System.Windows.Forms.SplitContainer()
         Me.sc3forTasksAndDetails = New System.Windows.Forms.SplitContainer()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         CType(Me.sc1forTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.sc1forTabsAndMain.Panel1.SuspendLayout()
         Me.sc1forTabsAndMain.Panel2.SuspendLayout()
         Me.sc1forTabsAndMain.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         CType(Me.sc2forTagsAndTasks, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.sc2forTagsAndTasks.Panel1.SuspendLayout()
         Me.sc2forTagsAndTasks.Panel2.SuspendLayout()
         Me.sc2forTagsAndTasks.SuspendLayout()
         CType(Me.sc3forTasksAndDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.sc3forTasksAndDetails.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'sc1forTabsAndMain
@@ -92,10 +95,10 @@ Partial Class frmUiMockup
         'TabPage2
         '
         Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.Location = New System.Drawing.Point(67, 4)
+        Me.TabPage2.Location = New System.Drawing.Point(100, 4)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(12, 248)
+        Me.TabPage2.Size = New System.Drawing.Size(0, 248)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Worklog"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -119,6 +122,10 @@ Partial Class frmUiMockup
         Me.sc2forTagsAndTasks.Location = New System.Drawing.Point(0, 0)
         Me.sc2forTagsAndTasks.Name = "sc2forTagsAndTasks"
         '
+        'sc2forTagsAndTasks.Panel1
+        '
+        Me.sc2forTagsAndTasks.Panel1.Controls.Add(Me.DataGridView1)
+        '
         'sc2forTagsAndTasks.Panel2
         '
         Me.sc2forTagsAndTasks.Panel2.Controls.Add(Me.sc3forTasksAndDetails)
@@ -138,6 +145,26 @@ Partial Class frmUiMockup
         Me.sc3forTasksAndDetails.SplitterDistance = 148
         Me.sc3forTasksAndDetails.TabIndex = 0
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.AllowUserToOrderColumns = True
+        Me.DataGridView1.AllowUserToResizeColumns = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.ColumnHeadersVisible = False
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridView1.MultiSelect = False
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.DataGridView1.Size = New System.Drawing.Size(142, 262)
+        Me.DataGridView1.TabIndex = 0
+        '
         'frmUiMockup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -152,11 +179,13 @@ Partial Class frmUiMockup
         CType(Me.sc1forTabsAndMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.sc1forTabsAndMain.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
+        Me.sc2forTagsAndTasks.Panel1.ResumeLayout(False)
         Me.sc2forTagsAndTasks.Panel2.ResumeLayout(False)
         CType(Me.sc2forTagsAndTasks, System.ComponentModel.ISupportInitialize).EndInit()
         Me.sc2forTagsAndTasks.ResumeLayout(False)
         CType(Me.sc3forTasksAndDetails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.sc3forTasksAndDetails.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -167,4 +196,5 @@ Partial Class frmUiMockup
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
 End Class
