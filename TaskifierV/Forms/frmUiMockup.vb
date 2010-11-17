@@ -24,19 +24,13 @@
         'Display default tag (all)
         DataGridView1.Rows.Add("All")
         'Display all tags
-        'Dim tags_ = From Tags__ In Tags
-        'Select Tags__.Name
-        'Dim v = From k In LogEntries Select k
-
-        Dim v = From k In LogEntries Select k.Id
-
-        
-
-        DataGridView1.Rows.Add("Tag 2")
-        DataGridView1.Rows.Add("Tag 3")
-        DataGridView1.Rows.Add("Tag 4")
-        DataGridView1.Rows.Add("Tag 5")
-        DataGridView1.Rows.Add("Tag 6")
+        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim v = From k In DB.Tags Select k.Name
+        For Each element In v
+            DataGridView1.Rows.Add(element.ToString)
+            'MsgBox(element.ToString)
+        Next
+        DB = Nothing
     End Sub
 
 End Class
