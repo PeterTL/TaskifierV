@@ -100,6 +100,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Taskifier.dbml</DependentUpon>
     </Compile>
+    <Compile Include="frmUiMockup.Designer.vb">
+      <DependentUpon>frmUiMockup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUiMockup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TaskifierV.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmUiMockup.resx">
+      <DependentUpon>frmUiMockup.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskifierV.resx">
       <DependentUpon>TaskifierV.vb</DependentUpon>
     </EmbeddedResource>
