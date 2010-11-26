@@ -34,6 +34,11 @@
         Return lstTags
     End Function
 
+    Public Function InsertTagList(ByRef lstStrTags As List(Of String))
+        'TODO
+        Return Nothing
+    End Function
+
 End Class
 
 Public Class TagTextBox
