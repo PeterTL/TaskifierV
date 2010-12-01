@@ -20,65 +20,64 @@
     End Sub
 
     Private Sub frmUiMockup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        'Reset tag grid
+        DataGridView1.Columns.Clear()
+        'Build up tag grid
+        DataGridView1.Columns.Add("Tags", "Tags")
+        'Display default tag (all)
+        DataGridView1.Rows.Add("All")
+        'Display all tags
         Dim tc As New TagAndTaskControl
-        Dim tags As DataTable
+        Dim tags As List(Of String)
         tags = tc.GetTagsForLog("Backlog")
+        For Each element In tags
+            DataGridView1.Rows.Add(element.ToString)
+            'MsgBox(element.ToString)
+        Next
 
-        DataGridView1.DataSource = tags
-        DataGridView1.Columns(0).HeaderText = "Id"
-        DataGridView1.Columns(0).HeaderText = "Tags"
-        DataGridView1.Columns(0).Visible = False
-
-        ' ''TODO: implement initial task grid
-        ' ''Reset task grid
-        ''DataGridView2.Columns.Clear()
-        ' ''Build up task grid
-        ''DataGridView2.Columns.Add("Tasks", "Tasks")
-        ' ''Display tasks
-        ''Dim tatc As New TagAndTaskControl
-        ''Dim tasks As List(Of String)
-        ''tasks = tatc.GetTasksForTag("%", "Donelog")
-        ''For Each element In tasks
-        ''    DataGridView2.Rows.Add(element.ToString)
-        ''Next
+        'Reset task grid
+        DataGridView2.Columns.Clear()
+        'Build up task grid
+        DataGridView2.Columns.Add("Tasks", "Tasks")
+        'Display tasks
+        Dim tatc As New TagAndTaskControl
+        Dim tasks As List(Of String)
+        tasks = tatc.GetTasksForTag("%", "Backlog")
+        For Each element In tasks
+            DataGridView2.Rows.Add(element.ToString)
+        Next
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
-        ' ''Reset tag grid
-        ''DataGridView1.Columns.Clear()
-        ' ''Build up tag grid
-        ''DataGridView1.Columns.Add("Tags", "Tags")
-        ' ''Display default tag (all)
-        ''DataGridView1.Rows.Add("All")
-        ' ''Display all tags
-        ''Dim tc As New TagAndTaskControl
-        ''Dim tags As List(Of String)
-        ''tags = tc.GetTagsForLog(TabControl1.SelectedTab.Text)
-        ''For Each element In tags
-        ''    DataGridView1.Rows.Add(element.ToString)
-        ''    'MsgBox(element.ToString)
-        ''Next
+        'Reset tag grid
+        DataGridView1.Columns.Clear()
+        'Build up tag grid
+        DataGridView1.Columns.Add("Tags", "Tags")
+        'Display default tag (all)
+        DataGridView1.Rows.Add("All")
+        'Display all tags
+        Dim tc As New TagAndTaskControl
+        Dim tags As List(Of String)
+        tags = tc.GetTagsForLog(TabControl1.SelectedTab.Text)
+        For Each element In tags
+            DataGridView1.Rows.Add(element.ToString)
+            'MsgBox(element.ToString)
+        Next
 
-        ' ''Reset task grid
-        ''DataGridView2.Columns.Clear()
-        ' ''Build up task grid
-        ''DataGridView2.Columns.Add("Id", "Id")
-        ''DataGridView2.Columns.Add("Tasks", "Tasks")
-        ' ''Display tasks
-        ''Dim tatc As New TagAndTaskControl
-        ''Dim tasks As List(Of String)
-        ''tasks = tatc.GetTasksForTag("%", TabControl1.SelectedTab.Text)
-
-
-        ''For Each element In tasks
-        ''    DataGridView2.Rows.Add(element.ToString)
-        ''Next
+        'Reset task grid
+        DataGridView2.Columns.Clear()
+        'Build up task grid
+        DataGridView2.Columns.Add("Tasks", "Tasks")
+        'Display tasks
+        Dim tatc As New TagAndTaskControl
+        Dim tasks As List(Of String)
+        tasks = tatc.GetTasksForTag("%", TabControl1.SelectedTab.Text)
+        For Each element In tasks
+            DataGridView2.Rows.Add(element.ToString)
+        Next
     End Sub
 
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        MsgBox(DataGridView1.SelectedCells(1).Value)
-
         'Reset task grid
         DataGridView2.Columns.Clear()
         'Build up task grid
