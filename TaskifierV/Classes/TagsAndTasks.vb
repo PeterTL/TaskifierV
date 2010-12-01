@@ -17,9 +17,18 @@ Public Class TagAndTaskControl
         Return tb
     End Function
 
-    Public Function GetTagsForLog(ByVal strLog As String) As List(Of String)
-        Dim lstTags As New List(Of String)
+    Public Function GetTagsForLog(ByVal strLog As String) As DataTable
+        Dim dt As New DataTable("TagsForLog")
+        Dim dcId As New DataColumn("Id")
+        Dim dcName As New DataColumn("Name")
+
+        dt.Columns.Add(dcId)
+        dt.Columns.Add(dcName)
+
+        Dim dr As DataRow
+
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+
         Dim v = From t In DB.Tags
                        Join lett In DB.LogEntriesToTags
                        On lett.TagId Equals t.Id
@@ -28,13 +37,41 @@ Public Class TagAndTaskControl
                        Where le.LogType = strLog
                        Where le.Active = True
                        Order By t.Name
-                       Select t.Name
+                       Select t.Id, t.Name
+
         For Each element In v
-            lstTags.Add(element.ToString)
+            dr = dt.NewRow()
+            dr("Id") = element.Id
+            dr("Name") = element.Name
+
+            dt.Rows.Add(dr)
         Next
+
         DB = Nothing
-        Return lstTags
+
+        Return dt
     End Function
+
+    'This function is deprecated if everything works as I plan it to be
+    ''''''''''''''''''
+    'Public Function GetTagsForLog(ByVal strLog As String) As List(Of String)
+    '    Dim lstTags As New List(Of String)
+    '    Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+    '    Dim v = From t In DB.Tags
+    '                   Join lett In DB.LogEntriesToTags
+    '                   On lett.TagId Equals t.Id
+    '                   Join le In DB.LogEntries
+    '                   On le.Id Equals lett.LogEntryId
+    '                   Where le.LogType = strLog
+    '                   Where le.Active = True
+    '                   Order By t.Name
+    '                   Select t.Name
+    '    For Each element In v
+    '        lstTags.Add(element.ToString)
+    '    Next
+    '    DB = Nothing
+    '    Return lstTags
+    'End Function
 
     Public Function GetTasksForTag(ByVal strTag As String, ByVal strLogType As String) As List(Of String)
         Dim lstTasks As New List(Of String)
