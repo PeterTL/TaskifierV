@@ -6,7 +6,7 @@ that it is written in good old dirty Visual Basic.NET. A C# sharp version
 might be versions for Mac OS (TaskifierX) and iOS (Taskifier?!?).
 
 Right now Taskifier is in alpha status and not to be used in a production
-anvironment. A version X.Y with X <= 1 will indicate that it is kind of
+environment. A version X.Y with X >= 1 will indicate that it is kind of
 stable though. But this will take a few more hours/days/months/years.
 
 The Github repository is here: https://github.com/PeterTL/TaskifierV
