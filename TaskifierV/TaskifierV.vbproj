@@ -115,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Classes\Tagging.vb">
+    <Compile Include="Classes\TagsAndTasks.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Data\dbTaskifier.designer.vb">

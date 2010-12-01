@@ -1,4 +1,6 @@
-﻿Public Class TagControl
+﻿Imports System.Data.Linq.SqlClient
+
+Public Class TagAndTaskControl
 
     Public Function CreateTagBox(ByRef loStrTags As List(Of String)) As TagTextBox
         'Step 1: Create TagTextBox
@@ -32,6 +34,27 @@
         Next
         DB = Nothing
         Return lstTags
+    End Function
+
+    Public Function GetTasksForTag(ByVal strTag As String, ByVal strLogType As String) As List(Of String)
+        Dim lstTasks As New List(Of String)
+        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim v = (From le In DB.LogEntries
+                        Join lett In DB.LogEntriesToTags
+                        On le.Id Equals lett.LogEntryId
+                        Join t In DB.Tags
+                        On lett.TagId Equals t.Id
+                        Where le.LogType = strLogType
+                        Where le.Active = True
+                        Where SqlMethods.Like(t.Name, strTag)
+                        Order By le.Name
+                        Select le.Name).Distinct
+        For Each element In v
+            Console.WriteLine(element)
+            lstTasks.Add(element.ToString)
+        Next
+        DB = Nothing
+        Return lstTasks
     End Function
 
     Public Function InsertTagList(ByRef lstStrTags As List(Of String))
