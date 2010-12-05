@@ -2,6 +2,7 @@
 
 Public Class TagAndTaskControl
 
+    'TODO: CreateTagBox: Method documentation
     Public Function CreateTagBox(ByRef loStrTags As List(Of String)) As TagTextBox
         'Step 1: Create TagTextBox
         Dim tb As New TagTextBox
@@ -17,38 +18,59 @@ Public Class TagAndTaskControl
         Return tb
     End Function
 
-    Public Function GetTagsForLog(ByVal strLog As String) As DataTable
+    ''' <summary>
+    ''' Returns a table with tags and their identifiers from the DB.
+    ''' The recoeds are filtered according to the given log string.
+    ''' </summary>
+    ''' <param name="strLogName">Log name, e.g. "Backlog".</param>
+    ''' <returns>Data table with tags (id and name as strings).</returns>
+    ''' <remarks></remarks>
+    Public Function GetTagsForLog(ByVal strLogName As String) As DataTable
+        'Create (empty) table and column objects
         Dim dt As New DataTable("TagsForLog")
         Dim dcId As New DataColumn("Id")
         Dim dcName As New DataColumn("Name")
 
+        'Add columns to table
         dt.Columns.Add(dcId)
         dt.Columns.Add(dcName)
 
+        'Create row and DB objects
         Dim dr As DataRow
-
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
 
+        'Query DB for tags, filter is log type
         Dim v = From t In DB.Tags
                        Join lett In DB.LogEntriesToTags
                        On lett.TagId Equals t.Id
                        Join le In DB.LogEntries
                        On le.Id Equals lett.LogEntryId
-                       Where le.LogType = strLog
+                       Where le.LogType = strLogName
                        Where le.Active = True
                        Order By t.Name
                        Select t.Id, t.Name
 
+        'Add default row
+        dr = dt.NewRow()
+        dr("Id") = "%"
+        dr("Name") = "All"
+        dt.Rows.Add(dr)
+
+        'Add rows returned fro DB
         For Each element In v
             dr = dt.NewRow()
             dr("Id") = element.Id
             dr("Name") = element.Name
-
             dt.Rows.Add(dr)
         Next
 
+        'Destroy objects
         DB = Nothing
+        dr = Nothing
+        dcName = Nothing
+        dcId = Nothing
 
+        'Return table
         Return dt
     End Function
 
@@ -73,6 +95,8 @@ Public Class TagAndTaskControl
     '    Return lstTags
     'End Function
 
+    'TODO: GetTasksForTag: Switch from List(Of String) To DataTable
+    'TODO: GetTasksForTag: Method documentation
     Public Function GetTasksForTag(ByVal strTag As String, ByVal strLogType As String) As List(Of String)
         Dim lstTasks As New List(Of String)
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
@@ -93,6 +117,7 @@ Public Class TagAndTaskControl
         DB = Nothing
         Return lstTasks
     End Function
+
 
     Public Function InsertTagList(ByRef lstStrTags As List(Of String))
         'TODO

@@ -21,13 +21,12 @@
 
     Private Sub frmUiMockup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim tc As New TagAndTaskControl
-        Dim tags As DataTable
-        tags = tc.GetTagsForLog("Backlog")
+        Dim tags As DataTable = tc.GetTagsForLog("Backlog")
 
         DataGridView1.DataSource = tags
-        DataGridView1.Columns(0).HeaderText = "Id"
-        DataGridView1.Columns(0).HeaderText = "Tags"
-        DataGridView1.Columns(0).Visible = False
+        'DataGridView1.Columns(0).HeaderText = "Id"
+        'DataGridView1.Columns(0).HeaderText = "Tags"
+        'DataGridView1.Columns("Id").Visible = True
 
         ' ''Reset tag grid
         ''DataGridView1.Columns.Clear()
@@ -58,6 +57,14 @@
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
+        Dim tc As New TagAndTaskControl
+        Dim tags As DataTable = tc.GetTagsForLog(TabControl1.SelectedTab.Text)
+
+        DataGridView1.DataSource = tags
+        'DataGridView1.Columns(0).HeaderText = "Id"
+        'DataGridView1.Columns(0).HeaderText = "Tags"
+        'DataGridView1.Columns(0).Visible = False
+
         ' ''Reset tag grid
         ''DataGridView1.Columns.Clear()
         ' ''Build up tag grid
@@ -87,6 +94,10 @@
     End Sub
 
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        MsgBox(DataGridView1.SelectedCells(0).Value)
+        'MsgBox(DataGridView1.SelectedRows(0).Cells("Id").Value)
+        'MsgBox(DataGridView1.Rows(DataGridView1.SelectedRows(0).Index).Cells("Id").Value)
+
         ' ''Reset task grid
         ''DataGridView2.Columns.Clear()
         ' ''Build up task grid
