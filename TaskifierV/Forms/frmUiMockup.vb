@@ -24,6 +24,7 @@
         Dim tags As DataTable = tc.GetTagsForLog("Backlog")
 
         DataGridView1.DataSource = tags
+
         'DataGridView1.Columns(0).HeaderText = "Id"
         'DataGridView1.Columns(0).HeaderText = "Tags"
         'DataGridView1.Columns("Id").Visible = True
@@ -94,9 +95,14 @@
     End Sub
 
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        MsgBox(DataGridView1.SelectedCells(0).Value)
+        'MsgBox(DataGridView1.SelectedCells(0).Value)
         'MsgBox(DataGridView1.SelectedRows(0).Cells("Id").Value)
         'MsgBox(DataGridView1.Rows(DataGridView1.SelectedRows(0).Index).Cells("Id").Value)
+
+        Dim tc As New TagAndTaskControl
+        Dim tasks As DataTable = tc.GetTasksForTag(DataGridView1.SelectedCells(0).Value, TabControl1.SelectedTab.Text)
+
+        DataGridView2.DataSource = tasks
 
         ' ''Reset task grid
         ''DataGridView2.Columns.Clear()
