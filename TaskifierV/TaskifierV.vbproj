@@ -115,9 +115,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Classes\TagsAndTasks.vb">
+    <Compile Include="Classes\AppGraphics.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\TagAndTaskControl.vb" />
     <Compile Include="Data\dbTaskifier.designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
