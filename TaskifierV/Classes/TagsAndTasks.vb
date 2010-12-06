@@ -26,8 +26,9 @@ Public Class TagAndTaskControl
     ''' <remarks></remarks>
     Public Function GetTagsForLog(ByVal strLogName As String) As DataTable
         'Debug method parameters
-        Debug.Print("Log: " & strLogName)
-        Debug.Print("--------------------")
+        Debug.Print("")
+        Debug.Print("Function GetTagsForLog started. Messages:")
+        Debug.Print("Log Name: " & strLogName)
 
         'Create (empty) table and column objects
         Dim dt As New DataTable("TagsForLog")
@@ -43,7 +44,7 @@ Public Class TagAndTaskControl
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
 
         'Query DB for tags, filter is log type
-        Dim v = From t In DB.Tags
+        Dim v = (From t In DB.Tags
                        Join lett In DB.LogEntriesToTags
                        On lett.TagId Equals t.Id
                        Join le In DB.LogEntries
@@ -51,11 +52,11 @@ Public Class TagAndTaskControl
                        Where le.LogType = strLogName
                        Where le.Active = True
                        Order By t.Name
-                       Select t.Id, t.Name
+                       Select t.Id, t.Name).Distinct
 
         'Add default row
         dr = dt.NewRow()
-        dr("Id") = ""
+        dr("Id") = "-1"
         dr("Name") = "All"
         dt.Rows.Add(dr)
 
@@ -86,9 +87,10 @@ Public Class TagAndTaskControl
     ''' <remarks></remarks>
     Public Function GetTasksForTag(ByVal iTagId As Integer, ByVal strLogName As String) As DataTable
         'Debug method parameters
+        Debug.Print("")
+        Debug.Print("Function GetTasksForTag started. Messages:")
         Debug.Print("Tag ID: " & iTagId.ToString)
-        Debug.Print("Log: " & strLogName)
-        Debug.Print("--------------------")
+        Debug.Print("Log Name: " & strLogName)
 
         'Create (empty) table and column objects
         Dim dt As New DataTable("TasksForTagsAndLog")
@@ -103,21 +105,36 @@ Public Class TagAndTaskControl
         Dim dr As DataRow
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
 
-        'Query DB for tasks, filter is tag and log type
-        Dim v = (From le In DB.LogEntries
-                        Join lett In DB.LogEntriesToTags
-                        On le.Id Equals lett.LogEntryId
-                        Join t In DB.Tags
-                        On lett.TagId Equals t.Id
-                        Where le.LogType = strLogName
-                        Where le.Active = True
-                        Where le.Id = iTagId
-                        Order By le.Name
-                        Select le.Id, le.Name).Distinct
+        'Check if tag identifier is set
+        Dim v
+        If iTagId > -1 Then
+            'Query DB for tasks, filter is tag and log type
+            v = (From le In DB.LogEntries
+                            Join lett In DB.LogEntriesToTags
+                            On le.Id Equals lett.LogEntryId
+                            Join t In DB.Tags
+                            On lett.TagId Equals t.Id
+                            Where le.LogType = strLogName
+                            Where le.Active = True
+                            Where t.Id = iTagId
+                            Order By le.Name
+                            Select le.Id, le.Name).Distinct
+        Else
+            'Query DB for tasks, filter is log type (NOT tag!)
+            v = (From le In DB.LogEntries
+                            Join lett In DB.LogEntriesToTags
+                            On le.Id Equals lett.LogEntryId
+                            Join t In DB.Tags
+                            On lett.TagId Equals t.Id
+                            Where le.LogType = strLogName
+                            Where le.Active = True
+                            Order By le.Name
+                            Select le.Id, le.Name).Distinct
+        End If
 
         'Add default row
         dr = dt.NewRow()
-        dr("Id") = ""
+        dr("Id") = "-1"
         dr("Name") = "All"
         dt.Rows.Add(dr)
 
@@ -139,6 +156,13 @@ Public Class TagAndTaskControl
         Return dt
     End Function
 
+    Public Function GetTaskDetails(ByVal iTaskId As Integer) As DataTable
+        'Debug method parameters
+        Debug.Print("")
+        Debug.Print("Function GetTaskDetails started. Messages:")
+        Debug.Print("Tag ID: " & iTaskId.ToString)
+        Return Nothing
+    End Function
 
     Public Function InsertTagList(ByRef lstStrTags As List(Of String))
         'TODO
