@@ -2,6 +2,7 @@
 
 Public Class TagAndTaskControl
 
+    'TODO: CreateTagBox: Method documentation
     Public Function CreateTagBox(ByRef loStrTags As List(Of String)) As TagTextBox
         'Step 1: Create TagTextBox
         Dim tb As New TagTextBox
@@ -17,45 +18,127 @@ Public Class TagAndTaskControl
         Return tb
     End Function
 
-    Public Function GetTagsForLog(ByVal strLog As String) As List(Of String)
-        Dim lstTags As New List(Of String)
+    ''' <summary>
+    ''' Returns a table with tags and their identifiers from the DB.
+    ''' </summary>
+    ''' <param name="strLogName">Log name, e.g. "Backlog".</param>
+    ''' <returns>Data table with tags (id and name).</returns>
+    ''' <remarks></remarks>
+    Public Function GetTagsForLog(ByVal strLogName As String) As DataTable
+        'Debug method parameters
+        Debug.Print("Log: " & strLogName)
+        Debug.Print("--------------------")
+
+        'Create (empty) table and column objects
+        Dim dt As New DataTable("TagsForLog")
+        Dim dcId As New DataColumn("Id")
+        Dim dcName As New DataColumn("Name")
+
+        'Add columns to table
+        dt.Columns.Add(dcId)
+        dt.Columns.Add(dcName)
+
+        'Create row and DB objects
+        Dim dr As DataRow
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+
+        'Query DB for tags, filter is log type
         Dim v = From t In DB.Tags
                        Join lett In DB.LogEntriesToTags
                        On lett.TagId Equals t.Id
                        Join le In DB.LogEntries
                        On le.Id Equals lett.LogEntryId
-                       Where le.LogType = strLog
+                       Where le.LogType = strLogName
                        Where le.Active = True
                        Order By t.Name
-                       Select t.Name
+                       Select t.Id, t.Name
+
+        'Add default row
+        dr = dt.NewRow()
+        dr("Id") = ""
+        dr("Name") = "All"
+        dt.Rows.Add(dr)
+
+        'Add rows returned from DB
         For Each element In v
-            lstTags.Add(element.ToString)
+            dr = dt.NewRow()
+            dr("Id") = element.Id
+            dr("Name") = element.Name
+            dt.Rows.Add(dr)
         Next
+
+        'Destroy objects
         DB = Nothing
-        Return lstTags
+        dr = Nothing
+        dcName = Nothing
+        dcId = Nothing
+
+        'Return table
+        Return dt
     End Function
 
-    Public Function GetTasksForTag(ByVal strTag As String, ByVal strLogType As String) As List(Of String)
-        Dim lstTasks As New List(Of String)
+    ''' <summary>
+    ''' Returns a table with tasks and their identifiers from the DB.
+    ''' </summary>
+    ''' <param name="iTagId">Tag identifier.</param>
+    ''' <param name="strLogName">Log name, e.g. "Backlog".</param>
+    ''' <returns>Data table with tasks (id and name).</returns>
+    ''' <remarks></remarks>
+    Public Function GetTasksForTag(ByVal iTagId As Integer, ByVal strLogName As String) As DataTable
+        'Debug method parameters
+        Debug.Print("Tag ID: " & iTagId.ToString)
+        Debug.Print("Log: " & strLogName)
+        Debug.Print("--------------------")
+
+        'Create (empty) table and column objects
+        Dim dt As New DataTable("TasksForTagsAndLog")
+        Dim dcId As New DataColumn("Id")
+        Dim dcName As New DataColumn("Name")
+
+        'Add columns to table
+        dt.Columns.Add(dcId)
+        dt.Columns.Add(dcName)
+
+        'Create row and DB objects
+        Dim dr As DataRow
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+
+        'Query DB for tasks, filter is tag and log type
         Dim v = (From le In DB.LogEntries
                         Join lett In DB.LogEntriesToTags
                         On le.Id Equals lett.LogEntryId
                         Join t In DB.Tags
                         On lett.TagId Equals t.Id
-                        Where le.LogType = strLogType
+                        Where le.LogType = strLogName
                         Where le.Active = True
-                        Where SqlMethods.Like(t.Name, strTag)
+                        Where le.Id = iTagId
                         Order By le.Name
-                        Select le.Name).Distinct
+                        Select le.Id, le.Name).Distinct
+
+        'Add default row
+        dr = dt.NewRow()
+        dr("Id") = ""
+        dr("Name") = "All"
+        dt.Rows.Add(dr)
+
+        'Add rows returned from DB
         For Each element In v
-            Console.WriteLine(element)
-            lstTasks.Add(element.ToString)
+            dr = dt.NewRow()
+            dr("Id") = element.Id
+            dr("Name") = element.Name
+            dt.Rows.Add(dr)
         Next
+
+        'Destroy objects
         DB = Nothing
-        Return lstTasks
+        dr = Nothing
+        dcName = Nothing
+        dcId = Nothing
+
+        'Return table
+        Return dt
     End Function
+
 
     Public Function InsertTagList(ByRef lstStrTags As List(Of String))
         'TODO

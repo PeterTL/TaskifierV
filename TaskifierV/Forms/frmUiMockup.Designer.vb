@@ -152,7 +152,6 @@ Partial Class frmUiMockup
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.DataGridView1.Size = New System.Drawing.Size(142, 271)
         Me.DataGridView1.TabIndex = 0
         '
@@ -188,7 +187,6 @@ Partial Class frmUiMockup
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.DataGridView2.Size = New System.Drawing.Size(186, 271)
         Me.DataGridView2.TabIndex = 1
         '
