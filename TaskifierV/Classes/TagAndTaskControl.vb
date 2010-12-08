@@ -142,12 +142,43 @@ Public Class TagAndTaskControl
     End Function
 
     'TODO: Method documentation
-    Public Function GetTaskDetails(ByVal iTaskId As Integer) As DataTable
+    Public Function GetTaskDetails(ByVal iTaskId As Integer) As LogEntryData
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTaskDetails started. Messages:")
         Debug.Print("Tag ID: " & iTaskId.ToString)
-        Return Nothing
+
+        'Create (empty) data object for log entry
+        Dim ledat As New LogEntryData
+
+        'Create row and DB objects
+        Dim dr As DataRow
+        Dim v
+        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+
+        'Query DB for tags, filter is log type
+        v = (From le In DB.LogEntries
+                        Where le.Id = iTaskId
+                        Select le.Id, le.LogType, le.Name, le.Description, le.Priority, le.StartDate, _
+                                le.EndDate, le.Active, le.InProgress, le.Finished).First
+
+        'Add row returned from DB
+        ledat.Id = v.Id
+        ledat.LogType = v.LogType
+        ledat.Name = v.Name
+        ledat.Description = v.Description
+        ledat.Priority = v.Priority
+        ledat.StartDate = v.StartDate
+        ledat.EndDate = v.EndDate
+        ledat.Active = v.Active
+        ledat.InProgress = v.InProgress
+        ledat.Finished = v.Finished
+
+        'Destroy objects
+        DB = Nothing
+        dr = Nothing
+
+        Return ledat
     End Function
 
     Public Function InsertTagList(ByRef lstStrTags As List(Of String))

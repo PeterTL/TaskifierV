@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Classes\AppData.vb" />
     <Compile Include="Classes\AppGraphics.vb">
       <SubType>Component</SubType>
     </Compile>
