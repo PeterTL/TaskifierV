@@ -68,7 +68,8 @@
 
         Try
             'Get tasks and fill second grid with tags according to selected tag and log
-            Dim tasks As DataTable = tc.GetTasksForTag(DataGridView1.SelectedCells(0).Value, TabControl1.SelectedTab.Text)
+            'Dim tasks As DataTable = tc.GetTasksForTag(DataGridView1.SelectedCells(0).Value, TabControl1.SelectedTab.Text)
+            Dim tasks As DataTable = tc.GetTasksForTag(DataGridView1.CurrentRow.Cells(0).Value, TabControl1.SelectedTab.Text)
             DataGridView2.DataSource = tasks
         Catch ex As Exception
             Debug.Print("")
@@ -83,7 +84,8 @@
 
         Try
             'Get task details
-            Dim task As DataTable = tc.GetTaskDetails(DataGridView2.SelectedCells(0).Value)
+            'Dim task As DataTable = tc.GetTaskDetails(DataGridView2.SelectedCells(0).Value)
+            Dim task As DataTable = tc.GetTaskDetails(DataGridView2.CurrentRow.Cells(0).Value)
         Catch ex As Exception
             Debug.Print("")
             Debug.Print("Handler DataGridView2_CellClick exited with error:")

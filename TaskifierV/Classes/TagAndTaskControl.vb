@@ -74,8 +74,8 @@ Public Class TagAndTaskControl
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTasksForTag started. Messages:")
-        Debug.Print("Tag ID: " & iTagId.ToString)
         Debug.Print("Log Name: " & strLogName)
+        Debug.Print("Tag ID: " & iTagId.ToString)
 
         'Create (empty) table and column objects
         Dim dt As New DataTable("TasksForTagsAndLog")
