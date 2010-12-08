@@ -1,103 +1,103 @@
 ﻿Public Class LogEntryData
 
-    Private _Id
-    Private _LogType
-    Private _Name
-    Private _Description
-    Private _Priority
-    Private _StartDate
-    Private _EndDate
-    Private _Active
-    Private _InProgress
-    Private _Finished
+    Private _id
+    Private _logType
+    Private _name
+    Private _description
+    Private _priority
+    Private _startDate
+    Private _endDate
+    Private _active
+    Private _inProgress
+    Private _finished
 
     Public Property Id() As Integer
         Get
-            Return _Id
+            Return _id
         End Get
         Set(ByVal value As Integer)
-            _Id = value
+            _id = value
         End Set
     End Property
 
     Public Property LogType() As String
         Get
-            Return _LogType
+            Return _logType
         End Get
         Set(ByVal value As String)
-            _LogType = value
+            _logType = value
         End Set
     End Property
 
     Public Property Name() As String
         Get
-            Return _Name
+            Return _name
         End Get
         Set(ByVal value As String)
-            _Name = value
+            _name = value
         End Set
     End Property
 
     Public Property Description() As String
         Get
-            Return _Description
+            Return _description
         End Get
         Set(ByVal value As String)
-            _Description = value
+            _description = value
         End Set
     End Property
 
     Public Property Priority() As String
         Get
-            Return _Priority
+            Return _priority
         End Get
         Set(ByVal value As String)
-            _Priority = value
+            _priority = value
         End Set
     End Property
 
     Public Property StartDate() As Date
         Get
-            Return _StartDate
+            Return _startDate
         End Get
         Set(ByVal value As Date)
-            _StartDate = value
+            _startDate = value
         End Set
     End Property
 
     Public Property EndDate() As Date
         Get
-            Return _EndDate
+            Return _endDate
         End Get
         Set(ByVal value As Date)
-            _EndDate = value
+            _endDate = value
         End Set
     End Property
 
     Public Property Active() As String
         Get
-            Return _Active
+            Return _active
         End Get
         Set(ByVal value As String)
-            _Active = value
+            _active = value
         End Set
     End Property
 
     Public Property InProgress() As String
         Get
-            Return _InProgress
+            Return _inProgress
         End Get
         Set(ByVal value As String)
-            _InProgress = value
+            _inProgress = value
         End Set
     End Property
 
     Public Property Finished() As String
         Get
-            Return _Finished
+            Return _finished
         End Get
         Set(ByVal value As String)
-            _Finished = value
+            _finished = value
         End Set
     End Property
 

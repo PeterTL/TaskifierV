@@ -22,22 +22,22 @@ Partial Class frmUiMockup
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.sc1forTabsAndMain = New System.Windows.Forms.SplitContainer()
+        Me.scTabsAndMain = New System.Windows.Forms.SplitContainer()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.sc2forTagsAndTasks = New System.Windows.Forms.SplitContainer()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.sc3forTasksAndDetails = New System.Windows.Forms.SplitContainer()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.scTagsAndLogEntries = New System.Windows.Forms.SplitContainer()
+        Me.dgvTags = New System.Windows.Forms.DataGridView()
+        Me.scLogEntriesAndDetails = New System.Windows.Forms.SplitContainer()
+        Me.dgvLogEntries = New System.Windows.Forms.DataGridView()
+        Me.lblName = New System.Windows.Forms.Label()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.lblPriority = New System.Windows.Forms.Label()
+        Me.lblStartDate = New System.Windows.Forms.Label()
+        Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.lblInProgress = New System.Windows.Forms.Label()
+        Me.lblFinished = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.txtPriority = New System.Windows.Forms.TextBox()
@@ -47,46 +47,46 @@ Partial Class frmUiMockup
         Me.txtFinished = New System.Windows.Forms.TextBox()
         Me.txtId = New System.Windows.Forms.TextBox()
         Me.txtActive = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblId = New System.Windows.Forms.Label()
         Me.txtLogType = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        CType(Me.sc1forTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.sc1forTabsAndMain.Panel1.SuspendLayout()
-        Me.sc1forTabsAndMain.Panel2.SuspendLayout()
-        Me.sc1forTabsAndMain.SuspendLayout()
+        Me.lblLogType = New System.Windows.Forms.Label()
+        Me.lblActive = New System.Windows.Forms.Label()
+        CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.scTabsAndMain.Panel1.SuspendLayout()
+        Me.scTabsAndMain.Panel2.SuspendLayout()
+        Me.scTabsAndMain.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        CType(Me.sc2forTagsAndTasks, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.sc2forTagsAndTasks.Panel1.SuspendLayout()
-        Me.sc2forTagsAndTasks.Panel2.SuspendLayout()
-        Me.sc2forTagsAndTasks.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.sc3forTasksAndDetails, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.sc3forTasksAndDetails.Panel1.SuspendLayout()
-        Me.sc3forTasksAndDetails.Panel2.SuspendLayout()
-        Me.sc3forTasksAndDetails.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.scTagsAndLogEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.scTagsAndLogEntries.Panel1.SuspendLayout()
+        Me.scTagsAndLogEntries.Panel2.SuspendLayout()
+        Me.scTagsAndLogEntries.SuspendLayout()
+        CType(Me.dgvTags, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.scLogEntriesAndDetails, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.scLogEntriesAndDetails.Panel1.SuspendLayout()
+        Me.scLogEntriesAndDetails.Panel2.SuspendLayout()
+        Me.scLogEntriesAndDetails.SuspendLayout()
+        CType(Me.dgvLogEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'sc1forTabsAndMain
+        'scTabsAndMain
         '
-        Me.sc1forTabsAndMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.sc1forTabsAndMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.sc1forTabsAndMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.sc1forTabsAndMain.IsSplitterFixed = True
-        Me.sc1forTabsAndMain.Location = New System.Drawing.Point(0, 0)
-        Me.sc1forTabsAndMain.Name = "sc1forTabsAndMain"
+        Me.scTabsAndMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.scTabsAndMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.scTabsAndMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.scTabsAndMain.IsSplitterFixed = True
+        Me.scTabsAndMain.Location = New System.Drawing.Point(0, 0)
+        Me.scTabsAndMain.Name = "scTabsAndMain"
         '
-        'sc1forTabsAndMain.Panel1
+        'scTabsAndMain.Panel1
         '
-        Me.sc1forTabsAndMain.Panel1.Controls.Add(Me.TabControl1)
+        Me.scTabsAndMain.Panel1.Controls.Add(Me.TabControl1)
         '
-        'sc1forTabsAndMain.Panel2
+        'scTabsAndMain.Panel2
         '
-        Me.sc1forTabsAndMain.Panel2.Controls.Add(Me.sc2forTagsAndTasks)
-        Me.sc1forTabsAndMain.Size = New System.Drawing.Size(717, 280)
-        Me.sc1forTabsAndMain.SplitterDistance = 89
-        Me.sc1forTabsAndMain.TabIndex = 0
+        Me.scTabsAndMain.Panel2.Controls.Add(Me.scTagsAndLogEntries)
+        Me.scTabsAndMain.Size = New System.Drawing.Size(759, 280)
+        Me.scTabsAndMain.SplitterDistance = 89
+        Me.scTabsAndMain.TabIndex = 0
         '
         'TabControl1
         '
@@ -137,304 +137,325 @@ Partial Class frmUiMockup
         Me.TabPage3.Text = "Donelog"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'sc2forTagsAndTasks
+        'scTagsAndLogEntries
         '
-        Me.sc2forTagsAndTasks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.sc2forTagsAndTasks.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.sc2forTagsAndTasks.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.sc2forTagsAndTasks.IsSplitterFixed = True
-        Me.sc2forTagsAndTasks.Location = New System.Drawing.Point(0, 0)
-        Me.sc2forTagsAndTasks.Name = "sc2forTagsAndTasks"
+        Me.scTagsAndLogEntries.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.scTagsAndLogEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.scTagsAndLogEntries.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.scTagsAndLogEntries.IsSplitterFixed = True
+        Me.scTagsAndLogEntries.Location = New System.Drawing.Point(0, 0)
+        Me.scTagsAndLogEntries.Name = "scTagsAndLogEntries"
         '
-        'sc2forTagsAndTasks.Panel1
+        'scTagsAndLogEntries.Panel1
         '
-        Me.sc2forTagsAndTasks.Panel1.Controls.Add(Me.DataGridView1)
+        Me.scTagsAndLogEntries.Panel1.Controls.Add(Me.dgvTags)
         '
-        'sc2forTagsAndTasks.Panel2
+        'scTagsAndLogEntries.Panel2
         '
-        Me.sc2forTagsAndTasks.Panel2.Controls.Add(Me.sc3forTasksAndDetails)
-        Me.sc2forTagsAndTasks.Size = New System.Drawing.Size(624, 280)
-        Me.sc2forTagsAndTasks.SplitterDistance = 144
-        Me.sc2forTagsAndTasks.TabIndex = 0
+        Me.scTagsAndLogEntries.Panel2.Controls.Add(Me.scLogEntriesAndDetails)
+        Me.scTagsAndLogEntries.Size = New System.Drawing.Size(666, 280)
+        Me.scTagsAndLogEntries.SplitterDistance = 144
+        Me.scTagsAndLogEntries.TabIndex = 0
         '
-        'DataGridView1
+        'dgvTags
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToOrderColumns = True
-        Me.DataGridView1.AllowUserToResizeColumns = False
-        Me.DataGridView1.AllowUserToResizeRows = False
-        Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.ColumnHeadersVisible = False
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView1.MultiSelect = False
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView1.Size = New System.Drawing.Size(142, 278)
-        Me.DataGridView1.TabIndex = 0
+        Me.dgvTags.AllowUserToAddRows = False
+        Me.dgvTags.AllowUserToDeleteRows = False
+        Me.dgvTags.AllowUserToOrderColumns = True
+        Me.dgvTags.AllowUserToResizeColumns = False
+        Me.dgvTags.AllowUserToResizeRows = False
+        Me.dgvTags.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.dgvTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTags.ColumnHeadersVisible = False
+        Me.dgvTags.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvTags.Location = New System.Drawing.Point(0, 0)
+        Me.dgvTags.MultiSelect = False
+        Me.dgvTags.Name = "dgvTags"
+        Me.dgvTags.ReadOnly = True
+        Me.dgvTags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvTags.Size = New System.Drawing.Size(142, 278)
+        Me.dgvTags.TabIndex = 0
         '
-        'sc3forTasksAndDetails
+        'scLogEntriesAndDetails
         '
-        Me.sc3forTasksAndDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.sc3forTasksAndDetails.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.sc3forTasksAndDetails.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-        Me.sc3forTasksAndDetails.IsSplitterFixed = True
-        Me.sc3forTasksAndDetails.Location = New System.Drawing.Point(0, 0)
-        Me.sc3forTasksAndDetails.Name = "sc3forTasksAndDetails"
+        Me.scLogEntriesAndDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.scLogEntriesAndDetails.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.scLogEntriesAndDetails.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.scLogEntriesAndDetails.IsSplitterFixed = True
+        Me.scLogEntriesAndDetails.Location = New System.Drawing.Point(0, 0)
+        Me.scLogEntriesAndDetails.Name = "scLogEntriesAndDetails"
         '
-        'sc3forTasksAndDetails.Panel1
+        'scLogEntriesAndDetails.Panel1
         '
-        Me.sc3forTasksAndDetails.Panel1.Controls.Add(Me.DataGridView2)
+        Me.scLogEntriesAndDetails.Panel1.Controls.Add(Me.dgvLogEntries)
         '
-        'sc3forTasksAndDetails.Panel2
+        'scLogEntriesAndDetails.Panel2
         '
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label10)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label9)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtLogType)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label8)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtActive)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtId)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtFinished)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtInProgress)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtEndDate)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtStartDate)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtPriority)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtDescription)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.txtName)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label7)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label6)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label5)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label4)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label3)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label2)
-        Me.sc3forTasksAndDetails.Panel2.Controls.Add(Me.Label1)
-        Me.sc3forTasksAndDetails.Size = New System.Drawing.Size(476, 280)
-        Me.sc3forTasksAndDetails.SplitterDistance = 188
-        Me.sc3forTasksAndDetails.TabIndex = 0
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblActive)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblLogType)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtLogType)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblId)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtActive)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtId)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtFinished)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtInProgress)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtEndDate)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtStartDate)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtPriority)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtDescription)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.txtName)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblFinished)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblInProgress)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblEndDate)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblStartDate)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblPriority)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblDescription)
+        Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblName)
+        Me.scLogEntriesAndDetails.Size = New System.Drawing.Size(518, 280)
+        Me.scLogEntriesAndDetails.SplitterDistance = 188
+        Me.scLogEntriesAndDetails.TabIndex = 0
         '
-        'DataGridView2
+        'dgvLogEntries
         '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.AllowUserToOrderColumns = True
-        Me.DataGridView2.AllowUserToResizeColumns = False
-        Me.DataGridView2.AllowUserToResizeRows = False
-        Me.DataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.ColumnHeadersVisible = False
-        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView2.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView2.MultiSelect = False
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView2.Size = New System.Drawing.Size(186, 278)
-        Me.DataGridView2.TabIndex = 1
+        Me.dgvLogEntries.AllowUserToAddRows = False
+        Me.dgvLogEntries.AllowUserToDeleteRows = False
+        Me.dgvLogEntries.AllowUserToOrderColumns = True
+        Me.dgvLogEntries.AllowUserToResizeColumns = False
+        Me.dgvLogEntries.AllowUserToResizeRows = False
+        Me.dgvLogEntries.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.dgvLogEntries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvLogEntries.ColumnHeadersVisible = False
+        Me.dgvLogEntries.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvLogEntries.Location = New System.Drawing.Point(0, 0)
+        Me.dgvLogEntries.MultiSelect = False
+        Me.dgvLogEntries.Name = "dgvLogEntries"
+        Me.dgvLogEntries.ReadOnly = True
+        Me.dgvLogEntries.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvLogEntries.Size = New System.Drawing.Size(186, 278)
+        Me.dgvLogEntries.TabIndex = 1
         '
-        'Label1
+        'lblName
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(42, 66)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.lblName.AutoSize = True
+        Me.lblName.Location = New System.Drawing.Point(42, 66)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(38, 13)
+        Me.lblName.TabIndex = 0
+        Me.lblName.Text = "Name:"
         '
-        'Label2
+        'lblDescription
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(17, 92)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Description:"
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Location = New System.Drawing.Point(17, 92)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(63, 13)
+        Me.lblDescription.TabIndex = 1
+        Me.lblDescription.Text = "Description:"
         '
-        'Label3
+        'lblPriority
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(39, 118)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(41, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Priority:"
+        Me.lblPriority.AutoSize = True
+        Me.lblPriority.Location = New System.Drawing.Point(39, 118)
+        Me.lblPriority.Name = "lblPriority"
+        Me.lblPriority.Size = New System.Drawing.Size(41, 13)
+        Me.lblPriority.TabIndex = 2
+        Me.lblPriority.Text = "Priority:"
         '
-        'Label4
+        'lblStartDate
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(22, 144)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(58, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Start Date:"
+        Me.lblStartDate.AutoSize = True
+        Me.lblStartDate.Location = New System.Drawing.Point(22, 144)
+        Me.lblStartDate.Name = "lblStartDate"
+        Me.lblStartDate.Size = New System.Drawing.Size(58, 13)
+        Me.lblStartDate.TabIndex = 3
+        Me.lblStartDate.Text = "Start Date:"
         '
-        'Label5
+        'lblEndDate
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 170)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(55, 13)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "End Date:"
+        Me.lblEndDate.AutoSize = True
+        Me.lblEndDate.Location = New System.Drawing.Point(25, 170)
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Size = New System.Drawing.Size(55, 13)
+        Me.lblEndDate.TabIndex = 4
+        Me.lblEndDate.Text = "End Date:"
         '
-        'Label6
+        'lblInProgress
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(17, 222)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(63, 13)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "In Progress:"
+        Me.lblInProgress.AutoSize = True
+        Me.lblInProgress.Location = New System.Drawing.Point(17, 222)
+        Me.lblInProgress.Name = "lblInProgress"
+        Me.lblInProgress.Size = New System.Drawing.Size(63, 13)
+        Me.lblInProgress.TabIndex = 5
+        Me.lblInProgress.Text = "In Progress:"
         '
-        'Label7
+        'lblFinished
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(31, 248)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(49, 13)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Finished:"
+        Me.lblFinished.AutoSize = True
+        Me.lblFinished.Location = New System.Drawing.Point(31, 248)
+        Me.lblFinished.Name = "lblFinished"
+        Me.lblFinished.Size = New System.Drawing.Size(49, 13)
+        Me.lblFinished.TabIndex = 6
+        Me.lblFinished.Text = "Finished:"
         '
         'txtName
         '
+        Me.txtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtName.Location = New System.Drawing.Point(86, 63)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(185, 20)
+        Me.txtName.Size = New System.Drawing.Size(227, 20)
         Me.txtName.TabIndex = 7
         '
         'txtDescription
         '
+        Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDescription.Location = New System.Drawing.Point(86, 89)
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(185, 20)
+        Me.txtDescription.Size = New System.Drawing.Size(227, 20)
         Me.txtDescription.TabIndex = 8
         '
         'txtPriority
         '
+        Me.txtPriority.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPriority.Location = New System.Drawing.Point(86, 115)
         Me.txtPriority.Name = "txtPriority"
-        Me.txtPriority.Size = New System.Drawing.Size(185, 20)
+        Me.txtPriority.Size = New System.Drawing.Size(227, 20)
         Me.txtPriority.TabIndex = 9
         '
         'txtStartDate
         '
+        Me.txtStartDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtStartDate.Location = New System.Drawing.Point(86, 141)
         Me.txtStartDate.Name = "txtStartDate"
-        Me.txtStartDate.Size = New System.Drawing.Size(185, 20)
+        Me.txtStartDate.Size = New System.Drawing.Size(227, 20)
         Me.txtStartDate.TabIndex = 10
         '
         'txtEndDate
         '
+        Me.txtEndDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEndDate.Location = New System.Drawing.Point(86, 167)
         Me.txtEndDate.Name = "txtEndDate"
-        Me.txtEndDate.Size = New System.Drawing.Size(185, 20)
+        Me.txtEndDate.Size = New System.Drawing.Size(227, 20)
         Me.txtEndDate.TabIndex = 11
         '
         'txtInProgress
         '
+        Me.txtInProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtInProgress.Location = New System.Drawing.Point(86, 219)
         Me.txtInProgress.Name = "txtInProgress"
-        Me.txtInProgress.Size = New System.Drawing.Size(185, 20)
+        Me.txtInProgress.Size = New System.Drawing.Size(227, 20)
         Me.txtInProgress.TabIndex = 12
         '
         'txtFinished
         '
+        Me.txtFinished.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFinished.Location = New System.Drawing.Point(86, 245)
         Me.txtFinished.Name = "txtFinished"
-        Me.txtFinished.Size = New System.Drawing.Size(185, 20)
+        Me.txtFinished.Size = New System.Drawing.Size(227, 20)
         Me.txtFinished.TabIndex = 13
         '
         'txtId
         '
+        Me.txtId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtId.Location = New System.Drawing.Point(86, 11)
         Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(185, 20)
+        Me.txtId.Size = New System.Drawing.Size(227, 20)
         Me.txtId.TabIndex = 14
         '
         'txtActive
         '
+        Me.txtActive.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtActive.Location = New System.Drawing.Point(86, 193)
         Me.txtActive.Name = "txtActive"
-        Me.txtActive.Size = New System.Drawing.Size(185, 20)
+        Me.txtActive.Size = New System.Drawing.Size(227, 20)
         Me.txtActive.TabIndex = 15
         '
-        'Label8
+        'lblId
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(61, 14)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(19, 13)
-        Me.Label8.TabIndex = 17
-        Me.Label8.Text = "Id:"
+        Me.lblId.AutoSize = True
+        Me.lblId.Location = New System.Drawing.Point(61, 14)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(19, 13)
+        Me.lblId.TabIndex = 17
+        Me.lblId.Text = "Id:"
         '
         'txtLogType
         '
+        Me.txtLogType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLogType.Location = New System.Drawing.Point(86, 37)
         Me.txtLogType.Name = "txtLogType"
-        Me.txtLogType.Size = New System.Drawing.Size(185, 20)
+        Me.txtLogType.Size = New System.Drawing.Size(227, 20)
         Me.txtLogType.TabIndex = 18
         '
-        'Label9
+        'lblLogType
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(25, 40)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(55, 13)
-        Me.Label9.TabIndex = 19
-        Me.Label9.Text = "Log Type:"
+        Me.lblLogType.AutoSize = True
+        Me.lblLogType.Location = New System.Drawing.Point(25, 40)
+        Me.lblLogType.Name = "lblLogType"
+        Me.lblLogType.Size = New System.Drawing.Size(55, 13)
+        Me.lblLogType.TabIndex = 19
+        Me.lblLogType.Text = "Log Type:"
         '
-        'Label10
+        'lblActive
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(39, 196)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(40, 13)
-        Me.Label10.TabIndex = 20
-        Me.Label10.Text = "Active:"
+        Me.lblActive.AutoSize = True
+        Me.lblActive.Location = New System.Drawing.Point(39, 196)
+        Me.lblActive.Name = "lblActive"
+        Me.lblActive.Size = New System.Drawing.Size(40, 13)
+        Me.lblActive.TabIndex = 20
+        Me.lblActive.Text = "Active:"
         '
         'frmUiMockup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(717, 280)
-        Me.Controls.Add(Me.sc1forTabsAndMain)
+        Me.ClientSize = New System.Drawing.Size(759, 280)
+        Me.Controls.Add(Me.scTabsAndMain)
         Me.MinimumSize = New System.Drawing.Size(725, 300)
         Me.Name = "frmUiMockup"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmUiMockup"
-        Me.sc1forTabsAndMain.Panel1.ResumeLayout(False)
-        Me.sc1forTabsAndMain.Panel2.ResumeLayout(False)
-        CType(Me.sc1forTabsAndMain, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.sc1forTabsAndMain.ResumeLayout(False)
+        Me.scTabsAndMain.Panel1.ResumeLayout(False)
+        Me.scTabsAndMain.Panel2.ResumeLayout(False)
+        CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scTabsAndMain.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
-        Me.sc2forTagsAndTasks.Panel1.ResumeLayout(False)
-        Me.sc2forTagsAndTasks.Panel2.ResumeLayout(False)
-        CType(Me.sc2forTagsAndTasks, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.sc2forTagsAndTasks.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.sc3forTasksAndDetails.Panel1.ResumeLayout(False)
-        Me.sc3forTasksAndDetails.Panel2.ResumeLayout(False)
-        Me.sc3forTasksAndDetails.Panel2.PerformLayout()
-        CType(Me.sc3forTasksAndDetails, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.sc3forTasksAndDetails.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scTagsAndLogEntries.Panel1.ResumeLayout(False)
+        Me.scTagsAndLogEntries.Panel2.ResumeLayout(False)
+        CType(Me.scTagsAndLogEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scTagsAndLogEntries.ResumeLayout(False)
+        CType(Me.dgvTags, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scLogEntriesAndDetails.Panel1.ResumeLayout(False)
+        Me.scLogEntriesAndDetails.Panel2.ResumeLayout(False)
+        Me.scLogEntriesAndDetails.Panel2.PerformLayout()
+        CType(Me.scLogEntriesAndDetails, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.scLogEntriesAndDetails.ResumeLayout(False)
+        CType(Me.dgvLogEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents sc1forTabsAndMain As System.Windows.Forms.SplitContainer
-    Friend WithEvents sc2forTagsAndTasks As System.Windows.Forms.SplitContainer
-    Friend WithEvents sc3forTasksAndDetails As System.Windows.Forms.SplitContainer
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents scTabsAndMain As System.Windows.Forms.SplitContainer
+    Friend WithEvents scTagsAndLogEntries As System.Windows.Forms.SplitContainer
+    Friend WithEvents scLogEntriesAndDetails As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvTags As System.Windows.Forms.DataGridView
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents dgvLogEntries As System.Windows.Forms.DataGridView
+    Friend WithEvents lblActive As System.Windows.Forms.Label
+    Friend WithEvents lblLogType As System.Windows.Forms.Label
     Friend WithEvents txtLogType As System.Windows.Forms.TextBox
-    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents lblId As System.Windows.Forms.Label
     Friend WithEvents txtActive As System.Windows.Forms.TextBox
     Friend WithEvents txtId As System.Windows.Forms.TextBox
     Friend WithEvents txtFinished As System.Windows.Forms.TextBox
@@ -444,11 +465,11 @@ Partial Class frmUiMockup
     Friend WithEvents txtPriority As System.Windows.Forms.TextBox
     Friend WithEvents txtDescription As System.Windows.Forms.TextBox
     Friend WithEvents txtName As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblFinished As System.Windows.Forms.Label
+    Friend WithEvents lblInProgress As System.Windows.Forms.Label
+    Friend WithEvents lblEndDate As System.Windows.Forms.Label
+    Friend WithEvents lblStartDate As System.Windows.Forms.Label
+    Friend WithEvents lblPriority As System.Windows.Forms.Label
+    Friend WithEvents lblDescription As System.Windows.Forms.Label
+    Friend WithEvents lblName As System.Windows.Forms.Label
 End Class

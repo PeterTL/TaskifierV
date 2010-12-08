@@ -5,14 +5,14 @@ Public Class TagAndTaskControl
     ''' <summary>
     ''' Returns a table with tags and their identifiers from the DB.
     ''' </summary>
-    ''' <param name="strLogName">Log name, e.g. "Backlog".</param>
+    ''' <param name="logName">Log name, e.g. "Backlog".</param>
     ''' <returns>Data table with tags (id and name).</returns>
     ''' <remarks></remarks>
-    Public Function GetTagsForLog(ByVal strLogName As String) As DataTable
+    Public Function GetTagsForLog(ByVal logName As String) As DataTable
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTagsForLog started. Messages:")
-        Debug.Print("Log Name: " & strLogName)
+        Debug.Print("Log Name: " & logName)
 
         'Create (empty) table and column objects
         Dim dt As New DataTable("TagsForLog")
@@ -34,7 +34,7 @@ Public Class TagAndTaskControl
                        On lett.TagId Equals t.Id
                        Join le In DB.LogEntries
                        On le.Id Equals lett.LogEntryId
-                       Where le.LogType = strLogName
+                       Where le.LogType = logName
                        Where le.Active = True
                        Order By t.Name
                        Select t.Id, t.Name).Distinct
@@ -66,16 +66,16 @@ Public Class TagAndTaskControl
     ''' <summary>
     ''' Returns a table with tasks and their identifiers from the DB.
     ''' </summary>
-    ''' <param name="iTagId">Tag identifier.</param>
-    ''' <param name="strLogName">Log name, e.g. "Backlog".</param>
+    ''' <param name="tagId">Tag identifier.</param>
+    ''' <param name="logName">Log name, e.g. "Backlog".</param>
     ''' <returns>Data table with tasks (id and name).</returns>
     ''' <remarks></remarks>
-    Public Function GetTasksForTag(ByVal iTagId As Integer, ByVal strLogName As String) As DataTable
+    Public Function GetTasksForTag(ByVal tagId As Integer, ByVal logName As String) As DataTable
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTasksForTag started. Messages:")
-        Debug.Print("Log Name: " & strLogName)
-        Debug.Print("Tag ID: " & iTagId.ToString)
+        Debug.Print("Log Name: " & logName)
+        Debug.Print("Tag ID: " & tagId.ToString)
 
         'Create (empty) table and column objects
         Dim dt As New DataTable("TasksForTagsAndLog")
@@ -92,16 +92,16 @@ Public Class TagAndTaskControl
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
 
         'Check if tag identifier is set
-        If iTagId > -1 Then
+        If tagId > -1 Then
             'Query DB for tasks, filter is tag and log type
             v = (From le In DB.LogEntries
                             Join lett In DB.LogEntriesToTags
                             On le.Id Equals lett.LogEntryId
                             Join t In DB.Tags
                             On lett.TagId Equals t.Id
-                            Where le.LogType = strLogName
+                            Where le.LogType = logName
                             Where le.Active = True
-                            Where t.Id = iTagId
+                            Where t.Id = tagId
                             Order By le.Name
                             Select le.Id, le.Name).Distinct
         Else
@@ -111,7 +111,7 @@ Public Class TagAndTaskControl
                             On le.Id Equals lett.LogEntryId
                             Join t In DB.Tags
                             On lett.TagId Equals t.Id
-                            Where le.LogType = strLogName
+                            Where le.LogType = logName
                             Where le.Active = True
                             Order By le.Name
                             Select le.Id, le.Name).Distinct
@@ -141,12 +141,17 @@ Public Class TagAndTaskControl
         Return dt
     End Function
 
-    'TODO: Method documentation
-    Public Function GetTaskDetails(ByVal iTaskId As Integer) As LogEntryData
+    ''' <summary>
+    ''' Returns a LogEntryDataObject with one single log entry.
+    ''' </summary>
+    ''' <param name="logEntryId">Log entry identifier.</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetTaskDetails(ByVal logEntryId As Integer) As LogEntryData
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTaskDetails started. Messages:")
-        Debug.Print("Tag ID: " & iTaskId.ToString)
+        Debug.Print("Tag ID: " & logEntryId.ToString)
 
         'Create (empty) data object for log entry
         Dim ledat As New LogEntryData
@@ -158,7 +163,7 @@ Public Class TagAndTaskControl
 
         'Query DB for tags, filter is log type
         v = (From le In DB.LogEntries
-                        Where le.Id = iTaskId
+                        Where le.Id = logEntryId
                         Select le.Id, le.LogType, le.Name, le.Description, le.Priority, le.StartDate, _
                                 le.EndDate, le.Active, le.InProgress, le.Finished).First
 
@@ -181,7 +186,7 @@ Public Class TagAndTaskControl
         Return ledat
     End Function
 
-    Public Function InsertTagList(ByRef lstStrTags As List(Of String))
+    Public Function InsertTagList(ByRef tagList As List(Of String))
         'TODO
         Return Nothing
     End Function
