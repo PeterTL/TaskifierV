@@ -130,12 +130,6 @@ Public Class TagAndTaskControl
                             Select le.Id, le.Name).Distinct
         End If
 
-        'Add default row
-        dr = dt.NewRow()
-        dr("Id") = "-1"
-        dr("Name") = "All"
-        dt.Rows.Add(dr)
-
         'Add rows returned from DB
         For Each element In v
             dr = dt.NewRow()
