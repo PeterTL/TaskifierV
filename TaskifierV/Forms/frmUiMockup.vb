@@ -1,6 +1,6 @@
 ﻿Public Class frmUiMockup
 
-    Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles TabControl1.DrawItem
+    Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles tcMain.DrawItem
         'Draw tabs
         Dim g As Graphics
         Dim sText As String
@@ -44,7 +44,7 @@
         End Try
     End Sub
 
-    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
+    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcMain.SelectedIndexChanged
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl
 
@@ -52,12 +52,12 @@
             'Get tags and fill first grid with tags according to selected log
             'Get all tags when log is Backlog
             Dim getAll As Boolean = False
-            If TabControl1.SelectedTab.Text = "Backlog" Then getAll = True
-            Dim tags As DataTable = tatControl.GetTagsForLog(TabControl1.SelectedTab.Text, getAll)
+            If tcMain.SelectedTab.Text = "Backlog" Then getAll = True
+            Dim tags As DataTable = tatControl.GetTagsForLog(tcMain.SelectedTab.Text, getAll)
             dgvTags.DataSource = tags
 
             'Get tasks and fill second grid with tags according to selected log
-            Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, TabControl1.SelectedTab.Text)
+            Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, tcMain.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
         Catch ex As Exception
             'Debug output
@@ -73,7 +73,7 @@
 
         Try
             'Get tasks and fill second grid with tags according to selected tag and log
-            Dim logEntries As DataTable = tatControl.GetTasksForTag(dgvTags.CurrentRow.Cells(0).Value, TabControl1.SelectedTab.Text)
+            Dim logEntries As DataTable = tatControl.GetTasksForTag(dgvTags.CurrentRow.Cells(0).Value, tcMain.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
         Catch ex As Exception
             'Debug output

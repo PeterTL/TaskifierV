@@ -23,10 +23,10 @@ Partial Class frmUiMockup
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.scTabsAndMain = New System.Windows.Forms.SplitContainer()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.tcMain = New System.Windows.Forms.TabControl()
+        Me.tpBacklog = New System.Windows.Forms.TabPage()
+        Me.tpWorklog = New System.Windows.Forms.TabPage()
+        Me.tpDonelog = New System.Windows.Forms.TabPage()
         Me.scTagsAndLogEntries = New System.Windows.Forms.SplitContainer()
         Me.dgvTags = New System.Windows.Forms.DataGridView()
         Me.scLogEntriesAndDetails = New System.Windows.Forms.SplitContainer()
@@ -55,7 +55,7 @@ Partial Class frmUiMockup
         Me.scTabsAndMain.Panel1.SuspendLayout()
         Me.scTabsAndMain.Panel2.SuspendLayout()
         Me.scTabsAndMain.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
+        Me.tcMain.SuspendLayout()
         CType(Me.scTagsAndLogEntries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scTagsAndLogEntries.Panel1.SuspendLayout()
         Me.scTagsAndLogEntries.Panel2.SuspendLayout()
@@ -79,7 +79,7 @@ Partial Class frmUiMockup
         '
         'scTabsAndMain.Panel1
         '
-        Me.scTabsAndMain.Panel1.Controls.Add(Me.TabControl1)
+        Me.scTabsAndMain.Panel1.Controls.Add(Me.tcMain)
         '
         'scTabsAndMain.Panel2
         '
@@ -88,54 +88,54 @@ Partial Class frmUiMockup
         Me.scTabsAndMain.SplitterDistance = 89
         Me.scTabsAndMain.TabIndex = 0
         '
-        'TabControl1
+        'tcMain
         '
-        Me.TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left
-        Me.TabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
-        Me.TabControl1.ItemSize = New System.Drawing.Size(30, 80)
-        Me.TabControl1.Location = New System.Drawing.Point(3, 3)
-        Me.TabControl1.Multiline = True
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(83, 256)
-        Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
-        Me.TabControl1.TabIndex = 2
+        Me.tcMain.Alignment = System.Windows.Forms.TabAlignment.Left
+        Me.tcMain.Appearance = System.Windows.Forms.TabAppearance.Buttons
+        Me.tcMain.Controls.Add(Me.tpBacklog)
+        Me.tcMain.Controls.Add(Me.tpWorklog)
+        Me.tcMain.Controls.Add(Me.tpDonelog)
+        Me.tcMain.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
+        Me.tcMain.ItemSize = New System.Drawing.Size(30, 80)
+        Me.tcMain.Location = New System.Drawing.Point(3, 3)
+        Me.tcMain.Multiline = True
+        Me.tcMain.Name = "tcMain"
+        Me.tcMain.SelectedIndex = 0
+        Me.tcMain.Size = New System.Drawing.Size(83, 256)
+        Me.tcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.tcMain.TabIndex = 2
         '
-        'TabPage1
+        'tpBacklog
         '
-        Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage1.Location = New System.Drawing.Point(100, 4)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(0, 248)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Backlog"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tpBacklog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tpBacklog.Location = New System.Drawing.Point(100, 4)
+        Me.tpBacklog.Name = "tpBacklog"
+        Me.tpBacklog.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpBacklog.Size = New System.Drawing.Size(0, 248)
+        Me.tpBacklog.TabIndex = 0
+        Me.tpBacklog.Text = "Backlog"
+        Me.tpBacklog.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'tpWorklog
         '
-        Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.Location = New System.Drawing.Point(100, 4)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(0, 248)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Worklog"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tpWorklog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tpWorklog.Location = New System.Drawing.Point(100, 4)
+        Me.tpWorklog.Name = "tpWorklog"
+        Me.tpWorklog.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpWorklog.Size = New System.Drawing.Size(0, 248)
+        Me.tpWorklog.TabIndex = 1
+        Me.tpWorklog.Text = "Worklog"
+        Me.tpWorklog.UseVisualStyleBackColor = True
         '
-        'TabPage3
+        'tpDonelog
         '
-        Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage3.Location = New System.Drawing.Point(100, 4)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(0, 248)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Donelog"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        Me.tpDonelog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tpDonelog.Location = New System.Drawing.Point(100, 4)
+        Me.tpDonelog.Name = "tpDonelog"
+        Me.tpDonelog.Size = New System.Drawing.Size(0, 248)
+        Me.tpDonelog.TabIndex = 2
+        Me.tpDonelog.Text = "Donelog"
+        Me.tpDonelog.UseVisualStyleBackColor = True
         '
         'scTagsAndLogEntries
         '
@@ -434,7 +434,7 @@ Partial Class frmUiMockup
         Me.scTabsAndMain.Panel2.ResumeLayout(False)
         CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.scTabsAndMain.ResumeLayout(False)
-        Me.TabControl1.ResumeLayout(False)
+        Me.tcMain.ResumeLayout(False)
         Me.scTagsAndLogEntries.Panel1.ResumeLayout(False)
         Me.scTagsAndLogEntries.Panel2.ResumeLayout(False)
         CType(Me.scTagsAndLogEntries, System.ComponentModel.ISupportInitialize).EndInit()
@@ -453,10 +453,10 @@ Partial Class frmUiMockup
     Friend WithEvents scTagsAndLogEntries As System.Windows.Forms.SplitContainer
     Friend WithEvents scLogEntriesAndDetails As System.Windows.Forms.SplitContainer
     Friend WithEvents dgvTags As System.Windows.Forms.DataGridView
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents tcMain As System.Windows.Forms.TabControl
+    Friend WithEvents tpBacklog As System.Windows.Forms.TabPage
+    Friend WithEvents tpWorklog As System.Windows.Forms.TabPage
+    Friend WithEvents tpDonelog As System.Windows.Forms.TabPage
     Friend WithEvents dgvLogEntries As System.Windows.Forms.DataGridView
     Friend WithEvents lblActive As System.Windows.Forms.Label
     Friend WithEvents lblLogType As System.Windows.Forms.Label
