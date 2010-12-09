@@ -113,30 +113,34 @@
     'Drag and drop magic
 
     Private Sub dgvLogEntries_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvLogEntries.MouseDown
-        'Variable for source element index
-        Dim index As Integer
+        'Only enable task drag and drop within the Backlog
+        If tcMain.SelectedTab.Text = "Backlog" Then
+            'Variable for source element index
+            Dim index As Integer
 
-        Try
-            'Get index of source element
-            index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
+            Try
+                'Get index of source element
+                index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
 
-            If index > -1 Then
-                'Highlight selected item an start d&d
-                dgvLogEntries.Rows(index).Selected = True
-                dgvLogEntries.DoDragDrop(index, DragDropEffects.Copy)
-            End If
-        Catch ex As Exception
+                If index > -1 Then
+                    'Highlight selected item an start d&d
+                    dgvLogEntries.Rows(index).Selected = True
+                    dgvLogEntries.DoDragDrop(index, DragDropEffects.Copy)
+                End If
+            Catch ex As Exception
+                'Debug output
+                Debug.Print("")
+                Debug.Print("Handler dgvLogEntries_MouseDown exited with error:")
+                Debug.Print(ex.Message)
+            End Try
+
             'Debug output
             Debug.Print("")
-            Debug.Print("Handler dgvLogEntries_MouseDown exited with error:")
-            Debug.Print(ex.Message)
-        End Try
+            Debug.Print("D&D start position")
+            Debug.Print("X: " & e.X)
+            Debug.Print("Y: " & e.Y)
+        End If
 
-        'Debug output
-        Debug.Print("")
-        Debug.Print("D&D start position")
-        Debug.Print("X: " & e.X)
-        Debug.Print("Y: " & e.Y)
     End Sub
 
     Private Sub dgvTags_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragOver
