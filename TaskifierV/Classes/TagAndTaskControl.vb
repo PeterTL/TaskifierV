@@ -8,7 +8,7 @@ Public Class TagAndTaskControl
     ''' <param name="logName">Log name, e.g. "Backlog".</param>
     ''' <returns>Data table with tags (id and name).</returns>
     ''' <remarks></remarks>
-    Public Function GetTagsForLog(ByVal logName As String) As DataTable
+    Public Function GetTagsForLog(ByVal logName As String, ByRef getAllTags As Boolean) As DataTable
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTagsForLog started. Messages:")
@@ -28,16 +28,29 @@ Public Class TagAndTaskControl
         Dim v
         Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
 
-        'Query DB for tags, filter is log type
-        v = (From t In DB.Tags
-                       Join lett In DB.LogEntriesToTags
-                       On lett.TagId Equals t.Id
-                       Join le In DB.LogEntries
-                       On le.Id Equals lett.LogEntryId
-                       Where le.LogType = logName
-                       Where le.Active = True
-                       Order By t.Name
-                       Select t.Id, t.Name).Distinct
+        'Check if tags need to be filtered
+        If getAllTags = True Then
+            'Query DB for all tags (NO filter!)
+            v = (From t In DB.Tags
+                           Join lett In DB.LogEntriesToTags
+                           On lett.TagId Equals t.Id
+                           Join le In DB.LogEntries
+                           On le.Id Equals lett.LogEntryId
+                           Where le.Active = True
+                           Order By t.Name
+                           Select t.Id, t.Name).Distinct
+        Else
+            'Query DB for tags, filter is log type
+            v = (From t In DB.Tags
+                           Join lett In DB.LogEntriesToTags
+                           On lett.TagId Equals t.Id
+                           Join le In DB.LogEntries
+                           On le.Id Equals lett.LogEntryId
+                           Where le.LogType = logName
+                           Where le.Active = True
+                           Order By t.Name
+                           Select t.Id, t.Name).Distinct
+        End If
 
         'Add default row
         dr = dt.NewRow()

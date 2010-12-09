@@ -26,7 +26,7 @@
 
         Try
             'Get tags and fill first grid with Backlog tags
-            Dim tags As DataTable = tatControl.GetTagsForLog("Backlog")
+            Dim tags As DataTable = tatControl.GetTagsForLog("Backlog", True)
             dgvTags.DataSource = tags
 
             'Get tasks and fill second grid with Backlog tasks
@@ -50,7 +50,10 @@
 
         Try
             'Get tags and fill first grid with tags according to selected log
-            Dim tags As DataTable = tatControl.GetTagsForLog(TabControl1.SelectedTab.Text)
+            'Get all tags when log is Backlog
+            Dim getAll As Boolean = False
+            If TabControl1.SelectedTab.Text = "Backlog" Then getAll = True
+            Dim tags As DataTable = tatControl.GetTagsForLog(TabControl1.SelectedTab.Text, getAll)
             dgvTags.DataSource = tags
 
             'Get tasks and fill second grid with tags according to selected log
