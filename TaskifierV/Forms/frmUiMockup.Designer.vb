@@ -31,26 +31,26 @@ Partial Class frmUiMockup
         Me.dgvTags = New System.Windows.Forms.DataGridView()
         Me.scLogEntriesAndDetails = New System.Windows.Forms.SplitContainer()
         Me.dgvLogEntries = New System.Windows.Forms.DataGridView()
-        Me.lblName = New System.Windows.Forms.Label()
-        Me.lblDescription = New System.Windows.Forms.Label()
-        Me.lblPriority = New System.Windows.Forms.Label()
-        Me.lblStartDate = New System.Windows.Forms.Label()
-        Me.lblEndDate = New System.Windows.Forms.Label()
-        Me.lblInProgress = New System.Windows.Forms.Label()
-        Me.lblFinished = New System.Windows.Forms.Label()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.txtPriority = New System.Windows.Forms.TextBox()
-        Me.txtStartDate = New System.Windows.Forms.TextBox()
-        Me.txtEndDate = New System.Windows.Forms.TextBox()
-        Me.txtInProgress = New System.Windows.Forms.TextBox()
-        Me.txtFinished = New System.Windows.Forms.TextBox()
-        Me.txtId = New System.Windows.Forms.TextBox()
-        Me.txtActive = New System.Windows.Forms.TextBox()
-        Me.lblId = New System.Windows.Forms.Label()
-        Me.txtLogType = New System.Windows.Forms.TextBox()
-        Me.lblLogType = New System.Windows.Forms.Label()
         Me.lblActive = New System.Windows.Forms.Label()
+        Me.lblLogType = New System.Windows.Forms.Label()
+        Me.txtLogType = New System.Windows.Forms.TextBox()
+        Me.lblId = New System.Windows.Forms.Label()
+        Me.txtActive = New System.Windows.Forms.TextBox()
+        Me.txtId = New System.Windows.Forms.TextBox()
+        Me.txtFinished = New System.Windows.Forms.TextBox()
+        Me.txtInProgress = New System.Windows.Forms.TextBox()
+        Me.txtEndDate = New System.Windows.Forms.TextBox()
+        Me.txtStartDate = New System.Windows.Forms.TextBox()
+        Me.txtPriority = New System.Windows.Forms.TextBox()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.lblFinished = New System.Windows.Forms.Label()
+        Me.lblInProgress = New System.Windows.Forms.Label()
+        Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.lblStartDate = New System.Windows.Forms.Label()
+        Me.lblPriority = New System.Windows.Forms.Label()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.lblName = New System.Windows.Forms.Label()
         CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scTabsAndMain.Panel1.SuspendLayout()
         Me.scTabsAndMain.Panel2.SuspendLayout()
@@ -159,6 +159,7 @@ Partial Class frmUiMockup
         '
         'dgvTags
         '
+        Me.dgvTags.AllowDrop = True
         Me.dgvTags.AllowUserToAddRows = False
         Me.dgvTags.AllowUserToDeleteRows = False
         Me.dgvTags.AllowUserToOrderColumns = True
@@ -172,7 +173,9 @@ Partial Class frmUiMockup
         Me.dgvTags.MultiSelect = False
         Me.dgvTags.Name = "dgvTags"
         Me.dgvTags.ReadOnly = True
+        Me.dgvTags.RowHeadersVisible = False
         Me.dgvTags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvTags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvTags.Size = New System.Drawing.Size(142, 278)
         Me.dgvTags.TabIndex = 0
         '
@@ -217,6 +220,7 @@ Partial Class frmUiMockup
         '
         'dgvLogEntries
         '
+        Me.dgvLogEntries.AllowDrop = True
         Me.dgvLogEntries.AllowUserToAddRows = False
         Me.dgvLogEntries.AllowUserToDeleteRows = False
         Me.dgvLogEntries.AllowUserToOrderColumns = True
@@ -230,171 +234,20 @@ Partial Class frmUiMockup
         Me.dgvLogEntries.MultiSelect = False
         Me.dgvLogEntries.Name = "dgvLogEntries"
         Me.dgvLogEntries.ReadOnly = True
+        Me.dgvLogEntries.RowHeadersVisible = False
         Me.dgvLogEntries.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvLogEntries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvLogEntries.Size = New System.Drawing.Size(186, 278)
         Me.dgvLogEntries.TabIndex = 1
         '
-        'lblName
+        'lblActive
         '
-        Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(42, 66)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(38, 13)
-        Me.lblName.TabIndex = 0
-        Me.lblName.Text = "Name:"
-        '
-        'lblDescription
-        '
-        Me.lblDescription.AutoSize = True
-        Me.lblDescription.Location = New System.Drawing.Point(17, 92)
-        Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(63, 13)
-        Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = "Description:"
-        '
-        'lblPriority
-        '
-        Me.lblPriority.AutoSize = True
-        Me.lblPriority.Location = New System.Drawing.Point(39, 118)
-        Me.lblPriority.Name = "lblPriority"
-        Me.lblPriority.Size = New System.Drawing.Size(41, 13)
-        Me.lblPriority.TabIndex = 2
-        Me.lblPriority.Text = "Priority:"
-        '
-        'lblStartDate
-        '
-        Me.lblStartDate.AutoSize = True
-        Me.lblStartDate.Location = New System.Drawing.Point(22, 144)
-        Me.lblStartDate.Name = "lblStartDate"
-        Me.lblStartDate.Size = New System.Drawing.Size(58, 13)
-        Me.lblStartDate.TabIndex = 3
-        Me.lblStartDate.Text = "Start Date:"
-        '
-        'lblEndDate
-        '
-        Me.lblEndDate.AutoSize = True
-        Me.lblEndDate.Location = New System.Drawing.Point(25, 170)
-        Me.lblEndDate.Name = "lblEndDate"
-        Me.lblEndDate.Size = New System.Drawing.Size(55, 13)
-        Me.lblEndDate.TabIndex = 4
-        Me.lblEndDate.Text = "End Date:"
-        '
-        'lblInProgress
-        '
-        Me.lblInProgress.AutoSize = True
-        Me.lblInProgress.Location = New System.Drawing.Point(17, 222)
-        Me.lblInProgress.Name = "lblInProgress"
-        Me.lblInProgress.Size = New System.Drawing.Size(63, 13)
-        Me.lblInProgress.TabIndex = 5
-        Me.lblInProgress.Text = "In Progress:"
-        '
-        'lblFinished
-        '
-        Me.lblFinished.AutoSize = True
-        Me.lblFinished.Location = New System.Drawing.Point(31, 248)
-        Me.lblFinished.Name = "lblFinished"
-        Me.lblFinished.Size = New System.Drawing.Size(49, 13)
-        Me.lblFinished.TabIndex = 6
-        Me.lblFinished.Text = "Finished:"
-        '
-        'txtName
-        '
-        Me.txtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtName.Location = New System.Drawing.Point(86, 63)
-        Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(227, 20)
-        Me.txtName.TabIndex = 7
-        '
-        'txtDescription
-        '
-        Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDescription.Location = New System.Drawing.Point(86, 89)
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(227, 20)
-        Me.txtDescription.TabIndex = 8
-        '
-        'txtPriority
-        '
-        Me.txtPriority.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPriority.Location = New System.Drawing.Point(86, 115)
-        Me.txtPriority.Name = "txtPriority"
-        Me.txtPriority.Size = New System.Drawing.Size(227, 20)
-        Me.txtPriority.TabIndex = 9
-        '
-        'txtStartDate
-        '
-        Me.txtStartDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtStartDate.Location = New System.Drawing.Point(86, 141)
-        Me.txtStartDate.Name = "txtStartDate"
-        Me.txtStartDate.Size = New System.Drawing.Size(227, 20)
-        Me.txtStartDate.TabIndex = 10
-        '
-        'txtEndDate
-        '
-        Me.txtEndDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEndDate.Location = New System.Drawing.Point(86, 167)
-        Me.txtEndDate.Name = "txtEndDate"
-        Me.txtEndDate.Size = New System.Drawing.Size(227, 20)
-        Me.txtEndDate.TabIndex = 11
-        '
-        'txtInProgress
-        '
-        Me.txtInProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtInProgress.Location = New System.Drawing.Point(86, 219)
-        Me.txtInProgress.Name = "txtInProgress"
-        Me.txtInProgress.Size = New System.Drawing.Size(227, 20)
-        Me.txtInProgress.TabIndex = 12
-        '
-        'txtFinished
-        '
-        Me.txtFinished.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtFinished.Location = New System.Drawing.Point(86, 245)
-        Me.txtFinished.Name = "txtFinished"
-        Me.txtFinished.Size = New System.Drawing.Size(227, 20)
-        Me.txtFinished.TabIndex = 13
-        '
-        'txtId
-        '
-        Me.txtId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtId.Location = New System.Drawing.Point(86, 11)
-        Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(227, 20)
-        Me.txtId.TabIndex = 14
-        '
-        'txtActive
-        '
-        Me.txtActive.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtActive.Location = New System.Drawing.Point(86, 193)
-        Me.txtActive.Name = "txtActive"
-        Me.txtActive.Size = New System.Drawing.Size(227, 20)
-        Me.txtActive.TabIndex = 15
-        '
-        'lblId
-        '
-        Me.lblId.AutoSize = True
-        Me.lblId.Location = New System.Drawing.Point(61, 14)
-        Me.lblId.Name = "lblId"
-        Me.lblId.Size = New System.Drawing.Size(19, 13)
-        Me.lblId.TabIndex = 17
-        Me.lblId.Text = "Id:"
-        '
-        'txtLogType
-        '
-        Me.txtLogType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLogType.Location = New System.Drawing.Point(86, 37)
-        Me.txtLogType.Name = "txtLogType"
-        Me.txtLogType.Size = New System.Drawing.Size(227, 20)
-        Me.txtLogType.TabIndex = 18
+        Me.lblActive.AutoSize = True
+        Me.lblActive.Location = New System.Drawing.Point(39, 196)
+        Me.lblActive.Name = "lblActive"
+        Me.lblActive.Size = New System.Drawing.Size(40, 13)
+        Me.lblActive.TabIndex = 20
+        Me.lblActive.Text = "Active:"
         '
         'lblLogType
         '
@@ -405,14 +258,167 @@ Partial Class frmUiMockup
         Me.lblLogType.TabIndex = 19
         Me.lblLogType.Text = "Log Type:"
         '
-        'lblActive
+        'txtLogType
         '
-        Me.lblActive.AutoSize = True
-        Me.lblActive.Location = New System.Drawing.Point(39, 196)
-        Me.lblActive.Name = "lblActive"
-        Me.lblActive.Size = New System.Drawing.Size(40, 13)
-        Me.lblActive.TabIndex = 20
-        Me.lblActive.Text = "Active:"
+        Me.txtLogType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLogType.Location = New System.Drawing.Point(86, 37)
+        Me.txtLogType.Name = "txtLogType"
+        Me.txtLogType.Size = New System.Drawing.Size(227, 20)
+        Me.txtLogType.TabIndex = 18
+        '
+        'lblId
+        '
+        Me.lblId.AutoSize = True
+        Me.lblId.Location = New System.Drawing.Point(61, 14)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(19, 13)
+        Me.lblId.TabIndex = 17
+        Me.lblId.Text = "Id:"
+        '
+        'txtActive
+        '
+        Me.txtActive.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtActive.Location = New System.Drawing.Point(86, 193)
+        Me.txtActive.Name = "txtActive"
+        Me.txtActive.Size = New System.Drawing.Size(227, 20)
+        Me.txtActive.TabIndex = 15
+        '
+        'txtId
+        '
+        Me.txtId.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtId.Location = New System.Drawing.Point(86, 11)
+        Me.txtId.Name = "txtId"
+        Me.txtId.Size = New System.Drawing.Size(227, 20)
+        Me.txtId.TabIndex = 14
+        '
+        'txtFinished
+        '
+        Me.txtFinished.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFinished.Location = New System.Drawing.Point(86, 245)
+        Me.txtFinished.Name = "txtFinished"
+        Me.txtFinished.Size = New System.Drawing.Size(227, 20)
+        Me.txtFinished.TabIndex = 13
+        '
+        'txtInProgress
+        '
+        Me.txtInProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtInProgress.Location = New System.Drawing.Point(86, 219)
+        Me.txtInProgress.Name = "txtInProgress"
+        Me.txtInProgress.Size = New System.Drawing.Size(227, 20)
+        Me.txtInProgress.TabIndex = 12
+        '
+        'txtEndDate
+        '
+        Me.txtEndDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtEndDate.Location = New System.Drawing.Point(86, 167)
+        Me.txtEndDate.Name = "txtEndDate"
+        Me.txtEndDate.Size = New System.Drawing.Size(227, 20)
+        Me.txtEndDate.TabIndex = 11
+        '
+        'txtStartDate
+        '
+        Me.txtStartDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtStartDate.Location = New System.Drawing.Point(86, 141)
+        Me.txtStartDate.Name = "txtStartDate"
+        Me.txtStartDate.Size = New System.Drawing.Size(227, 20)
+        Me.txtStartDate.TabIndex = 10
+        '
+        'txtPriority
+        '
+        Me.txtPriority.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPriority.Location = New System.Drawing.Point(86, 115)
+        Me.txtPriority.Name = "txtPriority"
+        Me.txtPriority.Size = New System.Drawing.Size(227, 20)
+        Me.txtPriority.TabIndex = 9
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDescription.Location = New System.Drawing.Point(86, 89)
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(227, 20)
+        Me.txtDescription.TabIndex = 8
+        '
+        'txtName
+        '
+        Me.txtName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtName.Location = New System.Drawing.Point(86, 63)
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(227, 20)
+        Me.txtName.TabIndex = 7
+        '
+        'lblFinished
+        '
+        Me.lblFinished.AutoSize = True
+        Me.lblFinished.Location = New System.Drawing.Point(31, 248)
+        Me.lblFinished.Name = "lblFinished"
+        Me.lblFinished.Size = New System.Drawing.Size(49, 13)
+        Me.lblFinished.TabIndex = 6
+        Me.lblFinished.Text = "Finished:"
+        '
+        'lblInProgress
+        '
+        Me.lblInProgress.AutoSize = True
+        Me.lblInProgress.Location = New System.Drawing.Point(17, 222)
+        Me.lblInProgress.Name = "lblInProgress"
+        Me.lblInProgress.Size = New System.Drawing.Size(63, 13)
+        Me.lblInProgress.TabIndex = 5
+        Me.lblInProgress.Text = "In Progress:"
+        '
+        'lblEndDate
+        '
+        Me.lblEndDate.AutoSize = True
+        Me.lblEndDate.Location = New System.Drawing.Point(25, 170)
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Size = New System.Drawing.Size(55, 13)
+        Me.lblEndDate.TabIndex = 4
+        Me.lblEndDate.Text = "End Date:"
+        '
+        'lblStartDate
+        '
+        Me.lblStartDate.AutoSize = True
+        Me.lblStartDate.Location = New System.Drawing.Point(22, 144)
+        Me.lblStartDate.Name = "lblStartDate"
+        Me.lblStartDate.Size = New System.Drawing.Size(58, 13)
+        Me.lblStartDate.TabIndex = 3
+        Me.lblStartDate.Text = "Start Date:"
+        '
+        'lblPriority
+        '
+        Me.lblPriority.AutoSize = True
+        Me.lblPriority.Location = New System.Drawing.Point(39, 118)
+        Me.lblPriority.Name = "lblPriority"
+        Me.lblPriority.Size = New System.Drawing.Size(41, 13)
+        Me.lblPriority.TabIndex = 2
+        Me.lblPriority.Text = "Priority:"
+        '
+        'lblDescription
+        '
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Location = New System.Drawing.Point(17, 92)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(63, 13)
+        Me.lblDescription.TabIndex = 1
+        Me.lblDescription.Text = "Description:"
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        Me.lblName.Location = New System.Drawing.Point(42, 66)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(38, 13)
+        Me.lblName.TabIndex = 0
+        Me.lblName.Text = "Name:"
         '
         'frmUiMockup
         '

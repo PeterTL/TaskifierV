@@ -62,7 +62,7 @@
         End Try
     End Sub
 
-    Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvTags.CellClick
+    Private Sub dgvTags_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvTags.CellClick
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl
 
@@ -72,12 +72,12 @@
             dgvLogEntries.DataSource = logEntries
         Catch ex As Exception
             Debug.Print("")
-            Debug.Print("Handler DataGridView1_CellClick exited with error:")
+            Debug.Print("Handler dgvTags_CellClick exited with error:")
             Debug.Print(ex.Message)
         End Try
     End Sub
 
-    Private Sub DataGridView2_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvLogEntries.CellClick
+    Private Sub dgvLogEntries_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvLogEntries.CellClick
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl
 
@@ -98,9 +98,37 @@
             txtFinished.Text = logEntry.Finished
         Catch ex As Exception
             Debug.Print("")
-            Debug.Print("Handler DataGridView2_CellClick exited with error:")
+            Debug.Print("Handler dgvLogEntries_CellClick exited with error:")
             Debug.Print(ex.Message)
         End Try
     End Sub
 
+    'Drag and drop magic
+
+    Private Sub dgvLogEntries_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvLogEntries.MouseDown
+        Dim index As Integer
+        index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
+        If index > -1 Then
+            dgvLogEntries.Rows(index).Selected = True
+            dgvLogEntries.DoDragDrop(index, DragDropEffects.Move)
+        End If
+    End Sub
+
+    Private Sub dgvTags_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragOver
+        e.Effect = DragDropEffects.Move
+    End Sub
+
+    Private Sub dgvTags_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragDrop
+        'Dim sourceIndex As Integer = Convert.ToInt32(e.Data.GetData(Type.GetType("System.Int32")))
+        'Dim sourceId As String
+        'sourceId = dgvLogEntries.Rows(sourceIndex).Cells("Id").Value.ToString
+
+        'Dim destIndex As Integer = dgvTags.HitTest(e.X, e.Y).RowIndex
+        'Dim destId As String
+        'destId = dgvTags.Rows(destIndex).Cells("Id").Value.ToString
+
+        'Debug.Print("")
+        'Debug.Print("Source ID: " & sourceId)
+        'Debug.Print("Dest ID: " & destId)
+    End Sub
 End Class
