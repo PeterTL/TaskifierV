@@ -37,6 +37,7 @@
             dgvTags.Columns("Id").Visible = False
             dgvLogEntries.Columns("Id").Visible = False
         Catch ex As Exception
+            'Debug output
             Debug.Print("")
             Debug.Print("Handler frmUiMockup_Load exited with error:")
             Debug.Print(ex.Message)
@@ -56,6 +57,7 @@
             Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, TabControl1.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
         Catch ex As Exception
+            'Debug output
             Debug.Print("")
             Debug.Print("Handler TabControl1_SelectedIndexChanged exited with error:")
             Debug.Print(ex.Message)
@@ -71,6 +73,7 @@
             Dim logEntries As DataTable = tatControl.GetTasksForTag(dgvTags.CurrentRow.Cells(0).Value, TabControl1.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
         Catch ex As Exception
+            'Debug output
             Debug.Print("")
             Debug.Print("Handler dgvTags_CellClick exited with error:")
             Debug.Print(ex.Message)
@@ -97,6 +100,7 @@
             txtInProgress.Text = logEntry.InProgress
             txtFinished.Text = logEntry.Finished
         Catch ex As Exception
+            'Debug output
             Debug.Print("")
             Debug.Print("Handler dgvLogEntries_CellClick exited with error:")
             Debug.Print(ex.Message)
@@ -106,29 +110,72 @@
     'Drag and drop magic
 
     Private Sub dgvLogEntries_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvLogEntries.MouseDown
+        'Variable for source element index
         Dim index As Integer
-        index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
-        If index > -1 Then
-            dgvLogEntries.Rows(index).Selected = True
-            dgvLogEntries.DoDragDrop(index, DragDropEffects.Move)
-        End If
+
+        Try
+            'Get index of source element
+            index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
+
+            If index > -1 Then
+                'Highlight selected item an start d&d
+                dgvLogEntries.Rows(index).Selected = True
+                dgvLogEntries.DoDragDrop(index, DragDropEffects.Copy)
+            End If
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler dgvLogEntries_MouseDown exited with error:")
+            Debug.Print(ex.Message)
+        End Try
+
+        'Debug output
+        Debug.Print("")
+        Debug.Print("D&D start position")
+        Debug.Print("X: " & e.X)
+        Debug.Print("Y: " & e.Y)
     End Sub
 
     Private Sub dgvTags_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragOver
-        e.Effect = DragDropEffects.Move
+        e.Effect = DragDropEffects.Copy
     End Sub
 
     Private Sub dgvTags_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragDrop
-        'Dim sourceIndex As Integer = Convert.ToInt32(e.Data.GetData(Type.GetType("System.Int32")))
-        'Dim sourceId As String
-        'sourceId = dgvLogEntries.Rows(sourceIndex).Cells("Id").Value.ToString
+        'Variables for source row
+        Dim sourceIndex As Integer
+        Dim sourceId As String
 
-        'Dim destIndex As Integer = dgvTags.HitTest(e.X, e.Y).RowIndex
-        'Dim destId As String
-        'destId = dgvTags.Rows(destIndex).Cells("Id").Value.ToString
+        Try
+            'Get identifier of source row
+            sourceIndex = Convert.ToInt32(e.Data.GetData(Type.GetType("System.Int32")))
+            sourceId = dgvLogEntries.Rows(sourceIndex).Cells("Id").Value.ToString
 
-        'Debug.Print("")
-        'Debug.Print("Source ID: " & sourceId)
-        'Debug.Print("Dest ID: " & destId)
+            'Variables for destination row
+            Dim clientPoint As Point
+            Dim destIndex As Integer
+            Dim destId As String
+
+            'Get identifier of destination row
+            clientPoint = dgvTags.PointToClient(New Point(e.X, e.Y))
+            destIndex = dgvTags.HitTest(clientPoint.X, clientPoint.Y).RowIndex
+            destId = dgvTags.Rows(destIndex).Cells("Id").Value.ToString
+
+            'Debug output
+            Debug.Print("")
+            Debug.Print("D&D end position")
+            Debug.Print("X: " & clientPoint.X)
+            Debug.Print("Y: " & clientPoint.Y)
+
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Source ID: " & sourceId)
+            Debug.Print("Dest ID: " & destId)
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler dgvTags_DragDrop exited with error:")
+            Debug.Print(ex.Message)
+        End Try
     End Sub
+
 End Class
