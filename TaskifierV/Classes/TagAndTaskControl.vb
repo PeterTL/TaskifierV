@@ -154,7 +154,7 @@ Public Class TagAndTaskControl
     ''' <param name="logEntryId">Log entry identifier.</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetTaskDetails(ByVal logEntryId As Integer) As LogEntryData
+    Public Function GetLogEntryDetails(ByVal logEntryId As Integer) As LogEntryData
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTaskDetails started. Messages:")
@@ -192,6 +192,20 @@ Public Class TagAndTaskControl
 
         Return ledat
     End Function
+
+    Public Sub FillBoxesWithLogEntryDetails(ByRef taskDetails As LogEntryData)
+        'Fill text boxes
+        frmUiMockup.txtId.Text = taskDetails.Id.ToString
+        frmUiMockup.txtLogType.Text = taskDetails.LogType
+        frmUiMockup.txtName.Text = taskDetails.Name
+        frmUiMockup.txtDescription.Text = taskDetails.Description
+        frmUiMockup.txtPriority.Text = taskDetails.Priority
+        frmUiMockup.txtStartDate.Text = taskDetails.StartDate
+        frmUiMockup.txtEndDate.Text = taskDetails.EndDate
+        frmUiMockup.txtActive.Text = taskDetails.Active
+        frmUiMockup.txtInProgress.Text = taskDetails.InProgress
+        frmUiMockup.txtFinished.Text = taskDetails.Finished
+    End Sub
 
     Public Function InsertTagList(ByRef tagList As List(Of String))
         'TODO

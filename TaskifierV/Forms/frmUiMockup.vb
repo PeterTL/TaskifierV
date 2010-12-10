@@ -33,6 +33,10 @@
             Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, "Backlog")
             dgvLogEntries.DataSource = logEntries
 
+            'Get details for first task and fill text boxes
+            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+            tatControl.FillBoxesWithLogEntryDetails(logEntry)
+
             'Hide system (id) columns
             dgvTags.Columns("Id").Visible = False
             dgvLogEntries.Columns("Id").Visible = False
@@ -59,6 +63,10 @@
             'Get tasks and fill second grid with tags according to selected log
             Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, tcMain.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
+
+            'Get details for first task and fill text boxes
+            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+            tatControl.FillBoxesWithLogEntryDetails(logEntry)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
@@ -75,6 +83,10 @@
             'Get tasks and fill second grid with tags according to selected tag and log
             Dim logEntries As DataTable = tatControl.GetTasksForTag(dgvTags.CurrentRow.Cells(0).Value, tcMain.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
+
+            'Get details for first task and fill text boxes
+            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+            tatControl.FillBoxesWithLogEntryDetails(logEntry)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
@@ -83,64 +95,47 @@
         End Try
     End Sub
 
-    Private Sub dgvLogEntries_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvLogEntries.CellClick
-        'Create tag and task object
-        Dim tatControl As New TagAndTaskControl
-
-        Try
-            'Get task details
-            Dim logEntry As LogEntryData = tatControl.GetTaskDetails(dgvLogEntries.CurrentRow.Cells(0).Value)
-
-            'Fill text boxes
-            txtId.Text = logEntry.Id.ToString
-            txtLogType.Text = logEntry.LogType
-            txtName.Text = logEntry.Name
-            txtDescription.Text = logEntry.Description
-            txtPriority.Text = logEntry.Priority
-            txtStartDate.Text = logEntry.StartDate
-            txtEndDate.Text = logEntry.EndDate
-            txtActive.Text = logEntry.Active
-            txtInProgress.Text = logEntry.InProgress
-            txtFinished.Text = logEntry.Finished
-        Catch ex As Exception
-            'Debug output
-            Debug.Print("")
-            Debug.Print("Handler dgvLogEntries_CellClick exited with error:")
-            Debug.Print(ex.Message)
-        End Try
-    End Sub
-
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     'Drag and drop magic
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
     Private Sub dgvLogEntries_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvLogEntries.MouseDown
-        'Only enable task drag and drop within the Backlog
-        If tcMain.SelectedTab.Text = "Backlog" Then
-            'Variable for source element index
-            Dim index As Integer
+        'Variable for source element index
+        Dim index As Integer
+        Dim id As Integer
 
-            Try
-                'Get index of source element
-                index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
+        'Debug output
+        Debug.Print("")
+        Debug.Print("D&D start position")
+        Debug.Print("X: " & e.X)
+        Debug.Print("Y: " & e.Y)
 
+        Try
+            'Get index and id of source element
+            index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
+            id = dgvLogEntries.Rows(index).Cells("Id").Value
+
+            'Create tag and task object
+            Dim tatControl As New TagAndTaskControl
+
+            'Get task details and fill text boxes
+            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
+            tatControl.FillBoxesWithLogEntryDetails(logEntry)
+
+            'Only enable task drag and drop within the Backlog
+            If tcMain.SelectedTab.Text = "Backlog" Then
                 If index > -1 Then
                     'Highlight selected item an start d&d
                     dgvLogEntries.Rows(index).Selected = True
                     dgvLogEntries.DoDragDrop(index, DragDropEffects.Copy)
                 End If
-            Catch ex As Exception
-                'Debug output
-                Debug.Print("")
-                Debug.Print("Handler dgvLogEntries_MouseDown exited with error:")
-                Debug.Print(ex.Message)
-            End Try
-
+            End If
+        Catch ex As Exception
             'Debug output
             Debug.Print("")
-            Debug.Print("D&D start position")
-            Debug.Print("X: " & e.X)
-            Debug.Print("Y: " & e.Y)
-        End If
-
+            Debug.Print("Handler dgvLogEntries_MouseDown exited with error:")
+            Debug.Print(ex.Message)
+        End Try
     End Sub
 
     Private Sub dgvTags_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragOver
@@ -167,6 +162,9 @@
             destIndex = dgvTags.HitTest(clientPoint.X, clientPoint.Y).RowIndex
             destId = dgvTags.Rows(destIndex).Cells("Id").Value.ToString
 
+            'Highlight destination row
+            dgvTags.Rows(destIndex).Selected = True
+
             'Debug output
             Debug.Print("")
             Debug.Print("D&D end position")
@@ -176,7 +174,9 @@
             'Debug output
             Debug.Print("")
             Debug.Print("Source ID: " & sourceId)
+            Debug.Print("Source Index: " & sourceIndex)
             Debug.Print("Dest ID: " & destId)
+            Debug.Print("Dest Index: " & destIndex)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
