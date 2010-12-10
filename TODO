@@ -1,0 +1,5 @@
+[DONE] Document the event handler methods
+
+[TODO] Display how many log entries are assigned to a tag (maybe in bracket behind the tag)
+[TODO] Widen the list elements to fit into the grid view dynamically
+
