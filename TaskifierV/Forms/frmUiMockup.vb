@@ -185,4 +185,58 @@
         End Try
     End Sub
 
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'Impelement context menu for tag list (WIP)
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    'Hightlight the right-clicked record
+    Private Sub dgvTags_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvTags.MouseDown
+        'Variables for destination row
+        Dim index As Integer
+        Dim id As String
+
+        Try
+            'Only do this when the right (sided) button is used
+            If e.Button = MouseButtons.Right Then
+                'New tags can only be created inside the Backlog
+                If tcMain.SelectedTab.Text = "Backlog" Then
+                    tsmiNewTag.Enabled = True
+                Else
+                    tsmiNewTag.Enabled = False
+                End If
+
+                'Get identifier of destination row
+                index = dgvTags.HitTest(e.X, e.Y).RowIndex
+                id = dgvTags.Rows(index).Cells("Id").Value.ToString
+
+                'Highlight destination row
+                dgvTags.Rows(index).Selected = True
+            End If
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler dgvTags_MouseDown exited with error:")
+            Debug.Print(ex.Message)
+        End Try
+    End Sub
+
+    'Add new item to tag list via context menu
+    Private Sub tsmiNewTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiNewTag.Click
+        'Please keep in mind when a new item is added...
+        '1. Add the item to the list
+        '2. Keep in "mind" which tag and task were selected
+        '3. Refresh the grid
+        '4. Re-select tag and task remembered under no. 2
+    End Sub
+
+    'Rename existing item of tag list via context menu
+    Private Sub tsmiRenameTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiRenameTag.Click
+
+    End Sub
+
+    'Delete existing item from tag list via context menu
+    Private Sub tsmiDeleteTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiDeleteTag.Click
+
+    End Sub
+
 End Class

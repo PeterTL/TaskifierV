@@ -22,6 +22,7 @@ Partial Class frmUiMockup
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.scTabsAndMain = New System.Windows.Forms.SplitContainer()
         Me.tcMain = New System.Windows.Forms.TabControl()
         Me.tpBacklog = New System.Windows.Forms.TabPage()
@@ -51,6 +52,11 @@ Partial Class frmUiMockup
         Me.lblPriority = New System.Windows.Forms.Label()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
+        Me.cmsTags = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.tsmiNewTag = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiRenameTag = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tstbRename = New System.Windows.Forms.ToolStripTextBox()
+        Me.tsmiDeleteTag = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scTabsAndMain.Panel1.SuspendLayout()
         Me.scTabsAndMain.Panel2.SuspendLayout()
@@ -66,6 +72,7 @@ Partial Class frmUiMockup
         Me.scLogEntriesAndDetails.Panel2.SuspendLayout()
         Me.scLogEntriesAndDetails.SuspendLayout()
         CType(Me.dgvLogEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsTags.SuspendLayout()
         Me.SuspendLayout()
         '
         'scTabsAndMain
@@ -168,6 +175,7 @@ Partial Class frmUiMockup
         Me.dgvTags.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dgvTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTags.ColumnHeadersVisible = False
+        Me.dgvTags.ContextMenuStrip = Me.cmsTags
         Me.dgvTags.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTags.Location = New System.Drawing.Point(0, 0)
         Me.dgvTags.MultiSelect = False
@@ -420,6 +428,36 @@ Partial Class frmUiMockup
         Me.lblName.TabIndex = 0
         Me.lblName.Text = "Name:"
         '
+        'cmsTags
+        '
+        Me.cmsTags.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiNewTag, Me.tsmiRenameTag, Me.tstbRename, Me.tsmiDeleteTag})
+        Me.cmsTags.Name = "cmsTags"
+        Me.cmsTags.Size = New System.Drawing.Size(161, 117)
+        '
+        'tsmiNewTag
+        '
+        Me.tsmiNewTag.Name = "tsmiNewTag"
+        Me.tsmiNewTag.Size = New System.Drawing.Size(160, 22)
+        Me.tsmiNewTag.Text = "New Tag"
+        '
+        'tsmiRenameTag
+        '
+        Me.tsmiRenameTag.Name = "tsmiRenameTag"
+        Me.tsmiRenameTag.Size = New System.Drawing.Size(160, 22)
+        Me.tsmiRenameTag.Text = "Rename Tag"
+        '
+        'tstbRename
+        '
+        Me.tstbRename.Name = "tstbRename"
+        Me.tstbRename.Size = New System.Drawing.Size(100, 23)
+        Me.tstbRename.Visible = False
+        '
+        'tsmiDeleteTag
+        '
+        Me.tsmiDeleteTag.Name = "tsmiDeleteTag"
+        Me.tsmiDeleteTag.Size = New System.Drawing.Size(160, 22)
+        Me.tsmiDeleteTag.Text = "Delete Tag"
+        '
         'frmUiMockup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -446,6 +484,8 @@ Partial Class frmUiMockup
         CType(Me.scLogEntriesAndDetails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.scLogEntriesAndDetails.ResumeLayout(False)
         CType(Me.dgvLogEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsTags.ResumeLayout(False)
+        Me.cmsTags.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -478,4 +518,9 @@ Partial Class frmUiMockup
     Friend WithEvents lblPriority As System.Windows.Forms.Label
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Friend WithEvents lblName As System.Windows.Forms.Label
+    Friend WithEvents cmsTags As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents tsmiNewTag As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tstbRename As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents tsmiRenameTag As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmiDeleteTag As System.Windows.Forms.ToolStripMenuItem
 End Class
