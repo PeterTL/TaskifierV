@@ -1,5 +1,6 @@
 ﻿Public Class frmUiMockup
 
+    'Draws the tabs in a non-standard way
     Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles tcMain.DrawItem
         'Draw tabs
         Dim g As Graphics
@@ -20,6 +21,7 @@
         g.DrawString(sText, ctlTab.Font, Brushes.Black, iX, iY)
     End Sub
 
+    'Fill grid and details with first task values
     Private Sub frmUiMockup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl
@@ -48,6 +50,7 @@
         End Try
     End Sub
 
+    'Changes log and fills grid and details with first task values
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcMain.SelectedIndexChanged
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl
@@ -75,6 +78,7 @@
         End Try
     End Sub
 
+    'Fill grid with tasks according to selected tag/log and details with first task details
     Private Sub dgvTags_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvTags.CellClick
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl
@@ -95,10 +99,7 @@
         End Try
     End Sub
 
-    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    'Drag and drop magic
-    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+    'Fills details of first tasks and enables drag-and-drop source
     Private Sub dgvLogEntries_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvLogEntries.MouseDown
         'Variable for source element index
         Dim index As Integer
@@ -138,10 +139,12 @@
         End Try
     End Sub
 
+    'Sets drag-over effect for first grid
     Private Sub dgvTags_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragOver
         e.Effect = DragDropEffects.Copy
     End Sub
 
+    'Contains the drop part, reads source and destination identifiers and indexes
     Private Sub dgvTags_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragDrop
         'Variables for source row
         Dim sourceIndex As Integer
