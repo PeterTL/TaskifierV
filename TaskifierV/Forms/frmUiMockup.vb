@@ -191,9 +191,9 @@
 
     'Hightlight the right-clicked record
     Private Sub dgvTags_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvTags.MouseDown
-        'Variables for destination row
+        'Variables for right-clicked row
         Dim index As Integer
-        Dim id As String
+        Dim id As String 'You never know when you need it...
 
         Try
             'Only do this when the right (sided) button is used
@@ -205,12 +205,13 @@
                     tsmiNewTag.Enabled = False
                 End If
 
-                'Get identifier of destination row
+                'Get identifier of right-clicked row
                 index = dgvTags.HitTest(e.X, e.Y).RowIndex
-                id = dgvTags.Rows(index).Cells("Id").Value.ToString
+                id = dgvTags.Rows(index).Cells("Id").Value.ToString 'You never know when you need it...
 
-                'Highlight destination row
+                'Highlight and set (!) right-clicked row
                 dgvTags.Rows(index).Selected = True
+                dgvTags.CurrentCell = dgvTags.Item(1, index)
             End If
         Catch ex As Exception
             'Debug output
@@ -236,7 +237,26 @@
 
     'Delete existing item from tag list via context menu
     Private Sub tsmiDeleteTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiDeleteTag.Click
+        'Variables for row to be deleted
+        Dim index As Integer
+        Dim id As String
 
+        Try
+            'Get identifier row to be deleted
+            index = dgvTags.CurrentRow.Index
+            id = dgvTags.Rows(index).Cells("Id").Value.ToString
+
+            'Only do this if the index is not -1 (which is default)
+            If id <> -1 Then
+                'TODO: Delete record
+
+            End If
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler tsmiRenameTag_Click exited with error:")
+            Debug.Print(ex.Message)
+        End Try
     End Sub
 
 End Class
