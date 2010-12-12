@@ -232,14 +232,19 @@
 
     'Rename existing item of tag list via context menu
     Private Sub tsmiRenameTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiRenameTag.Click
-
+        'Please keep in mind when an item is to be renamed...
+        '1. Keep in "mind" which tag and task were selected
+        '2. Rename the item in the database
+        '3. Refresh the grid
+        '4. Re-select tag and task remembered under no. 1
     End Sub
 
     'Delete existing item from tag list via context menu
     Private Sub tsmiDeleteTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiDeleteTag.Click
-        'Variables for row to be deleted
+        'Variables and objects
         Dim index As Integer
         Dim id As String
+        Dim tatControl As New TagAndTaskControl
 
         Try
             'Get identifier row to be deleted
@@ -248,8 +253,20 @@
 
             'Only do this if the index is not -1 (which is default)
             If id <> -1 Then
-                'TODO: Delete record
-
+                'Give the chance to cancel the action
+                Dim dres As DialogResult = MessageBox.Show("Do you want to delete the selected tag?", _
+                                                            "The Question", _
+                                                            MessageBoxButtons.YesNoCancel, _
+                                                            MessageBoxIcon.Question, _
+                                                            MessageBoxDefaultButton.Button2)
+                If dres = DialogResult.Yes Then
+                    'TODO: Delete record
+                    'Please keep in mind when an item is to be deleted...
+                    '1. Check if item is in use within other tags
+                    '2. If yes, maybe ask again?
+                    '3. If yes, delete from tag and tag-to-log-entries tables
+                    '4. Keep in mind the position(s) in the list
+                End If
             End If
         Catch ex As Exception
             'Debug output
