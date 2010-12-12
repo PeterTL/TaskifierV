@@ -84,7 +84,7 @@ Partial Class frmUiMockup
         'scTabsAndMain.Panel2
         '
         Me.scTabsAndMain.Panel2.Controls.Add(Me.scTagsAndLogEntries)
-        Me.scTabsAndMain.Size = New System.Drawing.Size(759, 280)
+        Me.scTabsAndMain.Size = New System.Drawing.Size(759, 277)
         Me.scTabsAndMain.SplitterDistance = 89
         Me.scTabsAndMain.TabIndex = 0
         '
@@ -153,7 +153,7 @@ Partial Class frmUiMockup
         'scTagsAndLogEntries.Panel2
         '
         Me.scTagsAndLogEntries.Panel2.Controls.Add(Me.scLogEntriesAndDetails)
-        Me.scTagsAndLogEntries.Size = New System.Drawing.Size(666, 280)
+        Me.scTagsAndLogEntries.Size = New System.Drawing.Size(666, 277)
         Me.scTagsAndLogEntries.SplitterDistance = 144
         Me.scTagsAndLogEntries.TabIndex = 0
         '
@@ -176,7 +176,7 @@ Partial Class frmUiMockup
         Me.dgvTags.RowHeadersVisible = False
         Me.dgvTags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvTags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTags.Size = New System.Drawing.Size(142, 278)
+        Me.dgvTags.Size = New System.Drawing.Size(142, 275)
         Me.dgvTags.TabIndex = 0
         '
         'scLogEntriesAndDetails
@@ -214,7 +214,7 @@ Partial Class frmUiMockup
         Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblPriority)
         Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblDescription)
         Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblName)
-        Me.scLogEntriesAndDetails.Size = New System.Drawing.Size(518, 280)
+        Me.scLogEntriesAndDetails.Size = New System.Drawing.Size(518, 277)
         Me.scLogEntriesAndDetails.SplitterDistance = 188
         Me.scLogEntriesAndDetails.TabIndex = 0
         '
@@ -237,7 +237,7 @@ Partial Class frmUiMockup
         Me.dgvLogEntries.RowHeadersVisible = False
         Me.dgvLogEntries.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvLogEntries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLogEntries.Size = New System.Drawing.Size(186, 278)
+        Me.dgvLogEntries.Size = New System.Drawing.Size(186, 275)
         Me.dgvLogEntries.TabIndex = 1
         '
         'lblActive
@@ -424,7 +424,7 @@ Partial Class frmUiMockup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(759, 280)
+        Me.ClientSize = New System.Drawing.Size(759, 277)
         Me.Controls.Add(Me.scTabsAndMain)
         Me.MinimumSize = New System.Drawing.Size(725, 300)
         Me.Name = "frmUiMockup"
