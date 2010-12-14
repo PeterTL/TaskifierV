@@ -223,7 +223,6 @@ Public Class TagAndTaskControl
             'ins.TagId = tagId
             'ins.Comment = "Created by software not by mankind."
 
-
             DB.SubmitChanges()
             MsgBox("Datensatz angelegt")
         End If
