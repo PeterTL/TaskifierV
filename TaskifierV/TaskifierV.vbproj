@@ -126,6 +126,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbTaskifier.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Data\dbTaskifier.vb">
+      <DependentUpon>dbTaskifier.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmUiMockup.Designer.vb">
       <DependentUpon>frmUiMockup.vb</DependentUpon>
     </Compile>
@@ -156,6 +159,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\dbTaskifier.dbml.layout">
+      <DependentUpon>dbTaskifier.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Forms\frmUiMockup.resx">
       <DependentUpon>frmUiMockup.vb</DependentUpon>
     </EmbeddedResource>
@@ -174,9 +180,6 @@
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>dbTaskifier.designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Data\dbTaskifier.dbml.layout">
-      <DependentUpon>dbTaskifier.dbml</DependentUpon>
     </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

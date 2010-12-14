@@ -146,9 +146,10 @@
 
     'Contains the drop part, reads source and destination identifiers and indexes
     Private Sub dgvTags_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragDrop
-        'Variables for source row
+        'Variables and objects
         Dim sourceIndex As Integer
         Dim sourceId As String
+        Dim tatControl As New TagAndTaskControl
 
         Try
             'Get identifier of source row
@@ -165,8 +166,22 @@
             destIndex = dgvTags.HitTest(clientPoint.X, clientPoint.Y).RowIndex
             destId = dgvTags.Rows(destIndex).Cells("Id").Value.ToString
 
-            'Highlight destination row
+            'Highlight and set (!) destination row
             dgvTags.Rows(destIndex).Selected = True
+            dgvTags.CurrentCell = dgvTags.Item(1, destIndex)
+
+            'Assign task to log entry
+            tatControl.AddLogEntryToTask(destId, sourceId)
+
+            'Select log items according to (newly) selected tag
+            Dim logEntries As DataTable = tatControl.GetTasksForTag(destId, "Backlog")
+            dgvLogEntries.DataSource = logEntries
+
+            'Get details for first task and fill text boxes
+            'TODO: Newly added task should be highlighted and displayed
+            'OLD: Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+            'Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(sourceId)
+            'tatControl.FillBoxesWithLogEntryDetails(logEntry)
 
             'Debug output
             Debug.Print("")
@@ -176,10 +191,10 @@
 
             'Debug output
             Debug.Print("")
-            Debug.Print("Source ID: " & sourceId)
-            Debug.Print("Source Index: " & sourceIndex)
-            Debug.Print("Dest ID: " & destId)
-            Debug.Print("Dest Index: " & destIndex)
+            Debug.Print("Source (Log Entry) ID: " & sourceId)
+            Debug.Print("Source (Log Entry) Index: " & sourceIndex)
+            Debug.Print("Dest (Tag) ID: " & destId)
+            Debug.Print("Dest (Tag) Index: " & destIndex)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
