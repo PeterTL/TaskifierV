@@ -22,6 +22,7 @@ Partial Class frmUiMockup
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.scTabsAndMain = New System.Windows.Forms.SplitContainer()
         Me.tcMain = New System.Windows.Forms.TabControl()
         Me.tpBacklog = New System.Windows.Forms.TabPage()
@@ -29,6 +30,10 @@ Partial Class frmUiMockup
         Me.tpDonelog = New System.Windows.Forms.TabPage()
         Me.scTagsAndLogEntries = New System.Windows.Forms.SplitContainer()
         Me.dgvTags = New System.Windows.Forms.DataGridView()
+        Me.cmsTags = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.tsmiNewTag = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiRenameTag = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiDeleteTag = New System.Windows.Forms.ToolStripMenuItem()
         Me.scLogEntriesAndDetails = New System.Windows.Forms.SplitContainer()
         Me.dgvLogEntries = New System.Windows.Forms.DataGridView()
         Me.lblActive = New System.Windows.Forms.Label()
@@ -51,6 +56,10 @@ Partial Class frmUiMockup
         Me.lblPriority = New System.Windows.Forms.Label()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
+        Me.cmsLogEntries = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.tsmiNewLogEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiRenameLogEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiDeleteLogEntry = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scTabsAndMain.Panel1.SuspendLayout()
         Me.scTabsAndMain.Panel2.SuspendLayout()
@@ -61,11 +70,13 @@ Partial Class frmUiMockup
         Me.scTagsAndLogEntries.Panel2.SuspendLayout()
         Me.scTagsAndLogEntries.SuspendLayout()
         CType(Me.dgvTags, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsTags.SuspendLayout()
         CType(Me.scLogEntriesAndDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scLogEntriesAndDetails.Panel1.SuspendLayout()
         Me.scLogEntriesAndDetails.Panel2.SuspendLayout()
         Me.scLogEntriesAndDetails.SuspendLayout()
         CType(Me.dgvLogEntries, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsLogEntries.SuspendLayout()
         Me.SuspendLayout()
         '
         'scTabsAndMain
@@ -84,7 +95,7 @@ Partial Class frmUiMockup
         'scTabsAndMain.Panel2
         '
         Me.scTabsAndMain.Panel2.Controls.Add(Me.scTagsAndLogEntries)
-        Me.scTabsAndMain.Size = New System.Drawing.Size(759, 280)
+        Me.scTabsAndMain.Size = New System.Drawing.Size(759, 277)
         Me.scTabsAndMain.SplitterDistance = 89
         Me.scTabsAndMain.TabIndex = 0
         '
@@ -153,7 +164,7 @@ Partial Class frmUiMockup
         'scTagsAndLogEntries.Panel2
         '
         Me.scTagsAndLogEntries.Panel2.Controls.Add(Me.scLogEntriesAndDetails)
-        Me.scTagsAndLogEntries.Size = New System.Drawing.Size(666, 280)
+        Me.scTagsAndLogEntries.Size = New System.Drawing.Size(666, 277)
         Me.scTagsAndLogEntries.SplitterDistance = 144
         Me.scTagsAndLogEntries.TabIndex = 0
         '
@@ -168,6 +179,7 @@ Partial Class frmUiMockup
         Me.dgvTags.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dgvTags.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTags.ColumnHeadersVisible = False
+        Me.dgvTags.ContextMenuStrip = Me.cmsTags
         Me.dgvTags.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTags.Location = New System.Drawing.Point(0, 0)
         Me.dgvTags.MultiSelect = False
@@ -176,8 +188,32 @@ Partial Class frmUiMockup
         Me.dgvTags.RowHeadersVisible = False
         Me.dgvTags.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvTags.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTags.Size = New System.Drawing.Size(142, 278)
+        Me.dgvTags.Size = New System.Drawing.Size(142, 275)
         Me.dgvTags.TabIndex = 0
+        '
+        'cmsTags
+        '
+        Me.cmsTags.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiNewTag, Me.tsmiRenameTag, Me.tsmiDeleteTag})
+        Me.cmsTags.Name = "cmsTags"
+        Me.cmsTags.Size = New System.Drawing.Size(146, 70)
+        '
+        'tsmiNewTag
+        '
+        Me.tsmiNewTag.Name = "tsmiNewTag"
+        Me.tsmiNewTag.Size = New System.Drawing.Size(145, 22)
+        Me.tsmiNewTag.Text = "New Tag"
+        '
+        'tsmiRenameTag
+        '
+        Me.tsmiRenameTag.Name = "tsmiRenameTag"
+        Me.tsmiRenameTag.Size = New System.Drawing.Size(145, 22)
+        Me.tsmiRenameTag.Text = "Rename Tag"
+        '
+        'tsmiDeleteTag
+        '
+        Me.tsmiDeleteTag.Name = "tsmiDeleteTag"
+        Me.tsmiDeleteTag.Size = New System.Drawing.Size(145, 22)
+        Me.tsmiDeleteTag.Text = "Delete Tag"
         '
         'scLogEntriesAndDetails
         '
@@ -214,7 +250,7 @@ Partial Class frmUiMockup
         Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblPriority)
         Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblDescription)
         Me.scLogEntriesAndDetails.Panel2.Controls.Add(Me.lblName)
-        Me.scLogEntriesAndDetails.Size = New System.Drawing.Size(518, 280)
+        Me.scLogEntriesAndDetails.Size = New System.Drawing.Size(518, 277)
         Me.scLogEntriesAndDetails.SplitterDistance = 188
         Me.scLogEntriesAndDetails.TabIndex = 0
         '
@@ -229,6 +265,7 @@ Partial Class frmUiMockup
         Me.dgvLogEntries.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dgvLogEntries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvLogEntries.ColumnHeadersVisible = False
+        Me.dgvLogEntries.ContextMenuStrip = Me.cmsLogEntries
         Me.dgvLogEntries.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvLogEntries.Location = New System.Drawing.Point(0, 0)
         Me.dgvLogEntries.MultiSelect = False
@@ -237,7 +274,7 @@ Partial Class frmUiMockup
         Me.dgvLogEntries.RowHeadersVisible = False
         Me.dgvLogEntries.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvLogEntries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLogEntries.Size = New System.Drawing.Size(186, 278)
+        Me.dgvLogEntries.Size = New System.Drawing.Size(186, 275)
         Me.dgvLogEntries.TabIndex = 1
         '
         'lblActive
@@ -420,11 +457,35 @@ Partial Class frmUiMockup
         Me.lblName.TabIndex = 0
         Me.lblName.Text = "Name:"
         '
+        'cmsLogEntries
+        '
+        Me.cmsLogEntries.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiNewLogEntry, Me.tsmiRenameLogEntry, Me.tsmiDeleteLogEntry})
+        Me.cmsLogEntries.Name = "cmsTags"
+        Me.cmsLogEntries.Size = New System.Drawing.Size(174, 70)
+        '
+        'tsmiNewLogEntry
+        '
+        Me.tsmiNewLogEntry.Name = "tsmiNewLogEntry"
+        Me.tsmiNewLogEntry.Size = New System.Drawing.Size(173, 22)
+        Me.tsmiNewLogEntry.Text = "New Log Entry"
+        '
+        'tsmiRenameLogEntry
+        '
+        Me.tsmiRenameLogEntry.Name = "tsmiRenameLogEntry"
+        Me.tsmiRenameLogEntry.Size = New System.Drawing.Size(173, 22)
+        Me.tsmiRenameLogEntry.Text = "Rename Log Entry"
+        '
+        'tsmiDeleteLogEntry
+        '
+        Me.tsmiDeleteLogEntry.Name = "tsmiDeleteLogEntry"
+        Me.tsmiDeleteLogEntry.Size = New System.Drawing.Size(173, 22)
+        Me.tsmiDeleteLogEntry.Text = "Delete Log Entry"
+        '
         'frmUiMockup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(759, 280)
+        Me.ClientSize = New System.Drawing.Size(759, 277)
         Me.Controls.Add(Me.scTabsAndMain)
         Me.MinimumSize = New System.Drawing.Size(725, 300)
         Me.Name = "frmUiMockup"
@@ -440,12 +501,14 @@ Partial Class frmUiMockup
         CType(Me.scTagsAndLogEntries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.scTagsAndLogEntries.ResumeLayout(False)
         CType(Me.dgvTags, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsTags.ResumeLayout(False)
         Me.scLogEntriesAndDetails.Panel1.ResumeLayout(False)
         Me.scLogEntriesAndDetails.Panel2.ResumeLayout(False)
         Me.scLogEntriesAndDetails.Panel2.PerformLayout()
         CType(Me.scLogEntriesAndDetails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.scLogEntriesAndDetails.ResumeLayout(False)
         CType(Me.dgvLogEntries, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsLogEntries.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -478,4 +541,12 @@ Partial Class frmUiMockup
     Friend WithEvents lblPriority As System.Windows.Forms.Label
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Friend WithEvents lblName As System.Windows.Forms.Label
+    Friend WithEvents cmsTags As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents tsmiNewTag As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmiRenameTag As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmiDeleteTag As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmsLogEntries As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents tsmiNewLogEntry As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmiRenameLogEntry As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmiDeleteLogEntry As System.Windows.Forms.ToolStripMenuItem
 End Class

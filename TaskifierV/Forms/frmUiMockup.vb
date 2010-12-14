@@ -146,9 +146,10 @@
 
     'Contains the drop part, reads source and destination identifiers and indexes
     Private Sub dgvTags_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvTags.DragDrop
-        'Variables for source row
+        'Variables and objects
         Dim sourceIndex As Integer
         Dim sourceId As String
+        Dim tatControl As New TagAndTaskControl
 
         Try
             'Get identifier of source row
@@ -165,8 +166,22 @@
             destIndex = dgvTags.HitTest(clientPoint.X, clientPoint.Y).RowIndex
             destId = dgvTags.Rows(destIndex).Cells("Id").Value.ToString
 
-            'Highlight destination row
+            'Highlight and set (!) destination row
             dgvTags.Rows(destIndex).Selected = True
+            dgvTags.CurrentCell = dgvTags.Item(1, destIndex)
+
+            'Assign task to log entry
+            tatControl.AddLogEntryToTask(destId, sourceId)
+
+            'Select log items according to (newly) selected tag
+            Dim logEntries As DataTable = tatControl.GetTasksForTag(destId, "Backlog")
+            dgvLogEntries.DataSource = logEntries
+
+            'Get details for first task and fill text boxes
+            'TODO: Newly added task should be highlighted and displayed
+            'OLD: Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+            'Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(sourceId)
+            'tatControl.FillBoxesWithLogEntryDetails(logEntry)
 
             'Debug output
             Debug.Print("")
@@ -176,14 +191,105 @@
 
             'Debug output
             Debug.Print("")
-            Debug.Print("Source ID: " & sourceId)
-            Debug.Print("Source Index: " & sourceIndex)
-            Debug.Print("Dest ID: " & destId)
-            Debug.Print("Dest Index: " & destIndex)
+            Debug.Print("Source (Log Entry) ID: " & sourceId)
+            Debug.Print("Source (Log Entry) Index: " & sourceIndex)
+            Debug.Print("Dest (Tag) ID: " & destId)
+            Debug.Print("Dest (Tag) Index: " & destIndex)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
             Debug.Print("Handler dgvTags_DragDrop exited with error:")
+            Debug.Print(ex.Message)
+        End Try
+    End Sub
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'Impelement context menu for tag list (WIP)
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    'Hightlight the right-clicked record
+    Private Sub dgvTags_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvTags.MouseDown
+        'Variables for right-clicked row
+        Dim index As Integer
+        Dim id As String 'You never know when you need it...
+
+        Try
+            'Only do this when the right (sided) button is used
+            If e.Button = MouseButtons.Right Then
+                'New tags can only be created inside the Backlog
+                If tcMain.SelectedTab.Text = "Backlog" Then
+                    tsmiNewTag.Enabled = True
+                Else
+                    tsmiNewTag.Enabled = False
+                End If
+
+                'Get identifier of right-clicked row
+                index = dgvTags.HitTest(e.X, e.Y).RowIndex
+                id = dgvTags.Rows(index).Cells("Id").Value.ToString 'You never know when you need it...
+
+                'Highlight and set (!) right-clicked row
+                dgvTags.Rows(index).Selected = True
+                dgvTags.CurrentCell = dgvTags.Item(1, index)
+            End If
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler dgvTags_MouseDown exited with error:")
+            Debug.Print(ex.Message)
+        End Try
+    End Sub
+
+    'Add new item to tag list via context menu
+    Private Sub tsmiNewTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiNewTag.Click
+        'Please keep in mind when a new item is added...
+        '1. Add the item to the list
+        '2. Keep in "mind" which tag and task were selected
+        '3. Refresh the grid
+        '4. Re-select tag and task remembered under no. 2
+    End Sub
+
+    'Rename existing item of tag list via context menu
+    Private Sub tsmiRenameTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiRenameTag.Click
+        'Please keep in mind when an item is to be renamed...
+        '1. Keep in "mind" which tag and task were selected
+        '2. Rename the item in the database
+        '3. Refresh the grid
+        '4. Re-select tag and task remembered under no. 1
+    End Sub
+
+    'Delete existing item from tag list via context menu
+    Private Sub tsmiDeleteTag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiDeleteTag.Click
+        'Variables and objects
+        Dim index As Integer
+        Dim id As String
+        Dim tatControl As New TagAndTaskControl
+
+        Try
+            'Get identifier row to be deleted
+            index = dgvTags.CurrentRow.Index
+            id = dgvTags.Rows(index).Cells("Id").Value.ToString
+
+            'Only do this if the index is not -1 (which is default)
+            If id <> -1 Then
+                'Give the chance to cancel the action
+                Dim dres As DialogResult = MessageBox.Show("Do you want to delete the selected tag?", _
+                                                            "The Question", _
+                                                            MessageBoxButtons.YesNoCancel, _
+                                                            MessageBoxIcon.Question, _
+                                                            MessageBoxDefaultButton.Button2)
+                If dres = DialogResult.Yes Then
+                    'TODO: Delete record
+                    'Please keep in mind when an item is to be deleted...
+                    '1. Check if item is in use within other tags
+                    '2. If yes, maybe ask again?
+                    '3. If yes, delete from tag and tag-to-log-entries tables
+                    '4. Keep in mind the position(s) in the list
+                End If
+            End If
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler tsmiRenameTag_Click exited with error:")
             Debug.Print(ex.Message)
         End Try
     End Sub

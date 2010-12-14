@@ -115,6 +115,8 @@ Partial Public Class LogEntries
 	
 	Private _Finished As System.Nullable(Of Boolean)
 	
+	Private _Comment As String
+	
     #Region "Definitionen der Erweiterungsmethoden"
     Partial Private Sub OnLoaded()
     End Sub
@@ -161,6 +163,10 @@ Partial Public Class LogEntries
     Partial Private Sub OnFinishedChanging(value As System.Nullable(Of Boolean))
     End Sub
     Partial Private Sub OnFinishedChanged()
+    End Sub
+    Partial Private Sub OnCommentChanging(value As String)
+    End Sub
+    Partial Private Sub OnCommentChanged()
     End Sub
     #End Region
 	
@@ -331,6 +337,22 @@ Partial Public Class LogEntries
 		End Set
 	End Property
 	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Comment", DbType:="NVarChar(100)")>  _
+	Public Property Comment() As String
+		Get
+			Return Me._Comment
+		End Get
+		Set
+			If (String.Equals(Me._Comment, value) = false) Then
+				Me.OnCommentChanging(value)
+				Me.SendPropertyChanging
+				Me._Comment = value
+				Me.SendPropertyChanged("Comment")
+				Me.OnCommentChanged
+			End If
+		End Set
+	End Property
+	
 	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
 	
 	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
@@ -364,6 +386,8 @@ Partial Public Class LogEntriesToTags
 	
 	Private _Active As Boolean
 	
+	Private _Comment As String
+	
     #Region "Definitionen der Erweiterungsmethoden"
     Partial Private Sub OnLoaded()
     End Sub
@@ -386,6 +410,10 @@ Partial Public Class LogEntriesToTags
     Partial Private Sub OnActiveChanging(value As Boolean)
     End Sub
     Partial Private Sub OnActiveChanged()
+    End Sub
+    Partial Private Sub OnCommentChanging(value As String)
+    End Sub
+    Partial Private Sub OnCommentChanged()
     End Sub
     #End Region
 	
@@ -462,6 +490,22 @@ Partial Public Class LogEntriesToTags
 		End Set
 	End Property
 	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Comment", DbType:="NVarChar(100)")>  _
+	Public Property Comment() As String
+		Get
+			Return Me._Comment
+		End Get
+		Set
+			If (String.Equals(Me._Comment, value) = false) Then
+				Me.OnCommentChanging(value)
+				Me.SendPropertyChanging
+				Me._Comment = value
+				Me.SendPropertyChanged("Comment")
+				Me.OnCommentChanged
+			End If
+		End Set
+	End Property
+	
 	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
 	
 	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
@@ -493,6 +537,8 @@ Partial Public Class Tags
 	
 	Private _Active As Boolean
 	
+	Private _Comment As String
+	
     #Region "Definitionen der Erweiterungsmethoden"
     Partial Private Sub OnLoaded()
     End Sub
@@ -511,6 +557,10 @@ Partial Public Class Tags
     Partial Private Sub OnActiveChanging(value As Boolean)
     End Sub
     Partial Private Sub OnActiveChanged()
+    End Sub
+    Partial Private Sub OnCommentChanging(value As String)
+    End Sub
+    Partial Private Sub OnCommentChanged()
     End Sub
     #End Region
 	
@@ -565,6 +615,22 @@ Partial Public Class Tags
 				Me._Active = value
 				Me.SendPropertyChanged("Active")
 				Me.OnActiveChanged
+			End If
+		End Set
+	End Property
+	
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_Comment", DbType:="NVarChar(100)")>  _
+	Public Property Comment() As String
+		Get
+			Return Me._Comment
+		End Get
+		Set
+			If (String.Equals(Me._Comment, value) = false) Then
+				Me.OnCommentChanging(value)
+				Me.SendPropertyChanging
+				Me._Comment = value
+				Me.SendPropertyChanged("Comment")
+				Me.OnCommentChanged
 			End If
 		End Set
 	End Property
