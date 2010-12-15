@@ -36,6 +36,10 @@ Partial Class frmUiMockup
         Me.tsmiDeleteTag = New System.Windows.Forms.ToolStripMenuItem()
         Me.scLogEntriesAndDetails = New System.Windows.Forms.SplitContainer()
         Me.dgvLogEntries = New System.Windows.Forms.DataGridView()
+        Me.cmsLogEntries = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.tsmiNewLogEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiRenameLogEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiDeleteLogEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblActive = New System.Windows.Forms.Label()
         Me.lblLogType = New System.Windows.Forms.Label()
         Me.txtLogType = New System.Windows.Forms.TextBox()
@@ -56,10 +60,6 @@ Partial Class frmUiMockup
         Me.lblPriority = New System.Windows.Forms.Label()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.cmsLogEntries = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.tsmiNewLogEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiRenameLogEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiDeleteLogEntry = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.scTabsAndMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.scTabsAndMain.Panel1.SuspendLayout()
         Me.scTabsAndMain.Panel2.SuspendLayout()
@@ -277,6 +277,30 @@ Partial Class frmUiMockup
         Me.dgvLogEntries.Size = New System.Drawing.Size(186, 275)
         Me.dgvLogEntries.TabIndex = 1
         '
+        'cmsLogEntries
+        '
+        Me.cmsLogEntries.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiNewLogEntry, Me.tsmiRenameLogEntry, Me.tsmiDeleteLogEntry})
+        Me.cmsLogEntries.Name = "cmsTags"
+        Me.cmsLogEntries.Size = New System.Drawing.Size(174, 70)
+        '
+        'tsmiNewLogEntry
+        '
+        Me.tsmiNewLogEntry.Name = "tsmiNewLogEntry"
+        Me.tsmiNewLogEntry.Size = New System.Drawing.Size(173, 22)
+        Me.tsmiNewLogEntry.Text = "New Log Entry"
+        '
+        'tsmiRenameLogEntry
+        '
+        Me.tsmiRenameLogEntry.Name = "tsmiRenameLogEntry"
+        Me.tsmiRenameLogEntry.Size = New System.Drawing.Size(173, 22)
+        Me.tsmiRenameLogEntry.Text = "Rename Log Entry"
+        '
+        'tsmiDeleteLogEntry
+        '
+        Me.tsmiDeleteLogEntry.Name = "tsmiDeleteLogEntry"
+        Me.tsmiDeleteLogEntry.Size = New System.Drawing.Size(173, 22)
+        Me.tsmiDeleteLogEntry.Text = "Delete Log Entry"
+        '
         'lblActive
         '
         Me.lblActive.AutoSize = True
@@ -456,30 +480,6 @@ Partial Class frmUiMockup
         Me.lblName.Size = New System.Drawing.Size(38, 13)
         Me.lblName.TabIndex = 0
         Me.lblName.Text = "Name:"
-        '
-        'cmsLogEntries
-        '
-        Me.cmsLogEntries.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiNewLogEntry, Me.tsmiRenameLogEntry, Me.tsmiDeleteLogEntry})
-        Me.cmsLogEntries.Name = "cmsTags"
-        Me.cmsLogEntries.Size = New System.Drawing.Size(174, 70)
-        '
-        'tsmiNewLogEntry
-        '
-        Me.tsmiNewLogEntry.Name = "tsmiNewLogEntry"
-        Me.tsmiNewLogEntry.Size = New System.Drawing.Size(173, 22)
-        Me.tsmiNewLogEntry.Text = "New Log Entry"
-        '
-        'tsmiRenameLogEntry
-        '
-        Me.tsmiRenameLogEntry.Name = "tsmiRenameLogEntry"
-        Me.tsmiRenameLogEntry.Size = New System.Drawing.Size(173, 22)
-        Me.tsmiRenameLogEntry.Text = "Rename Log Entry"
-        '
-        'tsmiDeleteLogEntry
-        '
-        Me.tsmiDeleteLogEntry.Name = "tsmiDeleteLogEntry"
-        Me.tsmiDeleteLogEntry.Size = New System.Drawing.Size(173, 22)
-        Me.tsmiDeleteLogEntry.Text = "Delete Log Entry"
         '
         'frmUiMockup
         '

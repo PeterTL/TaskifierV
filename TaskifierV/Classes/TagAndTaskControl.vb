@@ -26,7 +26,7 @@ Public Class TagAndTaskControl
         'Create row and DB objects
         Dim dr As DataRow
         Dim v
-        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
 
         'Check if tags need to be filtered
         If getAllTags = True Then
@@ -98,7 +98,7 @@ Public Class TagAndTaskControl
         'Create row and DB objects
         Dim dr As DataRow
         Dim v
-        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
 
         'Check if tag identifier is set
         If tagId > -1 Then
@@ -162,7 +162,7 @@ Public Class TagAndTaskControl
         'Create row and DB objects
         Dim dr As DataRow
         Dim v
-        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
 
         'Query DB for tags, filter is log type
         v = (From le In DB.LogEntries
@@ -199,7 +199,7 @@ Public Class TagAndTaskControl
 
         'Create row and DB objects
         Dim v
-        Dim DB As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
 
         'Check if task/tag combination already exists
         v = (From lett In DB.LogEntriesToTags
@@ -209,21 +209,13 @@ Public Class TagAndTaskControl
 
         If v = 0 Then
             'Assign log entry to tag
-            Dim DB2 As New TaskifierDB("Data/TaskifierDB.sdf")
             Dim newLogEntryToTask As New LogEntriesToTags With {.LogEntryId = logEntryId,
                                                                 .TagId = tagId,
                                                                 .Active = True,
                                                                 .Comment = "Created by software not by mankind."}
-            DB2.LogEntriesToTags.InsertOnSubmit(newLogEntryToTask)
-            DB2.SubmitChanges()
 
-            'Dim ins As New LogEntriesToTags
-            'ins.LogEntryId = logEntryId
-            'ins.TagId = tagId
-            'ins.Comment = "Created by software not by mankind."
-
+            DB.LogEntriesToTags.InsertOnSubmit(newLogEntryToTask)
             'DB.SubmitChanges()
-            MsgBox("Datensatz angelegt")
         End If
     End Sub
 
