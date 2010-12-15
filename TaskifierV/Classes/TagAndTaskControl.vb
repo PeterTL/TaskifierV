@@ -210,10 +210,9 @@ Public Class TagAndTaskControl
         If v = 0 Then
             'Assign log entry to tag
             Dim DB2 As New TaskifierDB("Data/TaskifierDB.sdf")
-            Dim newLogEntryToTask As New LogEntriesToTags With {.Id = 0,
-                                                               .LogEntryId = logEntryId,
+            Dim newLogEntryToTask As New LogEntriesToTags With {.LogEntryId = logEntryId,
                                                                 .TagId = tagId,
-                                                                .Active = 1,
+                                                                .Active = True,
                                                                 .Comment = "Created by software not by mankind."}
             DB2.LogEntriesToTags.InsertOnSubmit(newLogEntryToTask)
             DB2.SubmitChanges()
@@ -223,7 +222,7 @@ Public Class TagAndTaskControl
             'ins.TagId = tagId
             'ins.Comment = "Created by software not by mankind."
 
-            DB.SubmitChanges()
+            'DB.SubmitChanges()
             MsgBox("Datensatz angelegt")
         End If
     End Sub
