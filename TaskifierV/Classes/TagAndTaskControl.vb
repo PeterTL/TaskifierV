@@ -215,7 +215,7 @@ Public Class TagAndTaskControl
                                                                 .Comment = "Created by software not by mankind."}
 
             DB.LogEntriesToTags.InsertOnSubmit(newLogEntryToTask)
-            'DB.SubmitChanges()
+            DB.SubmitChanges()
         End If
     End Sub
 
