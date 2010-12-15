@@ -32,12 +32,4 @@
       <Column Name="Comment" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="tblTest" Member="TblTest">
-    <Type Name="TblTest">
-      <Column Name="col1int4" Member="Col1int4" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="col2nvarchar100" Member="Col2nvarchar100" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="col3bit1" Member="Col3bit1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="col3datetime8" Member="Col3datetime8" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </Type>
-  </Table>
 </Database>

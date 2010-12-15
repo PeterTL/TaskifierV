@@ -53,6 +53,24 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\Entwicklung\TaskifierV\TaskifierV\Data\TaskifierDB.sdf")>  _
+        Public ReadOnly Property DevDbPath() As String
+            Get
+                Return CType(Me("DevDbPath"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data/TaskifierDB.sdf")>  _
+        Public ReadOnly Property ProdDbPath() As String
+            Get
+                Return CType(Me("ProdDbPath"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

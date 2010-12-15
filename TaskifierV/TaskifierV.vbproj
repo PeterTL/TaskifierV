@@ -156,6 +156,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Data\dbTaskifier.dbml.layout">
       <DependentUpon>dbTaskifier.dbml</DependentUpon>
     </None>

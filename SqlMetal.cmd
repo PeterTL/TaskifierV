@@ -1,0 +1,1 @@
+C:\Programme\Microsoft Visual Studio 10.0\VC>sqlmetal D:\Entwicklung\TaskifierV\TaskifierV\Data\TaskifierDB.sdf /dbml:D:\Entwicklung\TaskifierV\TaskifierV\Data\dbTaskifier.dbml

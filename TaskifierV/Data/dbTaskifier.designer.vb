@@ -48,12 +48,6 @@ Partial Public Class TaskifierDB
     End Sub
   Partial Private Sub DeleteTags(instance As Tags)
     End Sub
-  Partial Private Sub InsertTblTest(instance As TblTest)
-    End Sub
-  Partial Private Sub UpdateTblTest(instance As TblTest)
-    End Sub
-  Partial Private Sub DeleteTblTest(instance As TblTest)
-    End Sub
   #End Region
 	
 	Public Sub New(ByVal connection As String)
@@ -91,12 +85,6 @@ Partial Public Class TaskifierDB
 	Public ReadOnly Property Tags() As System.Data.Linq.Table(Of Tags)
 		Get
 			Return Me.GetTable(Of Tags)
-		End Get
-	End Property
-	
-	Public ReadOnly Property TblTest() As System.Data.Linq.Table(Of TblTest)
-		Get
-			Return Me.GetTable(Of TblTest)
 		End Get
 	End Property
 End Class
@@ -643,134 +631,6 @@ Partial Public Class Tags
 				Me._Comment = value
 				Me.SendPropertyChanged("Comment")
 				Me.OnCommentChanged
-			End If
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-End Class
-
-<Global.System.Data.Linq.Mapping.TableAttribute(Name:="tblTest")>  _
-Partial Public Class TblTest
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _Col1int4 As Integer
-	
-	Private _Col2nvarchar100 As String
-	
-	Private _Col3bit1 As System.Nullable(Of Boolean)
-	
-	Private _Col3datetime8 As System.Nullable(Of Date)
-	
-    #Region "Definitionen der Erweiterungsmethoden"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnCol1int4Changing(value As Integer)
-    End Sub
-    Partial Private Sub OnCol1int4Changed()
-    End Sub
-    Partial Private Sub OnCol2nvarchar100Changing(value As String)
-    End Sub
-    Partial Private Sub OnCol2nvarchar100Changed()
-    End Sub
-    Partial Private Sub OnCol3bit1Changing(value As System.Nullable(Of Boolean))
-    End Sub
-    Partial Private Sub OnCol3bit1Changed()
-    End Sub
-    Partial Private Sub OnCol3datetime8Changing(value As System.Nullable(Of Date))
-    End Sub
-    Partial Private Sub OnCol3datetime8Changed()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		OnCreated
-	End Sub
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="col1int4", Storage:="_Col1int4", DbType:="Int NOT NULL", IsPrimaryKey:=true)>  _
-	Public Property Col1int4() As Integer
-		Get
-			Return Me._Col1int4
-		End Get
-		Set
-			If ((Me._Col1int4 = value)  _
-						= false) Then
-				Me.OnCol1int4Changing(value)
-				Me.SendPropertyChanging
-				Me._Col1int4 = value
-				Me.SendPropertyChanged("Col1int4")
-				Me.OnCol1int4Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="col2nvarchar100", Storage:="_Col2nvarchar100", DbType:="NVarChar(100)")>  _
-	Public Property Col2nvarchar100() As String
-		Get
-			Return Me._Col2nvarchar100
-		End Get
-		Set
-			If (String.Equals(Me._Col2nvarchar100, value) = false) Then
-				Me.OnCol2nvarchar100Changing(value)
-				Me.SendPropertyChanging
-				Me._Col2nvarchar100 = value
-				Me.SendPropertyChanged("Col2nvarchar100")
-				Me.OnCol2nvarchar100Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="col3bit1", Storage:="_Col3bit1", DbType:="Bit")>  _
-	Public Property Col3bit1() As System.Nullable(Of Boolean)
-		Get
-			Return Me._Col3bit1
-		End Get
-		Set
-			If (Me._Col3bit1.Equals(value) = false) Then
-				Me.OnCol3bit1Changing(value)
-				Me.SendPropertyChanging
-				Me._Col3bit1 = value
-				Me.SendPropertyChanged("Col3bit1")
-				Me.OnCol3bit1Changed
-			End If
-		End Set
-	End Property
-	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Name:="col3datetime8", Storage:="_Col3datetime8", DbType:="DateTime")>  _
-	Public Property Col3datetime8() As System.Nullable(Of Date)
-		Get
-			Return Me._Col3datetime8
-		End Get
-		Set
-			If (Me._Col3datetime8.Equals(value) = false) Then
-				Me.OnCol3datetime8Changing(value)
-				Me.SendPropertyChanging
-				Me._Col3datetime8 = value
-				Me.SendPropertyChanged("Col3datetime8")
-				Me.OnCol3datetime8Changed
 			End If
 		End Set
 	End Property
