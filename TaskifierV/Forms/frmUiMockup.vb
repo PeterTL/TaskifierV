@@ -294,4 +294,13 @@
         End Try
     End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim db As New TaskifierDB("Data/TaskifierDB.sdf")
+        Dim newRow As New TblTest With {.Col1int4 = 1,
+                                        .Col2nvarchar100 = "Hallo",
+                                        .Col3bit1 = 1,
+                                        .Col3datetime8 = Now}
+        db.TblTest.InsertOnSubmit(newRow)
+        db.SubmitChanges()
+    End Sub
 End Class

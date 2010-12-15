@@ -126,9 +126,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbTaskifier.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Data\dbTaskifier.vb">
-      <DependentUpon>dbTaskifier.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmUiMockup.Designer.vb">
       <DependentUpon>frmUiMockup.vb</DependentUpon>
     </Compile>
