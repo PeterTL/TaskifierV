@@ -78,32 +78,13 @@
         End Try
     End Sub
 
-    'Fill grid with tasks according to selected tag/log and details with first task details
-    Private Sub dgvTags_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvTags.CellClick
-        'Create tag and task object
-        Dim tatControl As New TagAndTaskControl
-
-        Try
-            'Get tasks and fill second grid with tags according to selected tag and log
-            Dim logEntries As DataTable = tatControl.GetTasksForTag(dgvTags.CurrentRow.Cells(0).Value, tcMain.SelectedTab.Text)
-            dgvLogEntries.DataSource = logEntries
-
-            'Get details for first task and fill text boxes
-            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
-            tatControl.FillBoxesWithLogEntryDetails(logEntry)
-        Catch ex As Exception
-            'Debug output
-            Debug.Print("")
-            Debug.Print("Handler dgvTags_CellClick exited with error:")
-            Debug.Print(ex.Message)
-        End Try
-    End Sub
-
     'Fills details of first tasks and enables drag-and-drop source
     Private Sub dgvLogEntries_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvLogEntries.MouseDown
         'Variable for source element index
         Dim index As Integer
         Dim id As Integer
+        'Create tag and task object
+        Dim tatControl As New TagAndTaskControl
 
         'Debug output
         Debug.Print("")
@@ -112,24 +93,45 @@
         Debug.Print("Y: " & e.Y)
 
         Try
-            'Get index and id of source element
+            'Get index of source element
             index = dgvLogEntries.HitTest(e.X, e.Y).RowIndex
-            id = dgvLogEntries.Rows(index).Cells("Id").Value
 
-            'Create tag and task object
-            Dim tatControl As New TagAndTaskControl
-
-            'Get task details and fill text boxes
-            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
-            tatControl.FillBoxesWithLogEntryDetails(logEntry)
-
-            'Only enable task drag and drop within the Backlog
+            'Only enable context menu strip for new items within Backlog
             If tcMain.SelectedTab.Text = "Backlog" Then
-                If index > -1 Then
-                    'Highlight selected item an start d&d
-                    dgvLogEntries.Rows(index).Selected = True
-                    dgvLogEntries.DoDragDrop(index, DragDropEffects.Copy)
+                tsmiNewLogEntry.Enabled = True
+            Else
+                tsmiNewLogEntry.Enabled = False
+            End If
+
+            'Check if the "white"space or the row were clicked
+            If index > -1 Then
+                'Row was clicked, enable context menu items for delete and rename
+                tsmiDeleteLogEntry.Enabled = True
+                tsmiRenameLogEntry.Enabled = True
+
+                'Get identifier of right-clicked row
+                id = dgvLogEntries.Rows(index).Cells("Id").Value
+
+                'Get task details and fill text boxes
+                Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
+                tatControl.FillBoxesWithLogEntryDetails(logEntry)
+
+                'Highlight and set (!) selected item
+                dgvLogEntries.Rows(index).Selected = True
+                dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, index)
+
+                'Only do this if item was left-clicked (only in Backlog)
+                If e.Button = MouseButtons.Left Then
+                    'Only enable task drag and drop within the Backlog
+                    If tcMain.SelectedTab.Text = "Backlog" Then
+                        'Start d&d
+                        dgvLogEntries.DoDragDrop(index, DragDropEffects.Copy)
+                    End If
                 End If
+            Else
+                '"White"space was clicked, disablecontext menu items for delete and rename
+                tsmiDeleteLogEntry.Enabled = False
+                tsmiRenameLogEntry.Enabled = False
             End If
         Catch ex As Exception
             'Debug output
@@ -212,37 +214,54 @@
         'Variables for right-clicked row
         Dim index As Integer
         Dim id As String 'You never know when you need it...
+        'Create tag and task object
+        Dim tatControl As New TagAndTaskControl
 
         Try
-            'Only do this when the right (sided) button is used
-            If e.Button = MouseButtons.Right Then
-                'New tags can only be created inside the Backlog
-                If tcMain.SelectedTab.Text = "Backlog" Then
-                    tsmiNewTag.Enabled = True
+            'Get index of right-clicked row
+            index = dgvTags.HitTest(e.X, e.Y).RowIndex
+
+            'Only enable context menu strip for new items within Backlog
+            If tcMain.SelectedTab.Text = "Backlog" Then
+                tsmiNewTag.Enabled = True
+            Else
+                tsmiNewTag.Enabled = False
+            End If
+
+            'Check if the "white"space or the row were clicked
+            If index > -1 Then
+                'Get index of clicked row
+                id = dgvTags.Rows(index).Cells("Id").Value.ToString
+
+                'If another tag than the default tag was selected
+                If id > -1 Then
+                    'Another tag was clicked, enable context menu strips
+                    tsmiDeleteTag.Enabled = True
+                    tsmiRenameTag.Enabled = True
                 Else
-                    tsmiNewTag.Enabled = False
+                    'Default tag was clicked, disable context menu strips
+                    tsmiDeleteTag.Enabled = False
+                    tsmiRenameTag.Enabled = False
                 End If
 
                 'Get index of right-clicked row
                 index = dgvTags.HitTest(e.X, e.Y).RowIndex
 
-                'Check if the "white"space or the row were clicked
-                If index > -1 Then
-                    'Row was clicked, enable context menu items for delete and rename
-                    tsmiDeleteTag.Enabled = True
-                    tsmiRenameTag.Enabled = True
+                'Get tasks and fill second grid with tags according to selected tag and log
+                Dim logEntries As DataTable = tatControl.GetTasksForTag(id, tcMain.SelectedTab.Text)
+                dgvLogEntries.DataSource = logEntries
 
-                    'Get identifier of right-clicked row
-                    id = dgvTags.Rows(index).Cells("Id").Value.ToString 'You never know when you need it...
+                'Get details for first task and fill text boxes
+                Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+                tatControl.FillBoxesWithLogEntryDetails(logEntry)
 
-                    'Highlight and set (!) right-clicked row
-                    dgvTags.Rows(index).Selected = True
-                    dgvTags.CurrentCell = dgvTags.Item(1, index)
-                Else
-                    '"White"space was clicked, disablecontext menu items for delete and rename
-                    tsmiDeleteTag.Enabled = False
-                    tsmiRenameTag.Enabled = False
-                End If
+                'Highlight and set (!) right-clicked row
+                dgvTags.Rows(index).Selected = True
+                dgvTags.CurrentCell = dgvTags.Item(1, index)
+            Else
+                '"White"space was clicked, disablecontext menu items for delete and rename
+                tsmiDeleteTag.Enabled = False
+                tsmiRenameTag.Enabled = False
             End If
         Catch ex As Exception
             'Debug output
