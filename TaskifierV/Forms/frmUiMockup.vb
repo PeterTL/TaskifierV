@@ -223,13 +223,26 @@
                     tsmiNewTag.Enabled = False
                 End If
 
-                'Get identifier of right-clicked row
+                'Get index of right-clicked row
                 index = dgvTags.HitTest(e.X, e.Y).RowIndex
-                id = dgvTags.Rows(index).Cells("Id").Value.ToString 'You never know when you need it...
 
-                'Highlight and set (!) right-clicked row
-                dgvTags.Rows(index).Selected = True
-                dgvTags.CurrentCell = dgvTags.Item(1, index)
+                'Check if the "white"space or the row were clicked
+                If index > -1 Then
+                    'Row was clicked, enable context menu items for delete and rename
+                    tsmiDeleteTag.Enabled = True
+                    tsmiRenameTag.Enabled = True
+
+                    'Get identifier of right-clicked row
+                    id = dgvTags.Rows(index).Cells("Id").Value.ToString 'You never know when you need it...
+
+                    'Highlight and set (!) right-clicked row
+                    dgvTags.Rows(index).Selected = True
+                    dgvTags.CurrentCell = dgvTags.Item(1, index)
+                Else
+                    '"White"space was clicked, disablecontext menu items for delete and rename
+                    tsmiDeleteTag.Enabled = False
+                    tsmiRenameTag.Enabled = False
+                End If
             End If
         Catch ex As Exception
             'Debug output

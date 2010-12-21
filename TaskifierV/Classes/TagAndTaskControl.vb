@@ -115,11 +115,16 @@ Public Class TagAndTaskControl
                             Select le.Id, le.Name).Distinct
         Else
             'Query DB for tasks, filter is log type (NOT tag!)
+            'v = (From le In DB.LogEntries
+            '                Join lett In DB.LogEntriesToTags
+            '                On le.Id Equals lett.LogEntryId
+            '                Join t In DB.Tags
+            '                On lett.TagId Equals t.Id
+            '                Where le.LogType = logName
+            '                Where le.Active = True
+            '                Order By le.Name
+            '                Select le.Id, le.Name).Distinct
             v = (From le In DB.LogEntries
-                            Join lett In DB.LogEntriesToTags
-                            On le.Id Equals lett.LogEntryId
-                            Join t In DB.Tags
-                            On lett.TagId Equals t.Id
                             Where le.LogType = logName
                             Where le.Active = True
                             Order By le.Name
