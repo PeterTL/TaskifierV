@@ -2,6 +2,17 @@
 
 Public Class TagAndTaskControl
 
+    Private _dbPath As String
+
+    ''' <summary>
+    ''' Class constructor. Initializes the DB path.
+    ''' </summary>
+    ''' <param name="dbPath">Path to local DB.</param>
+    ''' <remarks></remarks>
+    Public Sub New(ByRef dbPath As String)
+        _dbPath = dbPath
+    End Sub
+
     ''' <summary>
     ''' Returns a table with tags and their identifiers from the DB.
     ''' </summary>
@@ -26,7 +37,7 @@ Public Class TagAndTaskControl
         'Create row and DB objects
         Dim dr As DataRow
         Dim v
-        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
+        Dim DB As New TaskifierDB(_dbPath)
 
         'Check if tags need to be filtered
         If getAllTags = True Then
@@ -98,7 +109,7 @@ Public Class TagAndTaskControl
         'Create row and DB objects
         Dim dr As DataRow
         Dim v
-        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
+        Dim DB As New TaskifierDB(_dbPath)
 
         'Check if tag identifier is set
         If tagId > -1 Then
@@ -167,7 +178,7 @@ Public Class TagAndTaskControl
         'Create row and DB objects
         Dim dr As DataRow
         Dim v
-        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
+        Dim DB As New TaskifierDB(_dbPath)
 
         'Query DB for tags, filter is log type
         v = (From le In DB.LogEntries
@@ -204,7 +215,7 @@ Public Class TagAndTaskControl
 
         'Create row and DB objects
         Dim v
-        Dim DB As New TaskifierDB(My.Settings("DevDbPath").ToString)
+        Dim DB As New TaskifierDB(_dbPath)
 
         'Check if task/tag combination already exists
         v = (From lett In DB.LogEntriesToTags

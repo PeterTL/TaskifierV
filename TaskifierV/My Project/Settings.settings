@@ -3,10 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="DevDbPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">D:\Entwicklung\TaskifierV\TaskifierV\Data\TaskifierDB.sdf</Value>
+      <Value Profile="(Default)">D:\Daten von Peter\Entwicklung\TaskifierV\TaskifierV\Data\TaskifierDB.sdf</Value>
     </Setting>
     <Setting Name="ProdDbPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Data/TaskifierDB.sdf</Value>
+    </Setting>
+    <Setting Name="DbPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Daten von Peter\Entwicklung\TaskifierV\TaskifierV\Data\TaskifierDB.sdf</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,5 +1,7 @@
 ﻿Public Class frmUiMockup
 
+    Public dbPath As String
+
     'Draws the tabs in a non-standard way
     Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles tcMain.DrawItem
         'Draw tabs
@@ -23,8 +25,20 @@
 
     'Fill grid and details with first task values
     Private Sub frmUiMockup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Take DB path from settings and overwrite it with command line value if given
+        dbPath = My.Settings("DbPath").ToString
+
+        Dim cmdLineArgs As Array = Environment.GetCommandLineArgs
+
+        For Each cmdLineArg As String In cmdLineArgs
+            If cmdLineArg.Substring(cmdLineArg.Length - 3) = "sdf" Then
+                dbPath = cmdLineArg
+                Exit For
+            End If
+        Next
+
         'Create tag and task object
-        Dim tatControl As New TagAndTaskControl
+        Dim tatControl As New TagAndTaskControl(dbPath)
 
         Try
             'Get tags and fill first grid with Backlog tags
@@ -53,7 +67,7 @@
     'Changes log and fills grid and details with first task values
     Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcMain.SelectedIndexChanged
         'Create tag and task object
-        Dim tatControl As New TagAndTaskControl
+        Dim tatControl As New TagAndTaskControl(dbPath)
 
         Try
             'Get tags and fill first grid with tags according to selected log
@@ -84,7 +98,7 @@
         Dim index As Integer
         Dim id As Integer
         'Create tag and task object
-        Dim tatControl As New TagAndTaskControl
+        Dim tatControl As New TagAndTaskControl(dbPath)
 
         'Debug output
         Debug.Print("")
@@ -151,7 +165,7 @@
         'Variables and objects
         Dim sourceIndex As Integer
         Dim sourceId As String
-        Dim tatControl As New TagAndTaskControl
+        Dim tatControl As New TagAndTaskControl(dbPath)
 
         Try
             'Get identifier of source row
@@ -215,7 +229,7 @@
         Dim index As Integer
         Dim id As String 'You never know when you need it...
         'Create tag and task object
-        Dim tatControl As New TagAndTaskControl
+        Dim tatControl As New TagAndTaskControl(dbPath)
 
         Try
             'Get index of right-clicked row
@@ -294,7 +308,7 @@
         'Variables and objects
         Dim index As Integer
         Dim id As String
-        Dim tatControl As New TagAndTaskControl
+        Dim tatControl As New TagAndTaskControl(dbPath)
 
         Try
             'Get identifier row to be deleted
