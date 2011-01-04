@@ -170,13 +170,12 @@ Public Class TagAndTaskControl
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function GetTaskDetails started. Messages:")
-        Debug.Print("Tag ID: " & logEntryId.ToString)
+        Debug.Print("Task ID: " & logEntryId.ToString)
 
         'Create (empty) data object for log entry
         Dim ledat As New LogEntryData
 
         'Create row and DB objects
-        Dim dr As DataRow
         Dim v
         Dim DB As New TaskifierDB(_dbPath)
 
@@ -200,7 +199,6 @@ Public Class TagAndTaskControl
 
         'Destroy objects
         DB = Nothing
-        dr = Nothing
 
         Return ledat
     End Function
@@ -219,9 +217,9 @@ Public Class TagAndTaskControl
 
         'Check if task/tag combination already exists
         v = (From lett In DB.LogEntriesToTags
-                        Where lett.LogEntryId = logEntryId
-                        Where lett.TagId = tagId
-                        Select lett.Id).Count
+                          Where lett.LogEntryId = logEntryId
+                          Where lett.TagId = tagId
+                          Select lett.Id).Count
 
         If v = 0 Then
             'Assign log entry to tag
@@ -233,6 +231,32 @@ Public Class TagAndTaskControl
             DB.LogEntriesToTags.InsertOnSubmit(newLogEntryToTask)
             DB.SubmitChanges()
         End If
+    End Sub
+
+    'TODO: Documentation
+    Public Sub RemoveLogEntryFromTask(ByVal tagId As Integer, ByVal logEntryId As Integer)
+        'Debug method parameters
+        Debug.Print("")
+        Debug.Print("Function RemoveLogEntryFromTask started. Messages:")
+        Debug.Print("Log Entry ID: " & logEntryId.ToString)
+        Debug.Print("Tag ID: " & tagId.ToString)
+
+        'Create row and DB objects
+        Dim v
+        Dim DB As New TaskifierDB(_dbPath)
+
+        'Get PK for log entry/tag combination
+        v = (From lett In DB.LogEntriesToTags
+                          Where lett.TagId = tagId
+                          Where lett.LogEntryId = logEntryId
+                          Select lett.Id).First
+
+        'Remove log entry from tag
+        MsgBox(v.Id)
+
+        'TODO: Implementation
+        Debug.Print("Removing log entry #" & logEntryId & " from tag #" & tagId)
+
     End Sub
 
     Public Sub FillBoxesWithLogEntryDetails(ByRef taskDetails As LogEntryData)

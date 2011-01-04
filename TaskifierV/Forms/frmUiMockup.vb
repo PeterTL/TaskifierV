@@ -3,7 +3,7 @@
     Public dbPath As String
 
     'Draws the tabs in a non-standard way
-    Private Sub TabControl1_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles tcMain.DrawItem
+    Private Sub tcMain_DrawItem(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles tcMain.DrawItem
         'Draw tabs
         Dim g As Graphics
         Dim sText As String
@@ -44,10 +44,16 @@
             'Get tags and fill first grid with Backlog tags
             Dim tags As DataTable = tatControl.GetTagsForLog("Backlog", True)
             dgvTags.DataSource = tags
+            'Select select first item
+            dgvTags.Rows(0).Selected = True
+            dgvTags.CurrentCell = dgvTags.Item(1, 0)
 
             'Get tasks and fill second grid with Backlog tasks
             Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, "Backlog")
             dgvLogEntries.DataSource = logEntries
+            'Select select first item
+            dgvLogEntries.Rows(0).Selected = True
+            dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
 
             'Get details for first task and fill text boxes
             Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
@@ -65,7 +71,7 @@
     End Sub
 
     'Changes log and fills grid and details with first task values
-    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcMain.SelectedIndexChanged
+    Private Sub tcMain_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcMain.SelectedIndexChanged
         'Create tag and task object
         Dim tatControl As New TagAndTaskControl(dbPath)
 
@@ -76,10 +82,16 @@
             If tcMain.SelectedTab.Text = "Backlog" Then getAll = True
             Dim tags As DataTable = tatControl.GetTagsForLog(tcMain.SelectedTab.Text, getAll)
             dgvTags.DataSource = tags
+            'Select select first item
+            dgvTags.Rows(0).Selected = True
+            dgvTags.CurrentCell = dgvTags.Item(1, 0)
 
             'Get tasks and fill second grid with tags according to selected log
             Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, tcMain.SelectedTab.Text)
             dgvLogEntries.DataSource = logEntries
+            'Select select first item
+            dgvLogEntries.Rows(0).Selected = True
+            dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
 
             'Get details for first task and fill text boxes
             Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
@@ -87,7 +99,7 @@
         Catch ex As Exception
             'Debug output
             Debug.Print("")
-            Debug.Print("Handler TabControl1_SelectedIndexChanged exited with error:")
+            Debug.Print("Handler tcMain_SelectedIndexChanged exited with error:")
             Debug.Print(ex.Message)
         End Try
     End Sub
@@ -165,9 +177,15 @@
         'Variables and objects
         Dim sourceIndex As Integer
         Dim sourceId As String
+        Dim destHighlIndex As Integer
+        Dim destHighlId As String
         Dim tatControl As New TagAndTaskControl(dbPath)
 
         Try
+            'Previously highlighted record
+            destHighlIndex = dgvTags.CurrentRow.Index
+            destHighlId = dgvTags.Rows(destHighlIndex).Cells("Id").Value.ToString
+
             'Get identifier of source row
             sourceIndex = Convert.ToInt32(e.Data.GetData(Type.GetType("System.Int32")))
             sourceId = dgvLogEntries.Rows(sourceIndex).Cells("Id").Value.ToString
@@ -186,8 +204,17 @@
             dgvTags.Rows(destIndex).Selected = True
             dgvTags.CurrentCell = dgvTags.Item(1, destIndex)
 
-            'Assign task to log entry
-            tatControl.AddLogEntryToTask(destId, sourceId)
+            'If task was dragged on All then remove it from current tag
+            'Otherwise add task to tag
+            If destId <> -1 Then
+                'Assign task to tag
+                tatControl.AddLogEntryToTask(destId, sourceId)
+            Else
+                If destHighlId <> -1 Then
+                    'Remove task from tag
+                    tatControl.RemoveLogEntryFromTask(destHighlId, sourceId)
+                End If
+            End If
 
             'Select log items according to (newly) selected tag
             Dim logEntries As DataTable = tatControl.GetTasksForTag(destId, "Backlog")
