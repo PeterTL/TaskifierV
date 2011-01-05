@@ -208,11 +208,11 @@
             'Otherwise add task to tag
             If destId <> -1 Then
                 'Assign task to tag
-                tatControl.AddLogEntryToTask(destId, sourceId)
+                tatControl.AddLogEntryToTag(destId, sourceId)
             Else
                 If destHighlId <> -1 Then
                     'Remove task from tag
-                    tatControl.RemoveLogEntryFromTask(destHighlId, sourceId)
+                    tatControl.RemoveLogEntryFromTag(destHighlId, sourceId)
                 End If
             End If
 

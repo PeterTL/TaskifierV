@@ -43,20 +43,20 @@ Public Class TagAndTaskControl
         If getAllTags = True Then
             'Query DB for all tags (NO filter!)
             v = (From t In DB.Tags
-                           Where t.Active = True
-                           Order By t.Name
-                           Select t.Id, t.Name).Distinct
+                 Where t.Active = True
+                 Order By t.Name
+                 Select t.Id, t.Name).Distinct
         Else
             'Query DB for tags, filter is log type
             v = (From t In DB.Tags
-                           Join lett In DB.LogEntriesToTags
-                           On lett.TagId Equals t.Id
-                           Join le In DB.LogEntries
-                           On le.Id Equals lett.LogEntryId
-                           Where le.LogType = logName
-                           Where le.Active = True
-                           Order By t.Name
-                           Select t.Id, t.Name).Distinct
+                 Join lett In DB.LogEntriesToTags
+                 On lett.TagId Equals t.Id
+                 Join le In DB.LogEntries
+                 On le.Id Equals lett.LogEntryId
+                 Where le.LogType = logName
+                 Where le.Active = True
+                 Order By t.Name
+                 Select t.Id, t.Name).Distinct
         End If
 
         'Add default row
@@ -115,31 +115,22 @@ Public Class TagAndTaskControl
         If tagId > -1 Then
             'Query DB for tasks, filter is tag and log type
             v = (From le In DB.LogEntries
-                            Join lett In DB.LogEntriesToTags
-                            On le.Id Equals lett.LogEntryId
-                            Join t In DB.Tags
-                            On lett.TagId Equals t.Id
-                            Where le.LogType = logName
-                            Where le.Active = True
-                            Where t.Id = tagId
-                            Order By le.Name
-                            Select le.Id, le.Name).Distinct
+                 Join lett In DB.LogEntriesToTags
+                 On le.Id Equals lett.LogEntryId
+                 Join t In DB.Tags
+                 On lett.TagId Equals t.Id
+                 Where le.LogType = logName
+                 Where le.Active = True
+                 Where t.Id = tagId
+                 Order By le.Name
+                 Select le.Id, le.Name).Distinct
         Else
             'Query DB for tasks, filter is log type (NOT tag!)
-            'v = (From le In DB.LogEntries
-            '                Join lett In DB.LogEntriesToTags
-            '                On le.Id Equals lett.LogEntryId
-            '                Join t In DB.Tags
-            '                On lett.TagId Equals t.Id
-            '                Where le.LogType = logName
-            '                Where le.Active = True
-            '                Order By le.Name
-            '                Select le.Id, le.Name).Distinct
             v = (From le In DB.LogEntries
-                            Where le.LogType = logName
-                            Where le.Active = True
-                            Order By le.Name
-                            Select le.Id, le.Name).Distinct
+                 Where le.LogType = logName
+                 Where le.Active = True
+                 Order By le.Name
+                 Select le.Id, le.Name).Distinct
         End If
 
         'Add rows returned from DB
@@ -181,9 +172,9 @@ Public Class TagAndTaskControl
 
         'Query DB for tags, filter is log type
         v = (From le In DB.LogEntries
-                        Where le.Id = logEntryId
-                        Select le.Id, le.LogType, le.Name, le.Description, le.Priority, le.StartDate, _
-                                le.EndDate, le.Active, le.InProgress, le.Finished).First
+             Where le.Id = logEntryId
+             Select le.Id, le.LogType, le.Name, le.Description, le.Priority, le.StartDate, _
+                    le.EndDate, le.Active, le.InProgress, le.Finished).First
 
         'Add row returned from DB
         ledat.Id = v.Id
@@ -204,7 +195,7 @@ Public Class TagAndTaskControl
     End Function
 
     'TODO: Documentation
-    Public Sub AddLogEntryToTask(ByVal tagId As Integer, ByVal logEntryId As Integer)
+    Public Sub AddLogEntryToTag(ByVal tagId As Integer, ByVal logEntryId As Integer)
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function AddLogEntryToTask started. Messages:")
@@ -217,9 +208,9 @@ Public Class TagAndTaskControl
 
         'Check if task/tag combination already exists
         v = (From lett In DB.LogEntriesToTags
-                          Where lett.LogEntryId = logEntryId
-                          Where lett.TagId = tagId
-                          Select lett.Id).Count
+             Where lett.LogEntryId = logEntryId
+             Where lett.TagId = tagId
+             Select lett.Id).Count
 
         If v = 0 Then
             'Assign log entry to tag
@@ -234,7 +225,7 @@ Public Class TagAndTaskControl
     End Sub
 
     'TODO: Documentation
-    Public Sub RemoveLogEntryFromTask(ByVal tagId As Integer, ByVal logEntryId As Integer)
+    Public Sub RemoveLogEntryFromTag(ByVal tagId As Integer, ByVal logEntryId As Integer)
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function RemoveLogEntryFromTask started. Messages:")
@@ -245,14 +236,15 @@ Public Class TagAndTaskControl
         Dim v
         Dim DB As New TaskifierDB(_dbPath)
 
-        'Get PK for log entry/tag combination
-        v = (From lett In DB.LogEntriesToTags
-                          Where lett.TagId = tagId
-                          Where lett.LogEntryId = logEntryId
-                          Select lett.Id).First
-
         'Remove log entry from tag
-        MsgBox(v.Id)
+        Dim lettToDelete =
+            (From lett In DB.LogEntriesToTags
+             Where lett.TagId = tagId
+             Where lett.LogEntryId = logEntryId
+             Select lett).First
+
+        DB.LogEntriesToTags.DeleteOnSubmit(lettToDelete)
+        DB.SubmitChanges()
 
         'TODO: Implementation
         Debug.Print("Removing log entry #" & logEntryId & " from tag #" & tagId)
