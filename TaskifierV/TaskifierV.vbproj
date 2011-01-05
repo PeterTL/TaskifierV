@@ -119,7 +119,7 @@
     <Compile Include="Classes\AppGraphics.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\TagAndTaskControl.vb" />
+    <Compile Include="Classes\TagAndLogEntryControl.vb" />
     <Compile Include="Classes\Utilities.vb" />
     <Compile Include="Data\dbTaskifier.designer.vb">
       <AutoGen>True</AutoGen>

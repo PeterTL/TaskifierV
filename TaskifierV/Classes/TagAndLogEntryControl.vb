@@ -1,6 +1,6 @@
 ﻿Imports System.Data.Linq.SqlClient
 
-Public Class TagAndTaskControl
+Public Class TagAndLogEntryControl
 
     Private _dbPath As String
 
@@ -84,21 +84,21 @@ Public Class TagAndTaskControl
     End Function
 
     ''' <summary>
-    ''' Returns a table with tasks and their identifiers from the DB
+    ''' Returns a table with log entries and their identifiers from the DB
     ''' </summary>
     ''' <param name="tagId">Tag identifier</param>
     ''' <param name="logName">Log name, e.g. "Backlog"</param>
-    ''' <returns>Data table with tasks (id and name)</returns>
+    ''' <returns>Data table with log entries (id and name)</returns>
     ''' <remarks></remarks>
-    Public Function GetTasksForTag(ByVal tagId As Integer, ByVal logName As String) As DataTable
+    Public Function GetLogEntriesForTag(ByVal tagId As Integer, ByVal logName As String) As DataTable
         'Debug method parameters
         Debug.Print("")
-        Debug.Print("Function GetTasksForTag started. Messages:")
+        Debug.Print("Function GetLogEntriesForTag started. Messages:")
         Debug.Print("Log Name: " & logName)
         Debug.Print("Tag ID: " & tagId.ToString)
 
         'Create (empty) table and column objects
-        Dim dt As New DataTable("TasksForTagsAndLog")
+        Dim dt As New DataTable("LogEntriesForTagsAndLog")
         Dim dcId As New DataColumn("Id")
         Dim dcName As New DataColumn("Name")
 
@@ -113,7 +113,7 @@ Public Class TagAndTaskControl
 
         'Check if tag identifier is set
         If tagId > -1 Then
-            'Query DB for tasks, filter is tag and log type
+            'Query DB for log entries, filter is tag and log type
             v = (From le In DB.LogEntries
                  Join lett In DB.LogEntriesToTags
                  On le.Id Equals lett.LogEntryId
@@ -125,7 +125,7 @@ Public Class TagAndTaskControl
                  Order By le.Name
                  Select le.Id, le.Name).Distinct
         Else
-            'Query DB for tasks, filter is log type (NOT tag!)
+            'Query DB for log entries, filter is log type (NOT tag!)
             v = (From le In DB.LogEntries
                  Where le.LogType = logName
                  Where le.Active = True
@@ -160,8 +160,8 @@ Public Class TagAndTaskControl
     Public Function GetLogEntryDetails(ByVal logEntryId As Integer) As LogEntryData
         'Debug method parameters
         Debug.Print("")
-        Debug.Print("Function GetTaskDetails started. Messages:")
-        Debug.Print("Task ID: " & logEntryId.ToString)
+        Debug.Print("Function GetLogEntryDetails started. Messages:")
+        Debug.Print("Log Entry ID: " & logEntryId.ToString)
 
         'Create (empty) data object for log entry
         Dim ledat As New LogEntryData
@@ -203,7 +203,7 @@ Public Class TagAndTaskControl
     Public Sub AddLogEntryToTag(ByVal tagId As Integer, ByVal logEntryId As Integer)
         'Debug method parameters
         Debug.Print("")
-        Debug.Print("Function AddLogEntryToTask started. Messages:")
+        Debug.Print("Function AddLogEntryToTag started. Messages:")
         Debug.Print("Log Entry ID: " & logEntryId.ToString)
         Debug.Print("Tag ID: " & tagId.ToString)
 
@@ -211,7 +211,7 @@ Public Class TagAndTaskControl
         Dim v
         Dim DB As New TaskifierDB(_dbPath)
 
-        'Check if task/tag combination already exists
+        'Check if log entry/tag combination already exists
         v = (From lett In DB.LogEntriesToTags
              Where lett.LogEntryId = logEntryId
              Where lett.TagId = tagId
@@ -219,12 +219,12 @@ Public Class TagAndTaskControl
 
         If v = 0 Then
             'Assign log entry to tag
-            Dim newLogEntryToTask As New LogEntriesToTags With {.LogEntryId = logEntryId,
+            Dim newLogEntryToTag As New LogEntriesToTags With {.LogEntryId = logEntryId,
                                                                 .TagId = tagId,
                                                                 .Active = True,
                                                                 .Comment = "Created by software not by mankind."}
 
-            DB.LogEntriesToTags.InsertOnSubmit(newLogEntryToTask)
+            DB.LogEntriesToTags.InsertOnSubmit(newLogEntryToTag)
             DB.SubmitChanges()
         End If
     End Sub
@@ -238,7 +238,7 @@ Public Class TagAndTaskControl
     Public Sub RemoveLogEntryFromTag(ByVal tagId As Integer, ByVal logEntryId As Integer)
         'Debug method parameters
         Debug.Print("")
-        Debug.Print("Function RemoveLogEntryFromTask started. Messages:")
+        Debug.Print("Function RemoveLogEntryFromTag started. Messages:")
         Debug.Print("Log Entry ID: " & logEntryId.ToString)
         Debug.Print("Tag ID: " & tagId.ToString)
 
@@ -257,14 +257,18 @@ Public Class TagAndTaskControl
         DB.SubmitChanges()
     End Sub
 
-    'TODO: Documentation
+    ''' <summary>
+    ''' Adds a new tag to the DB if it is not yet there
+    ''' </summary>
+    ''' <param name="tagName">Name of the tag to be added</param>
+    ''' <remarks></remarks>
     Public Sub AddNewTag(ByVal tagName As String)
         'Debug method parameters
         Debug.Print("")
         Debug.Print("Function AddNewTag started. Messages:")
         Debug.Print("Tag Name: " & tagName)
 
-        'DB object
+        'Tag variable and DB object
         Dim tagCount As Integer
         Dim DB As New TaskifierDB(_dbPath)
 
@@ -289,22 +293,47 @@ Public Class TagAndTaskControl
     End Sub
 
     ''' <summary>
+    ''' Removes a tag from the database, not caring if there are log entries assigned to it
+    ''' </summary>
+    ''' <param name="tagId">Identifier of the tag to be removed</param>
+    ''' <remarks></remarks>
+    Public Sub RemoveTag(ByVal tagId As Integer)
+        'Debug method parameters
+        Debug.Print("")
+        Debug.Print("Function RemoveTag started. Messages:")
+        Debug.Print("Tag Name: " & tagId)
+
+        'Create row and DB objects
+        Dim tagToDelete
+        Dim DB As New TaskifierDB(_dbPath)
+
+        'Remove tag
+        tagToDelete =
+            (From t In DB.Tags
+             Where t.Id = tagId
+             Select t).First
+
+        DB.Tags.DeleteOnSubmit(tagToDelete)
+        DB.SubmitChanges()
+    End Sub
+
+    ''' <summary>
     ''' Fills text boxes/date pickers/... with a LogEntryData object
     ''' </summary>
-    ''' <param name="taskDetails">LogEntryData data object</param>
+    ''' <param name="logEntryDetails">LogEntryData data object</param>
     ''' <remarks></remarks>
-    Public Sub FillBoxesWithLogEntryDetails(ByRef taskDetails As LogEntryData)
+    Public Sub FillBoxesWithLogEntryDetails(ByRef logEntryDetails As LogEntryData)
         'Fill text boxes
-        frmUiMockup.txtId.Text = taskDetails.Id.ToString
-        frmUiMockup.txtLogType.Text = taskDetails.LogType
-        frmUiMockup.txtName.Text = taskDetails.Name
-        frmUiMockup.txtDescription.Text = taskDetails.Description
-        frmUiMockup.txtPriority.Text = taskDetails.Priority
-        frmUiMockup.txtStartDate.Text = taskDetails.StartDate
-        frmUiMockup.txtEndDate.Text = taskDetails.EndDate
-        frmUiMockup.txtActive.Text = taskDetails.Active
-        frmUiMockup.txtInProgress.Text = taskDetails.InProgress
-        frmUiMockup.txtFinished.Text = taskDetails.Finished
+        frmUiMockup.txtId.Text = logEntryDetails.Id.ToString
+        frmUiMockup.txtLogType.Text = logEntryDetails.LogType
+        frmUiMockup.txtName.Text = logEntryDetails.Name
+        frmUiMockup.txtDescription.Text = logEntryDetails.Description
+        frmUiMockup.txtPriority.Text = logEntryDetails.Priority
+        frmUiMockup.txtStartDate.Text = logEntryDetails.StartDate
+        frmUiMockup.txtEndDate.Text = logEntryDetails.EndDate
+        frmUiMockup.txtActive.Text = logEntryDetails.Active
+        frmUiMockup.txtInProgress.Text = logEntryDetails.InProgress
+        frmUiMockup.txtFinished.Text = logEntryDetails.Finished
     End Sub
 
     Public Function InsertTagList(ByRef tagList As List(Of String))
