@@ -5,19 +5,19 @@ Public Class TagAndTaskControl
     Private _dbPath As String
 
     ''' <summary>
-    ''' Class constructor. Initializes the DB path.
+    ''' Class constructor. Initializes the DB path
     ''' </summary>
-    ''' <param name="dbPath">Path to local DB.</param>
+    ''' <param name="dbPath">Path to local DB</param>
     ''' <remarks></remarks>
     Public Sub New(ByRef dbPath As String)
         _dbPath = dbPath
     End Sub
 
     ''' <summary>
-    ''' Returns a table with tags and their identifiers from the DB.
+    ''' Returns a table with tags and their identifiers from the DB
     ''' </summary>
-    ''' <param name="logName">Log name, e.g. "Backlog".</param>
-    ''' <returns>Data table with tags (id and name).</returns>
+    ''' <param name="logName">Log name, e.g. "Backlog"</param>
+    ''' <returns>Data table with tags (id and name)</returns>
     ''' <remarks></remarks>
     Public Function GetTagsForLog(ByVal logName As String, ByRef getAllTags As Boolean) As DataTable
         'Debug method parameters
@@ -84,11 +84,11 @@ Public Class TagAndTaskControl
     End Function
 
     ''' <summary>
-    ''' Returns a table with tasks and their identifiers from the DB.
+    ''' Returns a table with tasks and their identifiers from the DB
     ''' </summary>
-    ''' <param name="tagId">Tag identifier.</param>
-    ''' <param name="logName">Log name, e.g. "Backlog".</param>
-    ''' <returns>Data table with tasks (id and name).</returns>
+    ''' <param name="tagId">Tag identifier</param>
+    ''' <param name="logName">Log name, e.g. "Backlog"</param>
+    ''' <returns>Data table with tasks (id and name)</returns>
     ''' <remarks></remarks>
     Public Function GetTasksForTag(ByVal tagId As Integer, ByVal logName As String) As DataTable
         'Debug method parameters
@@ -152,9 +152,9 @@ Public Class TagAndTaskControl
     End Function
 
     ''' <summary>
-    ''' Returns a LogEntryDataObject with one single log entry.
+    ''' Returns a LogEntryData object with one single log entry
     ''' </summary>
-    ''' <param name="logEntryId">Log entry identifier.</param>
+    ''' <param name="logEntryId">Log entry identifier</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function GetLogEntryDetails(ByVal logEntryId As Integer) As LogEntryData
@@ -194,7 +194,12 @@ Public Class TagAndTaskControl
         Return ledat
     End Function
 
-    'TODO: Documentation
+    ''' <summary>
+    ''' Adds a log entry to a tag
+    ''' </summary>
+    ''' <param name="tagId">Tag identifier</param>
+    ''' <param name="logEntryId">Log entry identifier</param>
+    ''' <remarks></remarks>
     Public Sub AddLogEntryToTag(ByVal tagId As Integer, ByVal logEntryId As Integer)
         'Debug method parameters
         Debug.Print("")
@@ -224,7 +229,12 @@ Public Class TagAndTaskControl
         End If
     End Sub
 
-    'TODO: Documentation
+    ''' <summary>
+    ''' Removes a log entry from a tag
+    ''' </summary>
+    ''' <param name="tagId">Tag identifier</param>
+    ''' <param name="logEntryId">Log entry identifier</param>
+    ''' <remarks></remarks>
     Public Sub RemoveLogEntryFromTag(ByVal tagId As Integer, ByVal logEntryId As Integer)
         'Debug method parameters
         Debug.Print("")
@@ -233,11 +243,11 @@ Public Class TagAndTaskControl
         Debug.Print("Tag ID: " & tagId.ToString)
 
         'Create row and DB objects
-        Dim v
+        Dim lettToDelete
         Dim DB As New TaskifierDB(_dbPath)
 
         'Remove log entry from tag
-        Dim lettToDelete =
+        lettToDelete =
             (From lett In DB.LogEntriesToTags
              Where lett.TagId = tagId
              Where lett.LogEntryId = logEntryId
@@ -245,12 +255,44 @@ Public Class TagAndTaskControl
 
         DB.LogEntriesToTags.DeleteOnSubmit(lettToDelete)
         DB.SubmitChanges()
-
-        'TODO: Implementation
-        Debug.Print("Removing log entry #" & logEntryId & " from tag #" & tagId)
-
     End Sub
 
+    'TODO: Documentation
+    Public Sub AddNewTag(ByVal tagName As String)
+        'Debug method parameters
+        Debug.Print("")
+        Debug.Print("Function AddNewTag started. Messages:")
+        Debug.Print("Tag Name: " & tagName)
+
+        'DB object
+        Dim tagCount As Integer
+        Dim DB As New TaskifierDB(_dbPath)
+
+        'Only do this if no standard tag (All) is used
+        If tagName.Trim <> "All" Then
+            'Check if tag is already in the DB
+            tagCount =
+                (From t In DB.Tags
+                 Where t.Name = tagName.Trim
+                 Select t).Count
+
+            If tagCount = 0 Then
+                'Write new tag into the DB
+                Dim newTag As New Tags With {.Name = tagName,
+                                             .Active = True,
+                                             .Comment = "Created by software not by mankind."}
+
+                DB.Tags.InsertOnSubmit(newTag)
+                DB.SubmitChanges()
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Fills text boxes/date pickers/... with a LogEntryData object
+    ''' </summary>
+    ''' <param name="taskDetails">LogEntryData data object</param>
+    ''' <remarks></remarks>
     Public Sub FillBoxesWithLogEntryDetails(ByRef taskDetails As LogEntryData)
         'Fill text boxes
         frmUiMockup.txtId.Text = taskDetails.Id.ToString

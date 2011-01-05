@@ -43,21 +43,29 @@
         Try
             'Get tags and fill first grid with Backlog tags
             Dim tags As DataTable = tatControl.GetTagsForLog("Backlog", True)
-            dgvTags.DataSource = tags
-            'Select select first item
-            dgvTags.Rows(0).Selected = True
-            dgvTags.CurrentCell = dgvTags.Item(1, 0)
 
-            'Get tasks and fill second grid with Backlog tasks
-            Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, "Backlog")
-            dgvLogEntries.DataSource = logEntries
-            'Select select first item
-            dgvLogEntries.Rows(0).Selected = True
-            dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
+            If tags.Rows.Count > 0 Then
+                dgvTags.DataSource = tags
 
-            'Get details for first task and fill text boxes
-            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
-            tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                'Select select first item
+                dgvTags.Rows(0).Selected = True
+                dgvTags.CurrentCell = dgvTags.Item(1, 0)
+
+                'Get tasks and fill second grid with Backlog tasks
+                Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, "Backlog")
+
+                If logEntries.Rows.Count > 0 Then
+                    dgvLogEntries.DataSource = logEntries
+
+                    'Select select first item
+                    dgvLogEntries.Rows(0).Selected = True
+                    dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
+
+                    'Get details for first task and fill text boxes
+                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+                    tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                End If
+            End If
 
             'Hide system (id) columns
             dgvTags.Columns("Id").Visible = False
@@ -81,21 +89,29 @@
             Dim getAll As Boolean = False
             If tcMain.SelectedTab.Text = "Backlog" Then getAll = True
             Dim tags As DataTable = tatControl.GetTagsForLog(tcMain.SelectedTab.Text, getAll)
-            dgvTags.DataSource = tags
-            'Select select first item
-            dgvTags.Rows(0).Selected = True
-            dgvTags.CurrentCell = dgvTags.Item(1, 0)
 
-            'Get tasks and fill second grid with tags according to selected log
-            Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, tcMain.SelectedTab.Text)
-            dgvLogEntries.DataSource = logEntries
-            'Select select first item
-            dgvLogEntries.Rows(0).Selected = True
-            dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
+            If tags.Rows.Count > 0 Then
+                dgvTags.DataSource = tags
 
-            'Get details for first task and fill text boxes
-            Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
-            tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                'Select select first item
+                dgvTags.Rows(0).Selected = True
+                dgvTags.CurrentCell = dgvTags.Item(1, 0)
+
+                'Get tasks and fill second grid with tags according to selected log
+                Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, tcMain.SelectedTab.Text)
+
+                If logEntries.Rows.Count > 0 Then
+                    dgvLogEntries.DataSource = logEntries
+
+                    'Select select first item
+                    dgvLogEntries.Rows(0).Selected = True
+                    dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
+
+                    'Get details for first task and fill text boxes
+                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+                    tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                End If
+            End If
         Catch ex As Exception
             'Debug output
             Debug.Print("")
@@ -288,13 +304,16 @@
                 'Get index of right-clicked row
                 index = dgvTags.HitTest(e.X, e.Y).RowIndex
 
-                'Get tasks and fill second grid with tags according to selected tag and log
+                'Get tasks and fill second grid with tasks according to selected tag and log
                 Dim logEntries As DataTable = tatControl.GetTasksForTag(id, tcMain.SelectedTab.Text)
-                dgvLogEntries.DataSource = logEntries
 
                 'Get details for first task and fill text boxes
-                Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
-                tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                dgvLogEntries.DataSource = logEntries
+
+                If logEntries.Rows.Count > 0 Then
+                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+                    tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                End If
 
                 'Highlight and set (!) right-clicked row
                 dgvTags.Rows(index).Selected = True
@@ -319,6 +338,43 @@
         '2. Keep in "mind" which tag and task were selected
         '3. Refresh the grid
         '4. Re-select tag and task remembered under no. 2
+
+        'Variables and objects
+        Dim strTagToAdd As String
+        Dim tatControl As New TagAndTaskControl(dbPath)
+
+        Try
+            'Get new tag string and store it to the database
+            strTagToAdd = InputBox("Please insert new tag name", "Create tag")
+            tatControl.AddNewTag(strTagToAdd)
+
+            'TODO: see comments at the beginning of the handler...
+            'Get tags and fill first grid with Backlog tags
+            Dim tags As DataTable = tatControl.GetTagsForLog("Backlog", True)
+            dgvTags.DataSource = tags
+            'Select select first item
+            dgvTags.Rows(0).Selected = True
+            dgvTags.CurrentCell = dgvTags.Item(1, 0)
+
+            'Get tasks and fill second grid with Backlog tasks
+            Dim logEntries As DataTable = tatControl.GetTasksForTag(-1, "Backlog")
+
+            If logEntries.Rows.Count > 0 Then
+                dgvLogEntries.DataSource = logEntries
+                'Select select first item
+                dgvLogEntries.Rows(0).Selected = True
+                dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
+
+                'Get details for first task and fill text boxes
+                Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+                tatControl.FillBoxesWithLogEntryDetails(logEntry)
+            End If
+        Catch ex As Exception
+            'Debug output
+            Debug.Print("")
+            Debug.Print("Handler tsmiNewTag_Click exited with error:")
+            Debug.Print(ex.Message)
+        End Try
     End Sub
 
     'Rename existing item of tag list via context menu
