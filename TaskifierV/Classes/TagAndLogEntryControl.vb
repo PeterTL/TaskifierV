@@ -3,14 +3,16 @@
 Public Class TagAndLogEntryControl
 
     Private _dbPath As String
+    Private _logName As String
 
     ''' <summary>
-    ''' Class constructor. Initializes the DB path
+    ''' Class constructor. Initializes DB path and log name
     ''' </summary>
     ''' <param name="dbPath">Path to local DB</param>
     ''' <remarks></remarks>
-    Public Sub New(ByRef dbPath As String)
+    Public Sub New(ByRef dbPath As String, ByRef logName As String)
         _dbPath = dbPath
+        _logName = logName
     End Sub
 
     ''' <summary>
@@ -315,6 +317,62 @@ Public Class TagAndLogEntryControl
 
         DB.Tags.DeleteOnSubmit(tagToDelete)
         DB.SubmitChanges()
+    End Sub
+
+    ''' <summary>
+    ''' Fills the data grid views for tags, selects the specified tag item
+    ''' If no tag identifier is given, all tags are displayed
+    ''' </summary>
+    ''' <param name="grid">Tag grid object to fill</param>
+    ''' <param name="indexToSelect">Tag identifier to highlight and select</param>
+    ''' <param name="getAllTags">Specifies if all tags should be selected</param>
+    ''' <remarks></remarks>
+    Public Sub FillTagGrid(ByRef grid As DataGridView, _
+                           ByVal indexToSelect As Integer, _
+                           ByRef getAllTags As Boolean)
+
+        'Create table object for tag list and fill it
+        Dim tags As DataTable = Me.GetTagsForLog(_logName, getAllTags)
+
+        'Only do this if there are tags
+        If tags.Rows.Count > 0 Then
+            'Put tags into grid if grid is specified
+            If Not grid Is Nothing Then grid.DataSource = tags
+
+            'Highlight and select specified row
+            grid.Rows(indexToSelect).Selected = True
+            grid.CurrentCell = grid.Item(1, indexToSelect)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Fills the data grid views for log entries, selects the specified log entry item
+    ''' If log entry identifier is -1, all log entries for the specified log are displayed
+    ''' </summary>
+    ''' <param name="grid">Log entry grid object to fill</param>
+    ''' <param name="indexToSelect">Log entry identifier to highlight and select</param>
+    ''' <remarks></remarks>
+    Public Sub FillLogEntryGrid(ByRef grid As DataGridView, _
+                                ByVal indexToSelect As Integer, _
+                                ByVal tagIdToFilter As Integer, _
+                                ByRef fillDetails As Boolean)
+
+        'Create table object for log entry list and fill it
+        Dim logEntries As DataTable = Me.GetLogEntriesForTag(tagIdToFilter, _logName)
+
+        'Only do this if there are log entries
+        If logEntries.Rows.Count > 0 Then
+            'Put tags into grid if grid is specified
+            If Not grid Is Nothing Then grid.DataSource = logEntries
+
+            'Highlight and select specified row
+            grid.Rows(indexToSelect).Selected = True
+            grid.CurrentCell = grid.Item(1, indexToSelect)
+
+            'Fill log entry details
+            Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+            Me.FillBoxesWithLogEntryDetails(logEntry)
+        End If
     End Sub
 
     ''' <summary>

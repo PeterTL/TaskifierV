@@ -38,34 +38,12 @@
         Next
 
         'Create tag and log entry object
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, "Backlog")
 
         Try
-            'Get tags and fill first grid with Backlog tags
-            Dim tags As DataTable = tatControl.GetTagsForLog("Backlog", True)
-
-            If tags.Rows.Count > 0 Then
-                dgvTags.DataSource = tags
-
-                'Select select first item
-                dgvTags.Rows(0).Selected = True
-                dgvTags.CurrentCell = dgvTags.Item(1, 0)
-
-                'Get log entries and fill second grid with Backlog log entries
-                Dim logEntries As DataTable = tatControl.GetLogEntriesForTag(-1, "Backlog")
-
-                If logEntries.Rows.Count > 0 Then
-                    dgvLogEntries.DataSource = logEntries
-
-                    'Select select first item
-                    dgvLogEntries.Rows(0).Selected = True
-                    dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
-
-                    'Get details for first log entry and fill text boxes
-                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
-                    tatControl.FillBoxesWithLogEntryDetails(logEntry)
-                End If
-            End If
+            'Fill tag and log entry grid and log entry details
+            tatControl.FillTagGrid(dgvTags, 0, True)
+            tatControl.FillLogEntryGrid(dgvLogEntries, 0, -1, True)
 
             'Hide system (id) columns
             dgvTags.Columns("Id").Visible = False
@@ -81,37 +59,17 @@
     'Changes log and fills grid and details with first log entry values
     Private Sub tcMain_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcMain.SelectedIndexChanged
         'Create tag and log entry object
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, tcMain.SelectedTab.Text)
 
         Try
             'Get tags and fill first grid with tags according to selected log
             'Get all tags when log is Backlog
             Dim getAll As Boolean = False
             If tcMain.SelectedTab.Text = "Backlog" Then getAll = True
-            Dim tags As DataTable = tatControl.GetTagsForLog(tcMain.SelectedTab.Text, getAll)
 
-            If tags.Rows.Count > 0 Then
-                dgvTags.DataSource = tags
-
-                'Select select first item
-                dgvTags.Rows(0).Selected = True
-                dgvTags.CurrentCell = dgvTags.Item(1, 0)
-
-                'Get log entries and fill second grid with tags according to selected log
-                Dim logEntries As DataTable = tatControl.GetLogEntriesForTag(-1, tcMain.SelectedTab.Text)
-
-                If logEntries.Rows.Count > 0 Then
-                    dgvLogEntries.DataSource = logEntries
-
-                    'Select select first item
-                    dgvLogEntries.Rows(0).Selected = True
-                    dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, 0)
-
-                    'Get details for first log entry and fill text boxes
-                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
-                    tatControl.FillBoxesWithLogEntryDetails(logEntry)
-                End If
-            End If
+            'Fill tag and log entry grid and log entry details
+            tatControl.FillTagGrid(dgvTags, 0, getAll)
+            tatControl.FillLogEntryGrid(dgvLogEntries, 0, -1, True)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
@@ -126,7 +84,7 @@
         Dim index As Integer
         Dim id As Integer
         'Create tag and log entry object
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, "Backlog")
 
         'Debug output
         Debug.Print("")
@@ -154,9 +112,11 @@
                 'Get identifier of right-clicked row
                 id = dgvLogEntries.Rows(index).Cells("Id").Value
 
+                tatControl.FillLogEntryGrid(dgvLogEntries, index, index, True)
+
                 'Get log entry details and fill text boxes
-                Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
-                tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                ''Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
+                ''tatControl.FillBoxesWithLogEntryDetails(logEntry)
 
                 'Highlight and set (!) selected item
                 dgvLogEntries.Rows(index).Selected = True
@@ -195,7 +155,7 @@
         Dim sourceId As String
         Dim destHighlIndex As Integer
         Dim destHighlId As String
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, "Backlog")
 
         Try
             'Previously highlighted record
@@ -272,7 +232,7 @@
         Dim index As Integer
         Dim id As String 'You never know when you need it...
         'Create tag and log entry object
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, "Backlog")
 
         Try
             'Get index of right-clicked row
@@ -341,7 +301,7 @@
 
         'Variables and objects
         Dim strTagToAdd As String
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, "Backlog")
 
         Try
             'Get new tag string and store it to the database
@@ -401,7 +361,7 @@
         'Variables and objects
         Dim index As Integer
         Dim id As String
-        Dim tatControl As New TagAndLogEntryControl(dbPath)
+        Dim tatControl As New TagAndLogEntryControl(dbPath, "Backlog")
 
         Try
             'Get identifier of row to be deleted
