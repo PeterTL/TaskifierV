@@ -3,14 +3,16 @@
 Public Class TagAndLogEntryControl
 
     Private _dbPath As String
+    Private _logName As String
 
     ''' <summary>
     ''' Class constructor. Initializes the DB path
     ''' </summary>
     ''' <param name="dbPath">Path to local DB</param>
     ''' <remarks></remarks>
-    Public Sub New(ByRef dbPath As String)
+    Public Sub New(ByRef dbPath As String, ByRef logName As String)
         _dbPath = dbPath
+        _logName = logName
     End Sub
 
     ''' <summary>
@@ -334,6 +336,114 @@ Public Class TagAndLogEntryControl
         frmUiMockup.txtActive.Text = logEntryDetails.Active
         frmUiMockup.txtInProgress.Text = logEntryDetails.InProgress
         frmUiMockup.txtFinished.Text = logEntryDetails.Finished
+    End Sub
+
+    'TODO: Documentation
+    Public Sub FillTagAndLogEntryGrids(ByRef tagGrid As DataGridView, _
+                                       ByVal tagIdToSelect As Integer, _
+                                       ByVal getAllTags As Boolean, _
+                                       ByRef logEntryGrid As DataGridView, _
+                                       ByVal logEntryIdToSelect As Integer, _
+                                       ByVal tagIdToFilterLogEntries As Integer)
+
+        Dim tags As DataTable = Me.GetTagsForLog(_logName, getAllTags)
+
+        If tags.Rows.Count > 0 Then
+            If Not tagGrid Is Nothing Then tagGrid.DataSource = tags
+
+            If Not tagIdToSelect = Nothing Then
+                tagGrid.Rows(tagIdToSelect).Selected = True
+                tagGrid.CurrentCell = tagGrid.Item(1, tagIdToSelect)
+            End If
+
+            Dim logEntries As DataTable = Me.GetLogEntriesForTag(tagIdToFilterLogEntries, _logName)
+
+            If logEntries.Rows.Count > 0 Then
+                If Not logEntryGrid Is Nothing Then logEntryGrid.DataSource = logEntries
+
+                If Not logEntryIdToSelect = Nothing Then
+                    logEntryGrid.Rows(logEntryIdToSelect).Selected = True
+                    logEntryGrid.CurrentCell = logEntryGrid.Item(1, logEntryIdToSelect)
+                End If
+
+                Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntries.Rows.Item(logEntryIdToSelect).Item(0))
+                'Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntryIdToSelect)
+                Me.FillBoxesWithLogEntryDetails(logEntry)
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="tagGrid">Referenz auf das zu füllende Tag-Grid</param>
+    ''' <param name="tagGridIndexToSelect">Index der zu markierenden Zeile im Tag-Grid</param>
+    ''' <param name="getAllTags">Gibt an, ob alle Tags für das Log geladen werden sollen</param>
+    ''' <param name="logEntryGrid">Referenz auf das zu füllende Log Entry-Grid</param>
+    ''' <param name="logEntryGridIndexToSelect">Index der zu markierenden Zeile im Log Entry-Grid</param>
+    ''' <param name="tagIdToFilterLogEntries">Tag-ID, anhand der die Log Entries gefiltert werden</param>
+    ''' <param name="logEntryIdForDetails">Log Entry-ID, anhand der die Details geladen werden</param>
+    ''' <remarks></remarks>
+    Public Sub FillTagAndLogEntryGrids2(ByRef tagGrid As DataGridView, _
+                                       ByVal tagGridIndexToSelect As Integer, _
+                                       ByVal getAllTags As Boolean, _
+                                       ByRef logEntryGrid As DataGridView, _
+                                       ByVal logEntryGridIndexToSelect As Integer, _
+                                       ByVal tagIdToFilterLogEntries As Integer, _
+                                       ByVal logEntryIdForDetails As Integer)
+
+        Dim tags As DataTable = Me.GetTagsForLog(_logName, getAllTags)
+
+        If tags.Rows.Count > 0 Then
+            If Not tagGrid Is Nothing Then tagGrid.DataSource = tags
+
+            If Not tagGridIndexToSelect = Nothing Then
+                tagGrid.Rows(tagGridIndexToSelect).Selected = True
+                tagGrid.CurrentCell = tagGrid.Item(1, tagGridIndexToSelect)
+            End If
+
+            Dim logEntries As DataTable = Me.GetLogEntriesForTag(logEntryIdForDetails, _logName)
+
+            If logEntries.Rows.Count > 0 Then
+                If Not logEntryGrid Is Nothing Then logEntryGrid.DataSource = logEntries
+
+                If Not logEntryGridIndexToSelect = Nothing Then
+                    logEntryGrid.Rows(logEntryGridIndexToSelect).Selected = True
+                    logEntryGrid.CurrentCell = logEntryGrid.Item(1, logEntryGridIndexToSelect)
+                End If
+
+                Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntries.Rows.Item(tagIdToFilterLogEntries).Item(0))
+                'Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntryIdToSelect)
+                Me.FillBoxesWithLogEntryDetails(logEntry)
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Fills the data grid views for tags, selects the specified tag item
+    ''' If no tag identifier is given, all tags are displayed
+    ''' </summary>
+    ''' <param name="tagGrid">Tag grid object to fill</param>
+    ''' <param name="tagId">Tag identifier to highlight and select</param>
+    ''' <remarks></remarks>
+    Public Sub FillTagGrid(ByRef tagGrid As DataGridView, ByVal tagId As Integer)
+        Dim tags As DataTable = Me.GetTagsForLog(_logName, True)
+        If tags.Rows.Count > 0 Then
+            tagGrid.DataSource = tags
+            tagGrid.Rows(tagId).Selected = True
+            tagGrid.CurrentCell = tagGrid.Item(1, tagId)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Fills the data grid views for log entries, selects the specified log entry item
+    ''' If log entry identifier is -1, all log entries for the specified log are displayed
+    ''' </summary>
+    ''' <param name="logEntryGrid">Log entry grid object to fill</param>
+    ''' <param name="logEntryId">Log entry identifier to highlight and select</param>
+    ''' <remarks></remarks>
+    Public Sub FillLogEntryGrid(ByRef logEntryGrid As DataGridView, ByVal logEntryId As Integer)
+
     End Sub
 
     Public Function InsertTagList(ByRef tagList As List(Of String))
