@@ -112,15 +112,22 @@
                 'Get identifier of right-clicked row
                 id = dgvLogEntries.Rows(index).Cells("Id").Value
 
-                tatControl.FillLogEntryGrid(dgvLogEntries, index, index, True)
-
                 'Get log entry details and fill text boxes
-                ''Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
-                ''tatControl.FillBoxesWithLogEntryDetails(logEntry)
+                'Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
+                'tatControl.FillBoxesWithLogEntryDetails(logEntry)
+
+                'tatControl.Test(id)
 
                 'Highlight and set (!) selected item
-                dgvLogEntries.Rows(index).Selected = True
-                dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, index)
+                'dgvLogEntries.Rows(index).Selected = True
+                'dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, index)
+
+                'tatControl.Test2(dgvLogEntries, index)
+
+                tatControl.Test3(dgvLogEntries, False, Nothing, index, id)
+
+                'TODO
+                'tatControl.FillLogEntryGrid(dgvLogEntries, index, id, False)
 
                 'Only do this if item was left-clicked (only in Backlog)
                 If e.Button = MouseButtons.Left Then
@@ -271,7 +278,7 @@
                 dgvLogEntries.DataSource = logEntries
 
                 If logEntries.Rows.Count > 0 Then
-                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
+                    Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
                     tatControl.FillBoxesWithLogEntryDetails(logEntry)
                 End If
 

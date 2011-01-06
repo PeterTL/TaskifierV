@@ -375,6 +375,46 @@ Public Class TagAndLogEntryControl
         End If
     End Sub
 
+    'TODO: Remove
+    Public Sub Test(ByVal id As Integer)
+        Dim logEntry As LogEntryData = Me.GetLogEntryDetails(id)
+        Me.FillBoxesWithLogEntryDetails(logEntry)
+    End Sub
+
+    'TODO: Remove
+    Public Sub Test2(ByRef grid As DataGridView, ByVal index As Integer)
+        grid.Rows(index).Selected = True
+        grid.CurrentCell = grid.Item(1, index)
+    End Sub
+
+    'TODO: Remove
+    Public Sub Test3(ByRef grid As DataGridView, _
+                     ByRef fillGrid As Boolean, _
+                     ByVal tagIdToFilter As Integer, _
+                     ByVal indexToSelect As Integer, _
+                     ByVal logEntryDetailId As Integer)
+
+        'Only do this if you are told to
+        If fillGrid Then
+            'Create table object for log entry list and fill it
+            Dim logEntries As DataTable = Me.GetLogEntriesForTag(tagIdToFilter, _logName)
+
+            'Only do this if there are log entries
+            If logEntries.Rows.Count > 0 Then
+                'Put tags into grid if grid
+                grid.DataSource = logEntries
+            End If
+        End If
+
+        'Highlight and select specified row
+        grid.Rows(indexToSelect).Selected = True
+        grid.CurrentCell = grid.Item(1, indexToSelect)
+
+        'Fill log entry details
+        Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntryDetailId)
+        Me.FillBoxesWithLogEntryDetails(logEntry)
+    End Sub
+
     ''' <summary>
     ''' Fills text boxes/date pickers/... with a LogEntryData object
     ''' </summary>
