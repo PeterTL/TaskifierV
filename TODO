@@ -5,5 +5,7 @@
 [TODO] Widen the list elements to fit into the grid view dynamically
 [TODO] Create context menu to add, rename and delete tags
 [TODO] Create context menu to add and delete, to start and finish log entries
-[TODO] Enhance the backlog view with "tags" for next things to do, urgent things...
+[TODO] Enhance the worklog view with "tags" for next things to do, urgent things...
 [TODO] Create context menu to add, rename and delete tags
+[TODO] Enhance the donelog view with "tags" to filter for time periods
+
