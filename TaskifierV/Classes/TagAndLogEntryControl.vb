@@ -338,10 +338,6 @@ Public Class TagAndLogEntryControl
         If tags.Rows.Count > 0 Then
             'Put tags into grid if grid is specified
             If Not grid Is Nothing Then grid.DataSource = tags
-
-            'Highlight and select specified row
-            grid.Rows(indexToSelect).Selected = True
-            grid.CurrentCell = grid.Item(1, indexToSelect)
         End If
     End Sub
 
@@ -365,14 +361,25 @@ Public Class TagAndLogEntryControl
             'Put tags into grid if grid is specified
             If Not grid Is Nothing Then grid.DataSource = logEntries
 
-            'Highlight and select specified row
-            grid.Rows(indexToSelect).Selected = True
-            grid.CurrentCell = grid.Item(1, indexToSelect)
-
             'Fill log entry details
             Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntries.Rows.Item(0).Item(0))
             Me.FillBoxesWithLogEntryDetails(logEntry)
         End If
+    End Sub
+
+    'TODO: Documentation
+    Public Sub HighlightGridRow(ByRef grid As DataGridView, _
+                                ByVal index As Integer)
+
+        'Highlight and select specified row
+        grid.Rows(index).Selected = True
+        grid.CurrentCell = grid.Item(1, index)
+    End Sub
+
+    'TODO: Documentation
+    Public Sub PutLogEntryToBoxes(ByVal logEntryId As Integer)
+        Dim logEntry As LogEntryData = Me.GetLogEntryDetails(logEntryId)
+        Me.FillBoxesWithLogEntryDetails(logEntry)
     End Sub
 
     'TODO: Remove

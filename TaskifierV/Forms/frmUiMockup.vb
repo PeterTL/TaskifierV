@@ -43,7 +43,9 @@
         Try
             'Fill tag and log entry grid and log entry details
             tatControl.FillTagGrid(dgvTags, 0, True)
+            tatControl.HighlightGridRow(dgvTags, 0)
             tatControl.FillLogEntryGrid(dgvLogEntries, 0, -1, True)
+            tatControl.HighlightGridRow(dgvLogEntries, 0)
 
             'Hide system (id) columns
             dgvTags.Columns("Id").Visible = False
@@ -69,7 +71,10 @@
 
             'Fill tag and log entry grid and log entry details
             tatControl.FillTagGrid(dgvTags, 0, getAll)
+            tatControl.HighlightGridRow(dgvTags, 0)
             tatControl.FillLogEntryGrid(dgvLogEntries, 0, -1, True)
+            tatControl.HighlightGridRow(dgvLogEntries, 0)
+            tatControl.PutLogEntryToBoxes(0)
         Catch ex As Exception
             'Debug output
             Debug.Print("")
@@ -113,18 +118,12 @@
                 id = dgvLogEntries.Rows(index).Cells("Id").Value
 
                 'Get log entry details and fill text boxes
-                'Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
-                'tatControl.FillBoxesWithLogEntryDetails(logEntry)
-
-                'tatControl.Test(id)
+                Dim logEntry As LogEntryData = tatControl.GetLogEntryDetails(id)
+                tatControl.FillBoxesWithLogEntryDetails(logEntry)
 
                 'Highlight and set (!) selected item
-                'dgvLogEntries.Rows(index).Selected = True
-                'dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, index)
-
-                'tatControl.Test2(dgvLogEntries, index)
-
-                tatControl.Test3(dgvLogEntries, False, Nothing, index, id)
+                dgvLogEntries.Rows(index).Selected = True
+                dgvLogEntries.CurrentCell = dgvLogEntries.Item(1, index)
 
                 'TODO
                 'tatControl.FillLogEntryGrid(dgvLogEntries, index, id, False)
